@@ -1,0 +1,8 @@
+2020/12/25 17:04:30 Ass_main.py[line:69] INFO ######## Tools start ########
+2020/12/25 17:04:30 Ass_main.py[line:143] ERROR 配置文件出现问题，请删除配置文件重新打开程序（会自动生成新配置文件）
+2020/12/25 17:04:30 Ass_main.py[line:166] INFO ######>>> Check device
+2020/12/25 17:04:30 Ass_main.py[line:181] DEBUG Device list:[]
+2020/12/25 17:04:30 Ass_main.py[line:430] INFO ######>>> Check port
+2020/12/25 17:04:30 Ass_main.py[line:438] DEBUG Port list:{'COM1': '通信端口 (COM1)'}
+2020/12/25 17:04:30 Ass_main.py[line:907] INFO ######>>> Init settings AT Dialog
+2020/12/25 17:04:30 Ass_main.py[line:974] INFO ######>>> Init Default settings Dialog
