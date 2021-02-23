@@ -1,3 +1,45 @@
+#### Test_Assistant
+
+---
+
+doc/  文档
+
+img/   图片素材
+
+syslog/   运行log
+
+utils/  常用方法
+
+——Ass_util.py  常规用方法
+
+——CP_util.py   Tab CP中常用方法
+
+——AP_util.py   Tab AP中常用方法
+
+ui/
+
+——main_ui.py   主界面ui
+
+——ass_atmgr_ui.py   AT管理界面ui
+
+——default_settings_ui.py   默认设置界面ui
+
+Ass_AP.py    Tab AP操作
+
+Ass_CP.py    Tab CP操作
+
+Ass_at_settings   AT界面操作
+
+Ass_default_settings  默认设置界面操作
+
+start.py   main方法
+
+---
+
+
+
+
+
 #### Tab1 AT
 
 ##### 功能
@@ -92,10 +134,6 @@ JFP1301，1304等功能机使用atd;拨号，终端不会显示拨号界面，TT
 
 
 
-使用多线程一遍发送，一遍接收，
-
-目前使用定时器0.002s执行一次接收
-
 
 
 #### Something
@@ -122,9 +160,16 @@ Q:
 
 4.添加设置通话测试时间间隔  √
 
-5.添加一个使用at+creg判断是否入网的method
+5.添加一个使用at+creg判断是否入网的method  √
 
 6.AP 左侧界面宽度需要增加
 
 7.默认设置修改后，Tab CP中测试项——测试次数未变化
 
+8.将各个类分为多个文件，start.py调用
+
+
+
+1.今天对自动化工具完成了像模像样的修改，但写的也太乱了，一个文件千行代码修改太费劲，重新设计了框图，到时再修改下
+
+2.明天娘的又要去50所了，就当交接了

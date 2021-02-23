@@ -51,7 +51,7 @@ logger.addHandler(ch)
 
 
 class Ass(QMainWindow, Ui_MainWindow, QComboBox):
-    config_path = 'config.cfg'
+    config_path = 'config/config.cfg'
 
     def __init__(self):
         super().__init__()
@@ -547,7 +547,6 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
             if self.ser.is_open:
                 self.port_close()
 
-
     # 清除显示
     def cp_clear_send(self):
         self.CP_send_textEdit.setText("")
@@ -558,6 +557,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
     # 根据选框执行相应测试项
     def run_test_choice_cp(self):
         self._exec_cmd("AT^DSCI=1")
+        self._exec_cmd("AT+CREG?")
         if self.TEST_FLAG == False:
             self.TEST_FLAG = True
 
@@ -595,6 +595,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         with open(self.config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
         number = config['number']
+        network_registered = '+CREG: 0,1'
 
         dial = '^DSCI: 1,0,2,0,0,"{}"'.format(number)
 
@@ -617,6 +618,10 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         # NO CARRIER表示电话状态为电话终止，原因空号， APP侧语音提示所拨打是空号，请查证再拨
         empty_number = '^DSCI: 1,0,6,0,0,"{}",129,,1,'.format(number)
         answer = '^DSCI: 1,0,0,0,0,"{}"'.format(number)
+
+        if network_registered in line:
+            self.NETWORK_REGISTERED = True
+            logger.info("NETWORK_REGISTERED  +CREG: 0,1")
 
         if dial in line:
             self.CP_recv_textBrowser.append("正在拨号>> %s" % number)
@@ -733,7 +738,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         logger.debug("Test times: %s" % times)
         for i in range(int(times)):
             self.recv_to_bottom()
-            if self.TEST_FLAG:
+            if self.TEST_FLAG and self.NETWORK_REGISTERED == True:
                 self.process.clear()
                 time.sleep(interval)
                 self.CP_recv_textBrowser.append("主叫主挂 >> 第%s次, 共 %s次" % (i+1, times))
@@ -766,6 +771,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
 
             else:
                 i -= 1
+                self.CP_recv_textBrowser.append("网络未注册")
                 break
         self.TEST_FLAG = False
         self.CP_recv_textBrowser.append("测试项：主叫主挂 测试次数: %d, pass: %d, fail: %d\r\n" %
@@ -793,7 +799,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         logger.debug("Test times:%s" % times)
         for i in range(int(times)):
             self.recv_to_bottom()
-            if self.TEST_FLAG:
+            if self.TEST_FLAG and self.NETWORK_REGISTERED == True:
                 self.process.clear()
                 time.sleep(interval)
                 self.CP_recv_textBrowser.append("主叫被挂 >> 第%s次, 共%s次," % (i+1, times))
@@ -850,7 +856,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         logger.debug("Test times:%s" % times)
         for i in range(int(times)):
             self.recv_to_bottom()
-            if self.TEST_FLAG:
+            if self.TEST_FLAG and self.NETWORK_REGISTERED == True:
                 time.sleep(interval)
                 self.process.clear()
                 self.CP_recv_textBrowser.append("主叫拒接 >> 第%s次, 共%s次," % (i+1, times))
@@ -904,7 +910,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         logger.debug("Test times: %s" % times)
         for i in range(int(times)):
             self.recv_to_bottom()
-            if self.TEST_FLAG:
+            if self.TEST_FLAG and self.NETWORK_REGISTERED == True:
                 self.process.clear()
                 time.sleep(interval)
                 self.CP_recv_textBrowser.append("主叫未接 >> 第%s次, 共%s次," % (i+1, times))
@@ -944,7 +950,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
 
 class Dialog_settings_at(Ui_Dialog, QDialog, Ui_MainWindow):
     # config_path = '..\\config\\config.cfg'
-    config_path = 'config.cfg'
+    config_path = 'config/config.cfg'
 
     def __init__(self):
         super(Ui_Dialog, self).__init__()
@@ -1008,7 +1014,7 @@ class Dialog_settings_at(Ui_Dialog, QDialog, Ui_MainWindow):
 
 class Dialog_default_settings(Default_settings_Dialog, QDialog, Ui_MainWindow):
     # config_path = '..\\config\\config.cfg'
-    config_path = 'config.cfg'
+    config_path = 'config/config.cfg'
 
     def __init__(self):
         super(Default_settings_Dialog, self).__init__()

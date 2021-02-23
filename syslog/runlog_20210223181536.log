@@ -1,0 +1,31 @@
+2021/02/23 18:15:37 Ass_main.py[line:69] INFO ######## Tools start ########
+2021/02/23 18:15:37 Ass_main.py[line:171] INFO ######>>> Check device
+2021/02/23 18:15:37 Ass_main.py[line:186] DEBUG Device list:[]
+2021/02/23 18:15:37 Ass_main.py[line:436] INFO ######>>> Check port
+2021/02/23 18:15:37 Ass_main.py[line:444] DEBUG Port list:{'COM8': 'LeadCore CMCC AT Interface (COM8)', 'COM7': 'LeadCore CMCC Diagnoses (COM7)'}
+2021/02/23 18:15:37 Ass_main.py[line:963] INFO ######>>> Init settings AT Dialog
+2021/02/23 18:15:37 Ass_main.py[line:1027] INFO ######>>> Init Default settings Dialog
+2021/02/23 18:15:39 Ass_main.py[line:450] INFO ######>>> Open port
+2021/02/23 18:15:39 Ass_main.py[line:453] INFO Port:COM8  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/23 18:15:40 Ass_main.py[line:503] INFO Send Combobox Cmd: AT
+2021/02/23 18:15:40 Ass_main.py[line:537] DEBUG Receive data:
+OK
+
+2021/02/23 18:15:44 Ass_main.py[line:589] INFO exec >> AT^DSCI=1
+2021/02/23 18:15:44 Ass_main.py[line:589] INFO exec >> AT+CREG?
+2021/02/23 18:15:44 Ass_main.py[line:714] DEBUG calling_reject
+2021/02/23 18:15:44 Ass_main.py[line:855] DEBUG Test times:6
+2021/02/23 18:15:44 Ass_main.py[line:537] DEBUG Receive data:
+OK
+
+2021/02/23 18:15:44 Ass_main.py[line:537] DEBUG Receive data:
++CREG: 0,1
+
+OK
+
+2021/02/23 18:15:44 Ass_main.py[line:624] INFO NETWORK_REGISTERED
+2021/02/23 18:15:45 Ass_main.py[line:537] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
