@@ -1,0 +1,129 @@
+2021/02/20 11:23:27 Ass_main.py[line:68] INFO ######## Tools start ########
+2021/02/20 11:23:27 Ass_main.py[line:165] INFO ######>>> Check device
+2021/02/20 11:23:27 Ass_main.py[line:180] DEBUG Device list:[]
+2021/02/20 11:23:27 Ass_main.py[line:432] INFO ######>>> Check port
+2021/02/20 11:23:27 Ass_main.py[line:440] DEBUG Port list:{'COM1': '通信端口 (COM1)', 'COM3': 'LeadCore CMCC Diagnoses (COM3)', 'COM8': 'LeadCore CMCC AT Interface (COM8)'}
+2021/02/20 11:23:27 Ass_main.py[line:909] INFO ######>>> Init settings AT Dialog
+2021/02/20 11:23:27 Ass_main.py[line:976] INFO ######>>> Init Default settings Dialog
+2021/02/20 11:23:31 Ass_main.py[line:446] INFO ######>>> Open port
+2021/02/20 11:23:31 Ass_main.py[line:449] INFO Port:COM3  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/20 11:23:37 Ass_main.py[line:446] INFO ######>>> Open port
+2021/02/20 11:23:37 Ass_main.py[line:449] INFO Port:COM8  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/20 11:23:40 Ass_main.py[line:688] DEBUG calling_to_answer
+2021/02/20 11:23:40 Ass_main.py[line:714] DEBUG test times:3
+2021/02/20 11:23:42 Ass_main.py[line:580] INFO exec >> ATD18701997306;
+2021/02/20 11:23:42 Ass_main.py[line:723] INFO 主叫接听 >> 第1次, 共3次,
+2021/02/20 11:23:42 Ass_main.py[line:536] DEBUG Receive data:
+ERROR
+
+2021/02/20 11:23:42 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/20 11:23:42 Ass_main.py[line:536] DEBUG Receive data:
+^SATSIGNAL:-108,90
+
+^CPSTATE: -108,381,37,84
+
+2021/02/20 11:23:45 Ass_main.py[line:729] DEBUG dial process: []
+2021/02/20 11:23:45 Ass_main.py[line:741] ERROR 拨打失败，请检查设备是否入网
+2021/02/20 11:23:45 Ass_main.py[line:754] INFO 测试项：主叫接听 测试次数:1, pass:0, fail:1
+
+2021/02/20 11:23:47 Ass_main.py[line:119] WARNING force stop test !!!
+2021/02/20 11:23:52 Ass_main.py[line:688] DEBUG calling_to_answer
+2021/02/20 11:23:52 Ass_main.py[line:714] DEBUG test times:3
+2021/02/20 11:23:54 Ass_main.py[line:580] INFO exec >> ATD18701997306;
+2021/02/20 11:23:54 Ass_main.py[line:723] INFO 主叫接听 >> 第1次, 共3次,
+2021/02/20 11:23:54 Ass_main.py[line:536] DEBUG Receive data:
+ERROR
+
+2021/02/20 11:23:54 Ass_main.py[line:688] DEBUG calling_to_answer
+2021/02/20 11:23:54 Ass_main.py[line:714] DEBUG test times:3
+2021/02/20 11:23:56 Ass_main.py[line:580] INFO exec >> ATD18701997306;
+2021/02/20 11:23:56 Ass_main.py[line:723] INFO 主叫接听 >> 第1次, 共3次,
+2021/02/20 11:23:56 Ass_main.py[line:536] DEBUG Receive data:
+ERROR
+
+2021/02/20 11:23:57 Ass_main.py[line:729] DEBUG dial process: []
+2021/02/20 11:23:57 Ass_main.py[line:741] ERROR 拨打失败，请检查设备是否入网
+2021/02/20 11:23:57 Ass_main.py[line:754] INFO 测试项：主叫接听 测试次数:1, pass:0, fail:1
+
+2021/02/20 11:23:58 Ass_main.py[line:754] INFO 测试项：主叫接听 测试次数:1, pass:0, fail:0
+
+2021/02/20 11:24:13 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/20 11:24:14 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 13,2
+
++CSQ: 13,2
+
+2021/02/20 11:24:14 Ass_main.py[line:536] DEBUG Receive data:
+^SATSIGNAL:-126,73
+
+^CPSTATE: -126,381,37,84
+
+2021/02/20 11:24:15 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,75
+
+^CPSTATE: -108,381,37,84
+
+2021/02/20 11:24:15 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-107,75
+
+^CPSTATE: -107,381,37,84
+
+2021/02/20 11:24:16 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+2021/02/20 11:24:16 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 14,2
+
++CSQ: 14,2
+
+^SATSIGNAL:-125,73
+
+^CPSTATE: -125,381,37,84
+
+2021/02/20 11:24:16 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,75
+
+^CPSTATE: -108,381,37,84
+
+2021/02/20 11:24:17 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 31,2
+
+2021/02/20 11:24:17 Ass_main.py[line:536] DEBUG Receive data:
++CSQ: 31,2
+
+^SATSIGNAL:-107,76
+
+^CPSTATE: -107,381,37,84
+
+2021/02/20 11:24:48 Ass_main.py[line:536] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,75
+
+2021/02/20 11:24:48 Ass_main.py[line:536] DEBUG Receive data:
+^CPSTATE: -108,381,37,84
+

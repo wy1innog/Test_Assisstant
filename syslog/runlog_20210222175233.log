@@ -1,0 +1,676 @@
+2021/02/22 17:52:33 Ass_main.py[line:69] INFO ######## Tools start ########
+2021/02/22 17:52:33 Ass_main.py[line:163] INFO ######>>> Check device
+2021/02/22 17:52:34 Ass_main.py[line:178] DEBUG Device list:[]
+2021/02/22 17:52:34 Ass_main.py[line:428] INFO ######>>> Check port
+2021/02/22 17:52:34 Ass_main.py[line:436] DEBUG Port list:{'COM7': 'LeadCore CMCC Diagnoses (COM7)', 'COM8': 'LeadCore CMCC AT Interface (COM8)'}
+2021/02/22 17:52:34 Ass_main.py[line:947] INFO ######>>> Init settings AT Dialog
+2021/02/22 17:52:34 Ass_main.py[line:1015] INFO ######>>> Init Default settings Dialog
+2021/02/22 17:52:37 Ass_main.py[line:442] INFO ######>>> Open port
+2021/02/22 17:52:37 Ass_main.py[line:445] INFO Port:COM7  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/22 17:52:37 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,85
+
+^CPSTATE: -105,562,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 17:52:40 Ass_main.py[line:495] INFO Send Combobox Cmd: AT
+2021/02/22 17:52:40 Ass_main.py[line:528] DEBUG Receive data:
+OK
+
+2021/02/22 17:52:44 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,88
+
+^CPSTATE: -104,562,36,84
+
+2021/02/22 17:52:45 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-106,87
+
+^CPSTATE: -106,562,36,84
+
+2021/02/22 17:52:46 Ass_main.py[line:733] DEBUG test times:2
+2021/02/22 17:52:48 Ass_main.py[line:591] INFO exec >> ATD18701997306;
+2021/02/22 17:52:48 Ass_main.py[line:742] INFO 主叫接听 >> 第1次, 共2次,
+2021/02/22 17:52:48 Ass_main.py[line:528] DEBUG Receive data:
+OK
+
+^DSCI: 1,0,2,0,0,"18701997306",129,,,127,"",255
+
+^SATSIGNAL:-105,86
+
+2021/02/22 17:52:48 Ass_main.py[line:625] INFO 正在拨号>> 18701997306
+2021/02/22 17:52:48 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,36,84
+
+^SATSIGNAL:-105,86
+
+^CPSTATE: -105,562,30,84
+
+2021/02/22 17:52:48 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 17:52:48 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,86
+
+^CPSTATE: -104,562,30,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 17:52:48 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,86
+
+^CPSTATE: -104,562,30,85
+
+2021/02/22 17:52:51 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:52:52 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:52:52 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-106,85
+
+^CPSTATE: -106,562,30,85
+
+2021/02/22 17:52:53 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:52:54 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:52:54 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,94
+
+^CPSTATE: -105,562,24,85
+
+2021/02/22 17:52:54 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,94
+
+^CPSTATE: -105,562,30,85
+
+2021/02/22 17:52:55 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,91
+
+2021/02/22 17:52:55 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,26,85
+
+^DGSQU: 31,3
+
+2021/02/22 17:52:55 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,3
+
+^SATSIGNAL:-105,91
+
+^CPSTATE: -105,562,26,92
+
+^SATSIGNAL:-105,91
+
+2021/02/22 17:52:55 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,30,92
+
+2021/02/22 17:52:55 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:52:56 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:52:57 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,99
+
+^CPSTATE: -105,562,32,92
+
+^SATSIGNAL:-105,99
+
+2021/02/22 17:52:57 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,39,92
+
+^DGSQU: 31,3
+
+2021/02/22 17:52:57 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,3
+
+2021/02/22 17:52:57 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:52:58 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:52:59 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-106,105
+
+^CPSTATE: -106,562,40,92
+
+2021/02/22 17:52:59 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:00 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:01 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:02 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:03 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:04 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:05 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-103,100
+
+2021/02/22 17:53:05 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -103,562,41,92
+
+^DSCI: 1,0,3,0,0,"18701997306",129,,,130,"",255
+
+2021/02/22 17:53:05 Ass_main.py[line:629] INFO 对端振铃
+2021/02/22 17:53:05 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:06 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:07 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:08 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:09 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:10 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:11 Ass_main.py[line:528] DEBUG Receive data:
++COLP: "",0,"",0
+
+2021/02/22 17:53:11 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-103,113
+
+^CPSTATE: -103,562,42,92
+
+^SATSIGNAL:-103,113
+
+^CPSTATE: -103,562,43,92
+
+^DGSQU: 31,4
+
+2021/02/22 17:53:11 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,4
+
++CIEV: 6,1
+
+^DSCI: 1,0,0,0,0,"18701997306",129,,,130,"",0
+
+2021/02/22 17:53:11 Ass_main.py[line:633] INFO 对端已接听
+2021/02/22 17:53:11 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃', '对端接听']
+2021/02/22 17:53:16 Ass_main.py[line:591] INFO exec >> AT+CHUP
+2021/02/22 17:53:16 Ass_main.py[line:528] DEBUG Receive data:
+OK
+
++CIEV: 6,0
+
+2021/02/22 17:53:16 Ass_main.py[line:528] DEBUG Receive data:
+^DSCI: 1,0,6,0,0,"18701997306",129,,16,2,"",0
+
+2021/02/22 17:53:16 Ass_main.py[line:666] INFO 通话结束
+
+2021/02/22 17:53:16 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-103,121
+
+^CPSTATE: -103,562,44,92
+
+2021/02/22 17:53:16 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,4
+
+2021/02/22 17:53:16 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,4
+
+2021/02/22 17:53:17 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃', '对端接听', '通话结束']
+2021/02/22 17:53:18 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-103,124
+
+^CPSTATE: -103,562,53,92
+
+^SATSIGNAL:-103,124
+
+^CPSTATE: -103,562,46,92
+
+2021/02/22 17:53:18 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+2021/02/22 17:53:20 Ass_main.py[line:591] INFO exec >> ATD18701997306;
+2021/02/22 17:53:20 Ass_main.py[line:742] INFO 主叫接听 >> 第2次, 共2次,
+2021/02/22 17:53:20 Ass_main.py[line:528] DEBUG Receive data:
+OK
+
+2021/02/22 17:53:20 Ass_main.py[line:528] DEBUG Receive data:
+^DSCI: 1,0,2,0,0,"18701997306",129,,,127,"",255
+
+2021/02/22 17:53:20 Ass_main.py[line:625] INFO 正在拨号>> 18701997306
+2021/02/22 17:53:21 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-103,124
+
+2021/02/22 17:53:21 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -103,562,30,92
+
+2021/02/22 17:53:21 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-103,122
+
+^CPSTATE: -103,562,30,84
+
+^DGSQU: 31,4
+
+2021/02/22 17:53:21 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,4
+
+^SATSIGNAL:-103,122
+
+^CPSTATE: -103,562,30,85
+
+2021/02/22 17:53:23 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:24 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:25 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:26 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:27 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,108
+
+^CPSTATE: -104,562,24,85
+
+^SATSIGNAL:-104,108
+
+2021/02/22 17:53:27 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -104,562,30,85
+
+2021/02/22 17:53:27 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,106
+
+2021/02/22 17:53:27 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -104,562,26,85
+
+^DGSQU: 31,4
+
+2021/02/22 17:53:27 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,4
+
+2021/02/22 17:53:27 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,106
+
+^CPSTATE: -104,562,26,92
+
+^SATSIGNAL:-104,106
+
+^CPSTATE: -104,562,30,92
+
+2021/02/22 17:53:27 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:28 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:29 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,106
+
+2021/02/22 17:53:29 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,32,92
+
+^SATSIGNAL:-105,106
+
+2021/02/22 17:53:29 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,39,92
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+2021/02/22 17:53:29 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:30 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:31 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,105
+
+^CPSTATE: -104,562,40,92
+
+2021/02/22 17:53:31 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:32 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:33 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:34 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:35 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:36 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:37 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:38 Ass_main.py[line:748] DEBUG dial process: ['拨号']
+2021/02/22 17:53:38 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,112
+
+2021/02/22 17:53:38 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -104,562,41,92
+
+^DSCI: 1,0,3,0,0,"18701997306",129,,,131,"",255
+
+2021/02/22 17:53:38 Ass_main.py[line:629] INFO 对端振铃
+2021/02/22 17:53:39 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:40 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:41 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:42 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:43 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:44 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:45 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:46 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:47 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:48 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:49 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:50 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:51 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:52 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:53 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:54 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:55 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:56 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:57 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:58 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:53:59 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:54:00 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:54:01 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:54:02 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃']
+2021/02/22 17:54:03 Ass_main.py[line:528] DEBUG Receive data:
++COLP: "",0,"",0
+
+^SATSIGNAL:-104,118
+
+^CPSTATE: -104,562,42,92
+
+2021/02/22 17:54:03 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,118
+
+^CPSTATE: -104,562,43,92
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+2021/02/22 17:54:03 Ass_main.py[line:528] DEBUG Receive data:
++CIEV: 6,1
+
+^DSCI: 1,0,0,0,0,"18701997306",129,,,131,"",0
+
+2021/02/22 17:54:03 Ass_main.py[line:633] INFO 对端已接听
+2021/02/22 17:54:03 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃', '对端接听']
+2021/02/22 17:54:08 Ass_main.py[line:591] INFO exec >> AT+CHUP
+2021/02/22 17:54:08 Ass_main.py[line:528] DEBUG Receive data:
+OK
+
++CIEV: 6,0
+
+^DSCI: 1,0,6,0,0,"18701997306",129,,16,3,"",0
+
+2021/02/22 17:54:08 Ass_main.py[line:642] INFO 通话结束
+
+2021/02/22 17:54:09 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,119
+
+2021/02/22 17:54:09 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -104,562,44,92
+
+2021/02/22 17:54:09 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+2021/02/22 17:54:09 Ass_main.py[line:748] DEBUG dial process: ['拨号', '对端振铃', '对端接听', '通话结束']
+2021/02/22 17:54:10 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,118
+
+^CPSTATE: -105,562,53,92
+
+^SATSIGNAL:-105,118
+
+^CPSTATE: -105,562,46,92
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+2021/02/22 17:54:10 Ass_main.py[line:773] INFO 测试项：主叫接听 测试次数: 2, pass: 2, fail: 0
+
+2021/02/22 17:54:13 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,120
+
+^CPSTATE: -104,562,36,92
+
+2021/02/22 17:54:13 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+2021/02/22 17:54:13 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,119
+
+^CPSTATE: -104,562,36,84
+
+2021/02/22 17:54:43 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-106,100
+
+^CPSTATE: -106,562,36,84
+
+2021/02/22 17:55:14 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,92
+
+^CPSTATE: -105,562,36,84
+
+2021/02/22 17:55:14 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 17:55:45 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,89
+
+^CPSTATE: -104,562,36,84
+
+2021/02/22 17:55:45 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 17:56:15 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,91
+
+^CPSTATE: -105,562,36,84
+
+2021/02/22 17:56:16 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 17:56:16 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,3
+
+2021/02/22 17:56:46 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,93
+
+2021/02/22 17:56:46 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -104,562,36,84
+
+2021/02/22 17:57:17 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 17:57:47 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-103,93
+
+^CPSTATE: -103,562,36,84
+
+2021/02/22 17:57:48 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 17:58:49 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,94
+
+^CPSTATE: -105,562,36,84
+
+2021/02/22 17:59:20 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 17:59:50 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-106,86
+
+2021/02/22 17:59:50 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -106,562,36,84
+
+2021/02/22 17:59:51 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 17:59:51 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,3
+
+2021/02/22 18:00:43 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,85
+
+2021/02/22 18:00:43 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,36,84
+
+2021/02/22 18:00:44 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 18:00:44 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-104,85
+
+^CPSTATE: -104,562,36,84
+
+2021/02/22 18:00:44 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 18:00:44 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,86
+
+^CPSTATE: -105,562,36,84
+
+2021/02/22 18:00:45 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 18:00:45 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,3
+
+^SATSIGNAL:-106,85
+
+^CPSTATE: -106,562,36,84
+
+2021/02/22 18:00:45 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 18:00:46 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-105,86
+
+^CPSTATE: -105,562,36,84
+
+2021/02/22 18:00:46 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 18:00:46 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,3
+
+^SATSIGNAL:-104,88
+
+^CPSTATE: -104,562,36,84
+
+2021/02/22 18:00:47 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,89
+
+2021/02/22 18:00:47 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,36,84
+
+2021/02/22 18:01:17 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-104,82
+
+^CPSTATE: -104,562,36,84
+
+2021/02/22 18:01:47 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,83
+
+^CPSTATE: -105,562,36,84
+
+2021/02/22 18:02:17 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-104,87
+
+^CPSTATE: -104,562,36,84
+
+2021/02/22 18:02:47 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 18:02:47 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,3
+
+^SATSIGNAL:-105,84
+
+^CPSTATE: -105,562,36,84
+
+2021/02/22 18:03:18 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-104,88
+
+^CPSTATE: -104,562,36,84
+
+2021/02/22 18:03:18 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-106,87
+
+^CPSTATE: -106,562,36,84
+
+2021/02/22 18:03:48 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 18:03:48 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,3
+
+^SATSIGNAL:-105,86
+
+^CPSTATE: -105,562,36,84
+
+2021/02/22 18:04:19 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 18:04:50 Ass_main.py[line:528] DEBUG Receive data:
+^SATSIGNAL:-106,84
+
+^CPSTATE: -106,562,36,84
+
+2021/02/22 18:04:50 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,85
+
+2021/02/22 18:04:50 Ass_main.py[line:528] DEBUG Receive data:
+^CPSTATE: -105,562,36,84
+
+2021/02/22 18:05:21 Ass_main.py[line:528] DEBUG Receive data:
+^DGSQU: 31,2
+
+2021/02/22 18:05:21 Ass_main.py[line:528] DEBUG Receive data:
++CSQ: 31,2
+
+^SATSIGNAL:-106,79
+
+^CPSTATE: -106,562,36,84
+

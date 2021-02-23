@@ -1,0 +1,10 @@
+2021/02/22 15:44:41 Ass_main.py[line:68] INFO ######## Tools start ########
+2021/02/22 15:44:41 Ass_main.py[line:166] INFO ######>>> Check device
+2021/02/22 15:44:42 Ass_main.py[line:181] DEBUG Device list:[]
+2021/02/22 15:44:42 Ass_main.py[line:433] INFO ######>>> Check port
+2021/02/22 15:44:42 Ass_main.py[line:441] DEBUG Port list:{'COM7': 'LeadCore CMCC Diagnoses (COM7)', 'COM8': 'LeadCore CMCC AT Interface (COM8)'}
+2021/02/22 15:44:42 Ass_main.py[line:936] INFO ######>>> Init settings AT Dialog
+2021/02/22 15:44:42 Ass_main.py[line:1003] INFO ######>>> Init Default settings Dialog
+2021/02/22 15:44:47 Ass_main.py[line:447] INFO ######>>> Open port
+2021/02/22 15:44:47 Ass_main.py[line:450] INFO Port:COM8  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/22 15:44:48 Ass_main.py[line:500] INFO Send choose at  ./:AT

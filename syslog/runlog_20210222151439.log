@@ -1,0 +1,650 @@
+2021/02/22 15:14:39 Ass_main.py[line:68] INFO ######## Tools start ########
+2021/02/22 15:14:39 Ass_main.py[line:165] INFO ######>>> Check device
+2021/02/22 15:14:39 Ass_main.py[line:180] DEBUG Device list:[]
+2021/02/22 15:14:39 Ass_main.py[line:432] INFO ######>>> Check port
+2021/02/22 15:14:39 Ass_main.py[line:440] DEBUG Port list:{'COM7': 'LeadCore CMCC Diagnoses (COM7)', 'COM8': 'LeadCore CMCC AT Interface (COM8)'}
+2021/02/22 15:14:39 Ass_main.py[line:920] INFO ######>>> Init settings AT Dialog
+2021/02/22 15:14:39 Ass_main.py[line:987] INFO ######>>> Init Default settings Dialog
+2021/02/22 15:15:29 Ass_main.py[line:446] INFO ######>>> Open port
+2021/02/22 15:15:29 Ass_main.py[line:449] INFO Port:COM8  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/22 15:15:29 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 31,3
+
+^SATSIGNAL:-108,84
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-107,84
+
+^CPSTATE: -107,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-108,81
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^DGSQU: 30,2
+
++CSQ: 30,2
+
+^SATSIGNAL:-109,72
+
+^CPSTATE: -109,201,36,84
+
+^DGSQU: 29,2
+
++CSQ: 29,2
+
+^SATSIGNAL:-110,66
+
+^CPSTATE: -110,201,36,84
+
+^DGSQU: 30,2
+
++CSQ: 30,2
+
+^SATSIGNAL:-109,63
+
+^CPSTATE: -109,201,36,84
+
+^DGSQU: 30,2
+
++CSQ: 30,2
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,72
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^DGSQU: 29,2
+
++CSQ: 29,2
+
+^SATSIGNAL:-110,72
+
+2021/02/22 15:15:29 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -110,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-107,70
+
+^CPSTATE: -107,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,70
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-107,67
+
+^CPSTATE: -107,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^DGSQU: 31,1
+
++CSQ: 31,1
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,62
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-107,64
+
+^CPSTATE: -107,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-106,68
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-107,74
+
+^CPSTATE: -107,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-106,70
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,70
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-107,67
+
+^CPSTATE: -107,201,36,84
+
++CIEV: 2,4
+
+2021/02/22 15:15:29 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
++CIEV: 2,2
+
+2021/02/22 15:15:33 Ass_main.py[line:524] INFO Send at cmd:atd18701997306;
+2021/02/22 15:15:33 Ass_main.py[line:539] DEBUG Receive data:
+OK
+
+^SATSIGNAL:-106,68
+
+^CPSTATE: -106,201,36,84
+
+2021/02/22 15:15:33 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,68
+
+^CPSTATE: -106,201,30,84
+
+2021/02/22 15:15:33 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
+2021/02/22 15:15:33 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 31,2
+
+^SATSIGNAL:-106,70
+
+^CPSTATE: -106,201,30,85
+
+2021/02/22 15:15:37 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-107,78
+
+^CPSTATE: -107,201,30,85
+
+2021/02/22 15:15:39 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-107,80
+
+^CPSTATE: -107,201,24,85
+
+^SATSIGNAL:-107,80
+
+2021/02/22 15:15:39 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -107,201,30,85
+
+2021/02/22 15:15:40 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,82
+
+^CPSTATE: -106,201,26,85
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:15:40 Ass_main.py[line:539] DEBUG Receive data:
++CIEV: 2,3
+
+^SATSIGNAL:-106,82
+
+^CPSTATE: -106,201,26,92
+
+^SATSIGNAL:-106,82
+
+^CPSTATE: -106,201,30,92
+
+2021/02/22 15:15:41 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-107,81
+
+^CPSTATE: -107,201,30,92
+
+2021/02/22 15:15:41 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-107,81
+
+^CPSTATE: -107,201,32,92
+
+^SATSIGNAL:-107,81
+
+^CPSTATE: -107,201,39,92
+
+2021/02/22 15:15:41 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:15:44 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,80
+
+2021/02/22 15:15:44 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -106,201,40,92
+
+2021/02/22 15:15:45 Ass_main.py[line:499] INFO Send choose at  ./:AT+CHUP
+2021/02/22 15:15:45 Ass_main.py[line:539] DEBUG Receive data:
+OK
+
++CIEV: 6,0
+
+^SATSIGNAL:-106,80
+
+2021/02/22 15:15:45 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -106,201,44,92
+
+2021/02/22 15:15:48 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:15:48 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-107,82
+
+^CPSTATE: -107,201,44,92
+
+2021/02/22 15:15:49 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-107,88
+
+^CPSTATE: -107,201,53,92
+
+^SATSIGNAL:-107,88
+
+2021/02/22 15:15:49 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -107,201,46,92
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:15:52 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-107,82
+
+^CPSTATE: -107,201,36,92
+
+2021/02/22 15:15:53 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-107,82
+
+^CPSTATE: -107,201,36,84
+
+2021/02/22 15:16:16 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,77
+
+^CPSTATE: -106,201,36,84
+
+2021/02/22 15:16:16 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,77
+
+^CPSTATE: -106,201,30,84
+
+2021/02/22 15:16:16 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
+2021/02/22 15:16:16 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 31,2
+
++CIEV: 2,2
+
+^SATSIGNAL:-106,77
+
+^CPSTATE: -106,201,30,85
+
+2021/02/22 15:16:22 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,84
+
+^CPSTATE: -106,201,24,85
+
+2021/02/22 15:16:22 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,84
+
+^CPSTATE: -106,201,30,85
+
+2021/02/22 15:16:22 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,84
+
+^CPSTATE: -106,201,26,85
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:16:22 Ass_main.py[line:539] DEBUG Receive data:
++CIEV: 2,3
+
+^SATSIGNAL:-106,84
+
+^CPSTATE: -106,201,26,92
+
+^SATSIGNAL:-106,84
+
+^CPSTATE: -106,201,30,92
+
+2021/02/22 15:16:23 Ass_main.py[line:539] DEBUG Receive data:
++CIEV: 6,0
+
+2021/02/22 15:16:23 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
++CIEV: 2,2
+
+2021/02/22 15:16:24 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,81
+
+^CPSTATE: -106,201,32,92
+
+2021/02/22 15:16:34 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-105,87
+
+^CPSTATE: -105,201,36,92
+
+2021/02/22 15:16:35 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:16:35 Ass_main.py[line:539] DEBUG Receive data:
++CIEV: 2,3
+
+^SATSIGNAL:-106,87
+
+^CPSTATE: -106,201,36,84
+
+2021/02/22 15:17:05 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-107,83
+
+2021/02/22 15:17:05 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -107,201,36,84
+
+2021/02/22 15:17:06 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:17:08 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-108,81
+
+2021/02/22 15:17:08 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -108,201,36,84
+
+2021/02/22 15:17:09 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-107,81
+
+^CPSTATE: -107,201,36,84
+
+2021/02/22 15:17:09 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:17:40 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+2021/02/22 15:18:11 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-106,79
+
+^CPSTATE: -106,201,36,84
+
+2021/02/22 15:18:41 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-107,82
+
+^CPSTATE: -107,201,36,84
+
+2021/02/22 15:19:12 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-106,81
+
+^CPSTATE: -106,201,36,84
+
+2021/02/22 15:19:43 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+2021/02/22 15:20:44 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:21:46 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+2021/02/22 15:22:17 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:23:49 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+2021/02/22 15:24:19 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 15:24:19 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 31,3
+
+2021/02/22 15:25:52 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-107,79
+
+^CPSTATE: -107,201,36,84
+
+2021/02/22 15:26:22 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-106,79
+
+^CPSTATE: -106,201,36,84
+
+2021/02/22 15:26:53 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,90
+
+2021/02/22 15:26:53 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -105,201,36,84
+
+2021/02/22 15:27:24 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-104,88
+
+^CPSTATE: -104,201,36,84
+
+2021/02/22 15:27:54 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,90
+
+^CPSTATE: -105,201,36,84
+
+2021/02/22 15:28:25 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 17,2
+
++CSQ: 17,2
+
+^SATSIGNAL:-122,66
+
+2021/02/22 15:28:25 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -122,201,36,84
+
+2021/02/22 15:28:55 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,71
+
+^CPSTATE: -108,201,36,84
+
+2021/02/22 15:29:26 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 15,3
+
++CSQ: 15,3
+
+2021/02/22 15:29:26 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-124,88
+
+^CPSTATE: -124,201,36,84
+
+2021/02/22 15:29:26 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 15,3
+
++CSQ: 15,3
+
+2021/02/22 15:29:27 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-108,86
+
+2021/02/22 15:29:27 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -108,201,36,84
+
+2021/02/22 15:29:57 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 16,2
+
+2021/02/22 15:29:57 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 16,2
+
+^SATSIGNAL:-123,66
+
+^CPSTATE: -123,201,36,84
+
+2021/02/22 15:29:57 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 16,2
+
++CSQ: 16,2
+
+2021/02/22 15:30:28 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,89
+
+2021/02/22 15:30:28 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -105,201,36,84
+
+2021/02/22 15:30:58 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 15:30:58 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 31,3
+
+^SATSIGNAL:-104,95
+
+^CPSTATE: -104,201,36,84
+
+2021/02/22 15:30:59 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/22 15:31:29 Ass_main.py[line:539] DEBUG Receive data:
+^SATSIGNAL:-105,100
+
+2021/02/22 15:31:29 Ass_main.py[line:539] DEBUG Receive data:
+^CPSTATE: -105,201,36,84
+
+2021/02/22 15:31:29 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,3
+
+2021/02/22 15:31:29 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 31,3
+
+2021/02/22 15:32:00 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
+2021/02/22 15:32:00 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 31,2
+
+^SATSIGNAL:-108,75
+
+^CPSTATE: -108,201,36,84
+
+2021/02/22 15:32:00 Ass_main.py[line:539] DEBUG Receive data:
+^DGSQU: 31,2
+
+2021/02/22 15:32:00 Ass_main.py[line:539] DEBUG Receive data:
++CSQ: 31,2
+
