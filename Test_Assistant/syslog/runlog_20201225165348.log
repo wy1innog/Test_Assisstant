@@ -1,7 +1,0 @@
-2020/12/25 16:53:49 Ass_main.py[line:69] INFO ######## Tools start ########
-2020/12/25 16:53:49 Ass_main.py[line:167] INFO ######>>> Check device
-2020/12/25 16:53:49 Ass_main.py[line:182] DEBUG Device list:[]
-2020/12/25 16:53:49 Ass_main.py[line:431] INFO ######>>> Check port
-2020/12/25 16:53:49 Ass_main.py[line:439] DEBUG Port list:{'COM1': '通信端口 (COM1)'}
-2020/12/25 16:53:49 Ass_main.py[line:908] INFO ######>>> Init settings AT Dialog
-2020/12/25 16:53:49 Ass_main.py[line:975] INFO ######>>> Init Default settings Dialog
