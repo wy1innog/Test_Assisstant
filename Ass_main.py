@@ -59,10 +59,10 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         self.ser = serial.Serial()
         self.init()
         self.port_check()
-        self.recv_flag = True
         self.process = []
-        self.test_flag = False
-        self.net_in_flag = False
+        self.RECV_FLAG = True
+        self.TEST_FLAG = False
+        self.NETWORK_REGISTERED = False
 
     def init(self):
 
@@ -107,15 +107,21 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
 
     # 停止正在进行的ap测试项
     def stop_test_ap(self):
-        self.test_flag = False
-        self.AP_recv_textBrowser.append("！！！测试被强制停止！！！")
-        logger.warning("force stop test !!!")
+        if self.TEST_FLAG == True:
+            self.TEST_FLAG = False
+            self.AP_recv_textBrowser.append("测试被强制停止！！！本次测试结束后终止测试")
+            logger.warning("force stop test !!!")
+        else:
+            pass
 
     # 停止正在进行的cp测试项
     def stop_test_cp(self):
-        self.test_flag = False
-        self.CP_recv_textBrowser.append("！！！测试被强制停止！！！")
-        logger.warning("force stop test !!!")
+        if self.TEST_FLAG == True:
+            self.TEST_FLAG = False
+            self.CP_recv_textBrowser.append("测试被强制停止！！！本次测试结束后终止测试")
+            logger.warning("force stop test !!!")
+        else:
+            pass
 
     # 导入config.json中所有指令
     def _prepare_AT(self):
@@ -123,16 +129,18 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
             with open(self.config_path, 'r', encoding='utf-8') as f:
                 config = json.load(f)
                 AT_list = config['AT_list']
-                self.lEdit_test_count_1.setPlaceholderText(config['times'])
-                self.lEdit_test_count.setPlaceholderText(config['times'])
+                self.Edit_test_count_AP.setPlaceholderText(config['Test_times'])
+                self.Edit_test_count.setPlaceholderText(config['Test_times'])
                 for line in AT_list:
                     self.combox_at_choice.addItem(line.strip())
 
         except FileNotFoundError:
             info = {
                 "number": "18701997306",
-                "times": "1",
-                "AT_list": ["AT", "AT+CFUN?", "AT^DGSN?", "AT^DMSN", "AT+CGMR"]
+                "content": "AT",
+                "Test_times": "1",
+                "interval": "5",
+                "AT_list": ["AT", "AT+CFUN?", "AT+CREG?", "AT^DMSN", "AT+CGMR"]
             }
             with open(self.config_path, 'w', encoding='utf-8') as fp:
                 json.dump(info, fp=fp, indent=4, ensure_ascii=False)
@@ -349,15 +357,15 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
                 self.AP_recv_textBrowser.append("log保存失败，请检查设备状态\n")
 
     def run_test_choice_ap(self):
-        if self.test_flag == False:
-            self.test_flag = True
+        if self.TEST_FLAG == False:
+            self.TEST_FLAG = True
             if self.check_device() != 0:
                 if self.reboot_test.isChecked():
-                    times_text = self.lEdit_test_count_1.text()
+                    times_text = self.Edit_test_count_AP.text()
                     if times_text == '':
                         with open(self.config_path, 'r', encoding='utf-8') as f:
                             config = json.load(f)
-                            times_text = config['times']
+                            times_text = config['Test_times']
                     elif times_text.isdigit():
                         pass
                     t1 = threading.Thread(target=self.run, args=(times_text,))
@@ -373,11 +381,11 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         pass_count = 0
         with open(self.config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
-            config['times'] = times
+            config['Test_times'] = times
         self.AP_recv_textBrowser.append("测试项：reboot重启 次数：%s" % times)
         logger.info("测试项：reboot重启 次数：%s" % times)
         for i in range(int(times)):
-            if self.test_flag == True:
+            if self.TEST_FLAG == True:
                 self.AP_recv_textBrowser.append("reboot重启 >> 第%d次测试 共%s次,正在测试..." % (i+1, times))
                 subprocess_call('adb reboot')
 
@@ -489,7 +497,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         if at_cmd1 != "刷新":
             if self.ser.is_open:
                 try:
-                    self.recv_flag = True
+                    self.RECV_FLAG = True
                     at_cmd = (at_cmd1 + '\r\n').encode('utf-8')
                     self.ser.write(at_cmd)
                     logger.info("Send Combobox Cmd: %s" % at_cmd1)
@@ -510,14 +518,15 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
     def data_send(self):
         if self.ser.is_open:
             at_cmd = self.CP_send_textEdit.toPlainText().strip()
-            self.recv_flag = True
+            self.RECV_FLAG = True
             if at_cmd != "":
                 # 非空字符串
                 input_s = (at_cmd + '\r\n').encode('utf-8')
                 self.ser.write(input_s)
                 logger.info("Send At Cmd: %s" % at_cmd)
         else:
-            pass
+            self.CP_recv_textBrowser.append("终端状态异常")
+            logger.warning("终端连接状态异常")
 
     # 接收数据
     def __data_receive(self):
@@ -529,7 +538,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
 
                 # 检查是否有关键log
                 self.call_check(str(data))
-                if self.recv_flag == True:
+                if self.RECV_FLAG == True:
                     self.CP_recv_textBrowser.insertPlainText(data.decode('utf-8', "ignore"))
                 self.recv_to_bottom()
             else:
@@ -538,18 +547,6 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
             if self.ser.is_open:
                 self.port_close()
 
-    # 多线程实时接收
-    def com_start_read(self, rx_size=1*1024*1024):
-        """
-        设置接收buf的size，并创建一个线程，专门用来实时接收数据
-        :param rx_size: 默认设置1M的接收缓存
-        :return: None
-        """
-        self.ser.set_buffer_size(rx_size=rx_size)
-        # self.__read_flag = True
-        read_thread = threading.Thread(target=self.__data_receive)
-        # read_thread.setDaemon(True)  # 守护进程，自动运行结束退出，或者主进程结束时，自动结束
-        read_thread.start()
 
     # 清除显示
     def cp_clear_send(self):
@@ -561,8 +558,9 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
     # 根据选框执行相应测试项
     def run_test_choice_cp(self):
         self._exec_cmd("AT^DSCI=1")
-        if self.test_flag == False:
-            self.test_flag = True
+        if self.TEST_FLAG == False:
+            self.TEST_FLAG = True
+
             if self.ser.is_open:
 
                 if self.Radio_calling_to_answer.isChecked():
@@ -581,9 +579,8 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
                     self.CP_recv_textBrowser.append("未选择测试项")
 
             else:
-                logger.debug("test flag:%s" % self.test_flag)
-        else:
-            pass
+                logger.warning("终端状态异常")
+
 
     def _exec_cmd(self, cmd):
         cmd1 = (cmd + '\r\n').encode('utf-8')
@@ -592,6 +589,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
             logger.info("exec >> " + cmd)
         except SerialException:
             logger.warning("Attempting to use a port that is not open")
+            self.CP_recv_textBrowser.append("终端状态异常")
 
     def call_check(self, line):
         with open(self.config_path, 'r', encoding='utf-8') as f:
@@ -617,7 +615,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         # BUSY表示电话状态为电话终止，未接通原因用户忙， APP侧语音提示所拨打电话正在通话中，请稍后再拨。
         busy = '^DSCI: 1,0,6,0,0,"{}",129,,17'.format(number)
         # NO CARRIER表示电话状态为电话终止，原因空号， APP侧语音提示所拨打是空号，请查证再拨
-        empty_number = '^DSCI: 1,0,6,0,0,"{}",129,,1'.format(number)
+        empty_number = '^DSCI: 1,0,6,0,0,"{}",129,,1,'.format(number)
         answer = '^DSCI: 1,0,0,0,0,"{}"'.format(number)
 
         if dial in line:
@@ -674,50 +672,51 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         with open(self.config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
             number = config['number']
-            times_text = self.lEdit_test_count.text()
+            interval = int(config['interval'])
+            times_text = self.Edit_test_count.text()
 
         if times_text.isdigit():
             times = times_text
 
-            config['times'] = times_text
+            config['Test_times'] = times_text
             if test_item == 'calling_to_answer':
                 logging.debug("calling_to_answer")
-                thread_calling = threading.Thread(target=self._calling_to_answer, args=(times, number,))
+                thread_calling = threading.Thread(target=self._calling_to_answer, args=(times, number, interval))
                 thread_calling.start()
             elif test_item == 'caller_hangs_up':
                 logger.debug("caller_hangs_up")
-                thread_calling = threading.Thread(target=self._caller_hangs_up, args=(times, number,))
+                thread_calling = threading.Thread(target=self._caller_hangs_up, args=(times, number, interval))
                 thread_calling.start()
             elif test_item == 'calling_reject':
                 logger.debug("calling_reject")
-                thread_calling = threading.Thread(target=self._calling_reject, args=(times_text, number,))
+                thread_calling = threading.Thread(target=self._calling_reject, args=(times_text, number, interval))
                 thread_calling.start()
             elif test_item == 'no_caller_answer':
                 logger.debug("no_caller_answer")
-                thread_calling = threading.Thread(target=self._no_caller_answer, args=(times_text, number,))
+                thread_calling = threading.Thread(target=self._no_caller_answer, args=(times_text, number, interval))
                 thread_calling.start()
         elif times_text == '':
-            times = config['times']
+            times = config['Test_times']
             if test_item == 'calling_to_answer':
                 logger.debug("calling_to_answer")
-                thread_calling = threading.Thread(target=self._calling_to_answer, args=(times, number,))
+                thread_calling = threading.Thread(target=self._calling_to_answer, args=(times, number, interval))
                 thread_calling.start()
             elif test_item == 'caller_hangs_up':
                 logger.debug("caller_hangs_up")
-                thread_calling = threading.Thread(target=self._caller_hangs_up, args=(times, number,))
+                thread_calling = threading.Thread(target=self._caller_hangs_up, args=(times, number, interval))
                 thread_calling.start()
             elif test_item == 'calling_reject':
                 logger.debug("calling_reject")
-                thread_calling = threading.Thread(target=self._calling_reject, args=(times, number,))
+                thread_calling = threading.Thread(target=self._calling_reject, args=(times, number, interval))
                 thread_calling.start()
             elif test_item == 'no_caller_answer':
                 logger.debug("no_caller_answer")
-                thread_calling = threading.Thread(target=self._no_caller_answer, args=(times, number,))
+                thread_calling = threading.Thread(target=self._no_caller_answer, args=(times, number, interval))
                 thread_calling.start()
         else:
             self.CP_recv_textBrowser.append("次数格式错误，请重新输入")
 
-    def _calling_to_answer(self, times, number):
+    def _calling_to_answer(self, times, number, interval):
         """
         测试项——主叫主挂，终端主叫，对端接听后，终端主动挂断
         :param times: 测试次数
@@ -728,45 +727,48 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         pass_calling_to_answer = 0
         fail_calling_to_answer = 0
         self.CP_recv_textBrowser.append("测试项：主叫主挂 测试次数:%s" % times)
-        self.recv_flag = False
+        self.RECV_FLAG = False
         current_process = ['拨号', '对端振铃', '对端接听', '通话结束']
 
-        logger.debug("test times:%s" % times)
+        logger.debug("Test times: %s" % times)
         for i in range(int(times)):
             self.recv_to_bottom()
-            if self.test_flag:
+            if self.TEST_FLAG:
                 self.process.clear()
-                time.sleep(2)
-                self.CP_recv_textBrowser.append("主叫主挂 >> 第%s次, 共%s次" % (i+1, times))
+                time.sleep(interval)
+                self.CP_recv_textBrowser.append("主叫主挂 >> 第%s次, 共 %s次" % (i+1, times))
                 self._exec_cmd('ATD%s;' % number)
 
                 logger.info("主叫主挂 >> 第%s次, 共%s次," % (i+1, times))
-                time.sleep(2)
 
-                while self.test_flag:
-                    time.sleep(1)
+                while True:
                     try:
+                        time.sleep(3)
                         logger.debug("dial process: %s" % self.process)
                         if self.process[-1] == "对端接听":
+                            # 等待5s超时，自动挂断
                             time.sleep(5)
                             self._exec_cmd('AT+CHUP')
+
                         elif self.process[-1] == "通话结束":
-                            time.sleep(1)
                             if self.process == current_process:
                                 pass_calling_to_answer += 1
+                                logger.info("通话流程为正确流程：{}".format(self.process))
                             else:
                                 fail_calling_to_answer += 1
+                                logger.warning("通话流程有误：{}".format(self.process))
                             break
                     except IndexError:
-                        logger.error("拨打失败，请检查设备是否入网")
+                        logger.warning("拨打失败，请检查设备是否入网")
                         self.CP_recv_textBrowser.append("测试停止，请检查设备入网状态")
                         fail_calling_to_answer += 1
-                        self.test_flag = False
                         break
 
             else:
+                i -= 1
                 break
-        self.CP_recv_textBrowser.append("测试项：主叫主挂 测试次数:%d, pass:%d, fail:%d\r\n" %
+        self.TEST_FLAG = False
+        self.CP_recv_textBrowser.append("测试项：主叫主挂 测试次数: %d, pass: %d, fail: %d\r\n" %
                                         (i+1, pass_calling_to_answer, fail_calling_to_answer))
         self.recv_to_bottom()
 
@@ -774,7 +776,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
                     (i+1, pass_calling_to_answer, fail_calling_to_answer))
 
 
-    def _caller_hangs_up(self, times, number):
+    def _caller_hangs_up(self, times, number, interval):
         """
         测试项——主叫被挂，终端主叫，对端接听接听后，对端主动挂断
         :param times: 测试次数
@@ -785,45 +787,45 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         pass_hangs_up = 0
         fail_hangs_up = 0
         self.CP_recv_textBrowser.append("测试项：主叫被挂 测试次数:%s" % times)
-        self.recv_flag = False
+        self.RECV_FLAG = False
         current_process = ['拨号', '对端振铃', '对端接听', '通话结束']
 
-        logger.debug("test times:%s" % times)
+        logger.debug("Test times:%s" % times)
         for i in range(int(times)):
             self.recv_to_bottom()
-            if self.test_flag:
+            if self.TEST_FLAG:
                 self.process.clear()
-                time.sleep(2)
-                self.CP_recv_textBrowser.append("主叫被挂 >> 第%s次, 共%s次," % (i + 1, times))
+                time.sleep(interval)
+                self.CP_recv_textBrowser.append("主叫被挂 >> 第%s次, 共%s次," % (i+1, times))
                 self._exec_cmd('ATD%s;' % number)
-                logger.info("主叫被挂 >> 第%s次, 共%s次," % (i + 1, times))
-                time.sleep(2)
+                logger.info("主叫被挂 >> 第%s次, 共%s次," % (i+1, times))
 
-                while self.test_flag:
-                    time.sleep(1)
+                while True:
                     try:
+                        time.sleep(3)
                         logger.debug("dial process: %s" % self.process)
                         if self.process[-1] == "对端接听":
                             time.sleep(5)
                             self._exec_cmd('AT+CHUP')
                         elif self.process[-1] == "通话结束":
-                            time.sleep(1)
                             if self.process == current_process:
                                 pass_hangs_up += 1
                                 logger.info("通话流程为正确流程：{}".format(self.process))
 
                             else:
                                 fail_hangs_up += 1
-                                logger.info("通话流程有误：{}".format(self.process))
+                                logger.warning("通话流程有误：{}".format(self.process))
                             break
                     except IndexError:
                         logger.error("拨打失败，请检查是被是否入网")
                         self.CP_recv_textBrowser.append("测试停止，请检查设备入网状态")
                         fail_hangs_up += 1
-                        self.test_flag = False
+                        self.TEST_FLAG = False
                         break
             else:
+                i -= 1
                 break
+        self.TEST_FLAG = False
         self.CP_recv_textBrowser.append("测试项：主叫被挂 测试次数:%d, pass:%d, fail:%d\r\n" %
                                         (i+1, pass_hangs_up, fail_hangs_up))
         self.recv_to_bottom()
@@ -831,7 +833,7 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
                     (i+1, pass_hangs_up, fail_hangs_up))
 
 
-    def _calling_reject(self, times, number):
+    def _calling_reject(self, times, number, interval):
         """
         测试项——主叫拒接，终端主叫，对端挂断
         :param times: 测试次数
@@ -842,47 +844,49 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         pass_calling_reject = 0
         fail_calling_reject = 0
         self.CP_recv_textBrowser.append("测试项：主叫拒接 测试次数:%s" % times)
-        self.recv_flag = False
+        self.RECV_FLAG = False
         current_process = ['拨号', '对端振铃', '通话结束']
 
-        logger.debug("test times:%s" % times)
+        logger.debug("Test times:%s" % times)
         for i in range(int(times)):
             self.recv_to_bottom()
-            if self.test_flag:
+            if self.TEST_FLAG:
+                time.sleep(interval)
                 self.process.clear()
-                time.sleep(2)
                 self.CP_recv_textBrowser.append("主叫拒接 >> 第%s次, 共%s次," % (i+1, times))
                 self._exec_cmd('ATD%s;' % number)
                 logger.info("主叫拒接 >> 第%s次, 共%s次," % (i+1, times))
-                time.sleep(2)
 
-                while self.test_flag:
-                    time.sleep(1)
-                    logger.debug("dial process: %s" % self.process)
+                while True:
                     try:
+                        time.sleep(3)
+                        logger.debug("dial process: %s" % self.process)
                         if "通话结束" in self.process[-1]:
-                            time.sleep(1)
                             if self.process == current_process:
                                 pass_calling_reject += 1
+                                logger.info("通话流程为正确流程：{}".format(self.process))
                             else:
                                 fail_calling_reject += 1
+                                logger.warning("通话流程有误：{}".format(self.process))
                             break
                     except IndexError:
                         logger.error("拨打失败，请检查是被是否入网")
                         self.CP_recv_textBrowser.append("测试停止，请检查设备入网状态")
                         fail_calling_reject += 1
-                        self.test_flag = False
+                        self.TEST_FLAG = False
                         break
             else:
+                i -= 1
                 break
-        self.CP_recv_textBrowser.append("测试项：主叫拒接 测d试次数:%s, pass:%d, fail:%d\r\n" %
+        self.TEST_FLAG = False
+        self.CP_recv_textBrowser.append("测试项：主叫拒接 测试次数:%s, pass:%d, fail:%d\r\n" %
                                         (i+1, pass_calling_reject, fail_calling_reject))
         self.recv_to_bottom()
         logger.info("测试项：主叫拒接 测试次数:%d, pass:%d, fail:%d\r\n" %
                     (i+1, pass_calling_reject, fail_calling_reject))
 
 
-    def _no_caller_answer(self, times, number):
+    def _no_caller_answer(self, times, number, interval):
         """
         测试项——主叫未接，终端主叫，对端不予接听
         :param times: 测试次数
@@ -893,30 +897,31 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
         pass_no_caller_answer = 0
         fail_no_caller_answer = 0
         self.CP_recv_textBrowser.append("测试项：主叫未接 测试次数:%s" % times)
-        self.recv_flag = False
-        current_process = ['拨号', '对端振铃', '对端无应答, 通话结束']
+        self.RECV_FLAG = False
+        # current_process = ['拨号', '对端振铃', '对端无应答, 通话结束']
+        current_process = ['拨号', '对端振铃', '通话结束']
 
-        logger.debug("test times:%s" % times)
+        logger.debug("Test times: %s" % times)
         for i in range(int(times)):
             self.recv_to_bottom()
-            if self.test_flag:
+            if self.TEST_FLAG:
                 self.process.clear()
-                time.sleep(2)
+                time.sleep(interval)
                 self.CP_recv_textBrowser.append("主叫未接 >> 第%s次, 共%s次," % (i+1, times))
                 self._exec_cmd('ATD%s;' % number)
                 logger.info("主叫未接 >> 第%s次, 共%s次," % (i+1, times))
-                time.sleep(2)
 
                 while True:
-                    time.sleep(1)
+                    time.sleep(3)
                     logger.debug("dial process: %s" % self.process)
                     try:
                         if self.process[-1] == "通话结束":
-                            time.sleep(1)
                             if self.process == current_process:
                                 pass_no_caller_answer += 1
+                                logger.info("通话流程为正确流程：{}".format(self.process))
                             else:
                                 fail_no_caller_answer += 1
+                                logger.warning("通话流程有误：{}".format(self.process))
                             break
 
                         # timeout
@@ -924,10 +929,12 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
                         logger.error("拨打失败，请检查是被是否入网")
                         self.CP_recv_textBrowser.append("测试停止，请检查设备入网状态")
                         fail_no_caller_answer += 1
-                        self.test_flag = False
+                        self.TEST_FLAG = False
                         break
             else:
+                i -= 1
                 break
+        self.TEST_FLAG = False
         self.CP_recv_textBrowser.append("测试项：主叫未接 测试次数:%s, pass:%d, fail:%d\r\n" %
                                         (i+1, pass_no_caller_answer, fail_no_caller_answer))
         self.recv_to_bottom()
@@ -960,10 +967,6 @@ class Dialog_settings_at(Ui_Dialog, QDialog, Ui_MainWindow):
                     self.listWidget.insertItem(0, cmd.strip())
         except JSONDecodeError:
             logger.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新config）")
-
-    def sendEditContent(self):
-        content = '1'
-        self.my_Signal.emit(content)
 
     def add_at_cmd(self):
         at_text, ok = QInputDialog.getText(self, "添加新指令", "请输入新指令:")
@@ -1026,9 +1029,11 @@ class Dialog_default_settings(Default_settings_Dialog, QDialog, Ui_MainWindow):
             with open(self.config_path, 'r', encoding='utf-8') as f:
                 config = json.load(f)
                 number = config['number']
-                times = config['times']
+                times = config['Test_times']
+                interval = config['interval']
                 self.edit_called_number.setPlaceholderText(number)
                 self.edit_times.setPlaceholderText(times)
+                self.edit_test_interval.setPlaceholderText(interval)
         except JSONDecodeError:
             logger.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新config）")
 
@@ -1038,8 +1043,13 @@ class Dialog_default_settings(Default_settings_Dialog, QDialog, Ui_MainWindow):
                 config = json.load(f)
                 if self.edit_called_number.isModified():
                     config['number'] = self.edit_called_number.text()
+                    logger.info("config.cfg modified number: %s" % self.edit_called_number.text())
                 if self.edit_times.isModified():
-                    config['times'] = self.edit_times.text()
+                    config['Test_times'] = self.edit_times.text()
+                    logger.info("config.cfg modified Test times: %s" % self.edit_times.text())
+                if self.edit_test_interval.isModified():
+                    config['interval'] = self.edit_test_interval.text()
+                    logger.info("config.cfg modified interval: %s" % self.edit_test_interval.text())
 
             with open(self.config_path, 'w', encoding='utf-8') as f:
                 json.dump(config, f, indent=4, ensure_ascii=False)

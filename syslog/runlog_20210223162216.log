@@ -1,0 +1,399 @@
+2021/02/23 16:22:17 Ass_main.py[line:69] INFO ######## Tools start ########
+2021/02/23 16:22:17 Ass_main.py[line:165] INFO ######>>> Check device
+2021/02/23 16:22:17 Ass_main.py[line:180] DEBUG Device list:[]
+2021/02/23 16:22:17 Ass_main.py[line:430] INFO ######>>> Check port
+2021/02/23 16:22:17 Ass_main.py[line:438] DEBUG Port list:{'COM8': 'LeadCore CMCC AT Interface (COM8)', 'COM7': 'LeadCore CMCC Diagnoses (COM7)'}
+2021/02/23 16:22:17 Ass_main.py[line:964] INFO ######>>> Init settings AT Dialog
+2021/02/23 16:22:17 Ass_main.py[line:1028] INFO ######>>> Init Default settings Dialog
+2021/02/23 16:22:21 Ass_main.py[line:444] INFO ######>>> Open port
+2021/02/23 16:22:21 Ass_main.py[line:447] INFO Port:COM7  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/23 16:22:21 Ass_main.py[line:530] DEBUG Receive data:
+^CPSTATE: -123,201,36,84
+
+^DGSQU: 16,2
+
++CSQ: 16,2
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,77
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,84
+
+^CPSTATE: -105,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-108,81
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-105,108
+
+^CPSTATE: -105,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^DGSQU: 16,3
+
++CSQ: 16,3
+
+^SATSIGNAL:-123,84
+
+^CPSTATE: -123,201,36,84
+
+^DGSQU: 16,3
+
++CSQ: 16,3
+
+^DGSQU: 31,3
+
+2021/02/23 16:22:21 Ass_main.py[line:530] DEBUG Receive data:
++CSQ: 31,3
+
+^SATSIGNAL:-107,86
+
+^CPSTATE: -107,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-106,99
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-105,108
+
+^CPSTATE: -105,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^DGSQU: 15,2
+
++CSQ: 15,2
+
+^SATSIGNAL:-124,73
+
+^CPSTATE: -124,201,36,84
+
+^DGSQU: 15,2
+
++CSQ: 15,2
+
+^DGSQU: 16,2
+
++CSQ: 16,2
+
+^SATSIGNAL:-123,69
+
+^CPSTATE: -123,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-106,106
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-108,87
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,88
+
+^CPSTATE: -105,201,36,84
+
+^DGSQU: 15,3
+
++CSQ: 15,3
+
+^SATSIGNAL:-124,87
+
+^CPSTATE: -124,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-108,88
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 15,3
+
++CSQ: 15,3
+
+^SATSIGNAL:-124,85
+
+2021/02/23 16:22:21 Ass_main.py[line:530] DEBUG Receive data:
+^CPSTATE: -124,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-106,85
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-123,78
+
+^CPSTATE: -123,201,36,84
+
+^SATSIGNAL:-123,78
+
+^CPSTATE: -123,201,30,84
+
+^SATSIGNAL:-123,78
+
+^CPSTATE: -123,201,27,84
+
+^SATSIGNAL:-123,78
+
+^CPSTATE: -123,201,30,84
+
+^DGSQU: 16,2
+
++CSQ: 16,2
+
+^SATSIGNAL:-123,78
+
+^CPSTATE: -123,201,30,85
+
+^SATSIGNAL:-106,119
+
+^CPSTATE: -106,201,24,85
+
+^SATSIGNAL:-106,118
+
+^CPSTATE: -106,201,26,85
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-106,118
+
+^CPSTATE: -106,201,26,92
+
+^SATSIGNAL:-106,116
+
+^CPSTATE: -106,201,32,92
+
+^SATSIGNAL:-106,120
+
+^CPSTATE: -106,201,29,92
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^MESINFO:0,0
+
+^SATSIGNAL:-105,118
+
+^CPSTATE: -105,201,36,92
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-105,117
+
+^CPSTATE: -105,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-106,107
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-105,108
+
+^CPSTATE: -105,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-106,119
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^SATSIGNAL:-108,79
+
+^CPSTATE: -108,201,36,84
+
+^DGSQU: 31,2
+
++CSQ: 31,2
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,98
+
+^CPSTATE: -105,201,36,84
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^DGSQU: 16,3
+
++CSQ: 16,3
+
+^SATSIGNAL:-123,100
+
+^CPSTATE: -123,201,36,84
+
+^DGSQU: 15,3
+
++CSQ: 15,3
+
+^SATSIGNAL:-124,97
+
+^CPSTATE: -124,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-106,95
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^DGSQU: 16,2
+
++CSQ: 16,2
+
+^SATSIGNAL:-123,67
+
+^CPSTATE: -123,201,36,84
+
+^DGSQU: 16,2
+
++CSQ: 16,2
+
+^DGSQU: 31,4
+
++CSQ: 31,4
+
+^SATSIGNAL:-106,105
+
+^CPSTATE: -106,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+^SATSIGNAL:-105,95
+
+^CPSTATE: -105,201,36,84
+
+^DGSQU: 31,3
+
++CSQ: 31,3
+
+2021/02/23 16:22:23 Ass_main.py[line:497] INFO Send Combobox Cmd: AT
+2021/02/23 16:22:23 Ass_main.py[line:530] DEBUG Receive data:
+OK
+
+2021/02/23 16:22:23 Ass_main.py[line:497] INFO Send Combobox Cmd: AT
+2021/02/23 16:22:23 Ass_main.py[line:530] DEBUG Receive data:
+OK
+
+2021/02/23 16:22:23 Ass_main.py[line:497] INFO Send Combobox Cmd: AT
+2021/02/23 16:22:23 Ass_main.py[line:530] DEBUG Receive data:
+OK
+
+2021/02/23 16:22:23 Ass_main.py[line:497] INFO Send Combobox Cmd: AT
+2021/02/23 16:22:23 Ass_main.py[line:530] DEBUG Receive data:
+OK
+
+2021/02/23 16:22:32 Ass_main.py[line:530] DEBUG Receive data:
+^DGSQU: 15,3
+
++CSQ: 15,3
+
+^SATSIGNAL:-124,83
+
+2021/02/23 16:22:32 Ass_main.py[line:530] DEBUG Receive data:
+^CPSTATE: -124,201,36,84
+
+2021/02/23 16:22:32 Ass_main.py[line:530] DEBUG Receive data:
+^DGSQU: 15,3
+
++CSQ: 15,3
+

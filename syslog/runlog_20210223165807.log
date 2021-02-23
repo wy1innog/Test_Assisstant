@@ -1,0 +1,30 @@
+2021/02/23 16:58:07 Ass_main.py[line:69] INFO ######## Tools start ########
+2021/02/23 16:58:07 Ass_main.py[line:165] INFO ######>>> Check device
+2021/02/23 16:58:08 Ass_main.py[line:180] DEBUG Device list:[]
+2021/02/23 16:58:08 Ass_main.py[line:430] INFO ######>>> Check port
+2021/02/23 16:58:08 Ass_main.py[line:438] DEBUG Port list:{}
+2021/02/23 16:58:08 Ass_main.py[line:966] INFO ######>>> Init settings AT Dialog
+2021/02/23 16:58:08 Ass_main.py[line:1030] INFO ######>>> Init Default settings Dialog
+2021/02/23 16:58:12 Ass_main.py[line:430] INFO ######>>> Check port
+2021/02/23 16:58:12 Ass_main.py[line:438] DEBUG Port list:{}
+2021/02/23 16:58:12 Ass_main.py[line:430] INFO ######>>> Check port
+2021/02/23 16:58:12 Ass_main.py[line:438] DEBUG Port list:{}
+2021/02/23 16:58:12 Ass_main.py[line:430] INFO ######>>> Check port
+2021/02/23 16:58:12 Ass_main.py[line:438] DEBUG Port list:{}
+2021/02/23 16:58:13 Ass_main.py[line:444] INFO ######>>> Open port
+2021/02/23 16:58:13 Ass_main.py[line:447] INFO Port:  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/23 16:58:16 Ass_main.py[line:463] INFO ######>>> Close port
+2021/02/23 16:58:16 Ass_main.py[line:463] INFO ######>>> Close port
+2021/02/23 16:58:17 Ass_main.py[line:463] INFO ######>>> Close port
+2021/02/23 16:58:18 Ass_main.py[line:444] INFO ######>>> Open port
+2021/02/23 16:58:18 Ass_main.py[line:447] INFO Port:  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/23 16:58:30 Ass_main.py[line:463] INFO ######>>> Close port
+2021/02/23 16:58:30 Ass_main.py[line:463] INFO ######>>> Close port
+2021/02/23 16:58:32 Ass_main.py[line:444] INFO ######>>> Open port
+2021/02/23 16:58:32 Ass_main.py[line:447] INFO Port:  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/02/23 16:58:46 Ass_main.py[line:597] WARNING Attempting to use a port that is not open
+2021/02/23 16:58:46 Ass_main.py[line:587] DEBUG TEST FLAG: True
+2021/02/23 16:58:49 Ass_main.py[line:597] WARNING Attempting to use a port that is not open
+2021/02/23 16:58:51 Ass_main.py[line:597] WARNING Attempting to use a port that is not open
+2021/02/23 16:58:52 Ass_main.py[line:597] WARNING Attempting to use a port that is not open
+2021/02/23 16:58:55 Ass_main.py[line:597] WARNING Attempting to use a port that is not open
