@@ -1,8 +1,0 @@
-2021/02/22 11:35:23 Ass_main.py[line:68] INFO ######## Tools start ########
-2021/02/22 11:35:23 Ass_main.py[line:165] INFO ######>>> Check device
-2021/02/22 11:35:28 Ass_main.py[line:180] DEBUG Device list:[]
-2021/02/22 11:35:28 Ass_main.py[line:432] INFO ######>>> Check port
-2021/02/22 11:35:28 Ass_main.py[line:440] DEBUG Port list:{}
-2021/02/22 11:35:28 Ass_main.py[line:916] INFO ######>>> Init settings AT Dialog
-2021/02/22 11:35:28 Ass_main.py[line:983] INFO ######>>> Init Default settings Dialog
-2021/02/22 11:35:51 Ass_main.py[line:489] INFO ######>>> Refresh at combobox

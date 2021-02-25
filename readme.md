@@ -20,17 +20,17 @@ ui/
 
 ——main_ui.py   主界面ui
 
-——ass_atmgr_ui.py   AT管理界面ui
+——at_settings_ui.py   AT管理界面ui
 
 ——default_settings_ui.py   默认设置界面ui
 
-Ass_AP.py    Tab AP操作
+AP.py    Tab AP操作
 
-Ass_CP.py    Tab CP操作
+CP.py    Tab CP操作
 
-Ass_at_settings   AT界面操作
+_at_settings   AT界面操作
 
-Ass_default_settings  默认设置界面操作
+default_settings  默认设置界面操作
 
 start.py   main方法
 

@@ -21,9 +21,9 @@ if parent_path not in sys.path:
 
 from serial import SerialTimeoutException, SerialException
 
-from main_ui import Ui_MainWindow
-from ass_atmgr_ui import Ui_Dialog
-from default_settings_ui import Default_settings_Dialog
+from ui.main_ui import Ui_MainWindow
+from ui.ass_atmgr_ui import Ui_Dialog
+from ui.default_settings_ui import Default_settings_Dialog
 from utils.Ass_util import subprocess_call, subprocess_getoutput, dev
 
 logger = logging.getLogger("ihblu")
@@ -948,71 +948,71 @@ class Ass(QMainWindow, Ui_MainWindow, QComboBox):
                     (i+1, pass_no_caller_answer, fail_no_caller_answer))
 
 
-class Dialog_settings_at(Ui_Dialog, QDialog, Ui_MainWindow):
-    # config_path = '..\\config\\config.cfg'
-    config_path = 'config/config.cfg'
+# class At_settings(Ui_Dialog, QDialog, Ui_MainWindow):
+#     # config_path = '..\\config\\config.cfg'
+#     config_path = 'config/config.cfg'
+#
+#     def __init__(self):
+#         super(Ui_Dialog, self).__init__()
+#         self.setupUi(self)
+#         # icon = '..\\img\\icon.ico'
+#         icon = 'img\icon.ico'
+#         self.setWindowIcon(QIcon(icon))
+#         self.init()
+#
+#     def init(self):
+#         logger.info("######>>> Init settings AT Dialog")
+#
+#         self.btn_add.clicked.connect(self.add_at_cmd)
+#         self.btn_sub.clicked.connect(self.remove_at_cmd)
+#         try:
+#
+#             with open(self.config_path, 'r', encoding='utf-8') as f:
+#                 AT_list = json.load(f)['AT_list']
+#                 for cmd in AT_list:
+#                     self.listWidget.insertItem(0, cmd.strip())
+#         except JSONDecodeError:
+#             logger.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新config）")
+#
+#     def add_at_cmd(self):
+#         at_text, ok = QInputDialog.getText(self, "添加新指令", "请输入新指令:")
+#         logger.info("######>>> Add new AT cmd: text=%s, status=%s" % (at_text, ok))
+#         at_cmd = str(at_text).upper()
+#         if at_cmd.startswith("AT"):
+#             if at_cmd and ok:
+#                 with open(self.config_path, 'r', encoding='utf-8') as f:
+#                     config_file = json.load(f)
+#                     config_file['AT_list'].append(at_cmd)
+#
+#                 with open(self.config_path, 'w', encoding='utf-8') as f:
+#                     json.dump(config_file, fp=f, indent=4, ensure_ascii=False)
+#                     logger.debug("write at: %s" % at_cmd)
+#                     self.listWidget.addItem(at_cmd.strip())
+#         else:
+#             logger.info("######??? Add new AT cmd failed! format illegal")
+#
+#     def remove_at_cmd(self):
+#         try:
+#             item = self.listWidget.currentItem()
+#             logger.info("######>>> Remove AT Command: %s" % item.text())
+#             self.listWidget.takeItem(self.listWidget.row(item))
+#
+#             with open(self.config_path, 'r', encoding='utf-8') as f:
+#                 config_file = json.load(f)
+#                 sub_text = item.text()
+#                 AT_list = config_file['AT_list']
+#                 for i in AT_list:
+#                     if sub_text == i.strip():
+#                         AT_list.remove(i)
+#             with open(self.config_path, 'w', encoding='utf-8') as f:
+#                 json.dump(config_file, f, indent=4, ensure_ascii=False)
+#                 logger.info("######!!! Remove AT Command: %s success" % item.text())
+#
+#         except Exception as e:
+#             logger.error("No select item")
 
-    def __init__(self):
-        super(Ui_Dialog, self).__init__()
-        self.setupUi(self)
-        # icon = '..\\img\\icon.ico'
-        icon = 'img\icon.ico'
-        self.setWindowIcon(QIcon(icon))
-        self.init()
 
-    def init(self):
-        logger.info("######>>> Init settings AT Dialog")
-
-        self.btn_add.clicked.connect(self.add_at_cmd)
-        self.btn_sub.clicked.connect(self.remove_at_cmd)
-        try:
-
-            with open(self.config_path, 'r', encoding='utf-8') as f:
-                AT_list = json.load(f)['AT_list']
-                for cmd in AT_list:
-                    self.listWidget.insertItem(0, cmd.strip())
-        except JSONDecodeError:
-            logger.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新config）")
-
-    def add_at_cmd(self):
-        at_text, ok = QInputDialog.getText(self, "添加新指令", "请输入新指令:")
-        logger.info("######>>> Add new AT cmd: text=%s, status=%s" % (at_text, ok))
-        at_cmd = str(at_text).upper()
-        if at_cmd.startswith("AT"):
-            if at_cmd and ok:
-                with open(self.config_path, 'r', encoding='utf-8') as f:
-                    config_file = json.load(f)
-                    config_file['AT_list'].append(at_cmd)
-
-                with open(self.config_path, 'w', encoding='utf-8') as f:
-                    json.dump(config_file, fp=f, indent=4, ensure_ascii=False)
-                    logger.debug("write at: %s" % at_cmd)
-                    self.listWidget.addItem(at_cmd.strip())
-        else:
-            logger.info("######??? Add new AT cmd failed! format illegal")
-
-    def remove_at_cmd(self):
-        try:
-            item = self.listWidget.currentItem()
-            logger.info("######>>> Remove AT Command: %s" % item.text())
-            self.listWidget.takeItem(self.listWidget.row(item))
-
-            with open(self.config_path, 'r', encoding='utf-8') as f:
-                config_file = json.load(f)
-                sub_text = item.text()
-                AT_list = config_file['AT_list']
-                for i in AT_list:
-                    if sub_text == i.strip():
-                        AT_list.remove(i)
-            with open(self.config_path, 'w', encoding='utf-8') as f:
-                json.dump(config_file, f, indent=4, ensure_ascii=False)
-                logger.info("######!!! Remove AT Command: %s success" % item.text())
-
-        except Exception as e:
-            logger.error("No select item")
-
-
-class Dialog_default_settings(Default_settings_Dialog, QDialog, Ui_MainWindow):
+class Default_settings(Default_settings_Dialog, QDialog, Ui_MainWindow):
     # config_path = '..\\config\\config.cfg'
     config_path = 'config/config.cfg'
 
@@ -1070,8 +1070,8 @@ if __name__ == '__main__':
 
     et = Ass()
 
-    dsa = Dialog_settings_at()
-    ds = Dialog_default_settings()
+    dsa = At_settings()
+    ds = Default_settings()
     btn = et.actionAT_manager.triggered.connect(dsa.show)
     btn1 = et.actionDefSet.triggered.connect(ds.show)
     et.show()
