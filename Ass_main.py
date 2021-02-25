@@ -11,7 +11,7 @@ import datetime
 import serial.tools.list_ports
 from PyQt5 import QtCore
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QInputDialog, QDialog, QComboBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDialog, QComboBox
 from PyQt5.QtCore import QTimer
 import logging.config
 
@@ -24,40 +24,20 @@ from serial import SerialTimeoutException, SerialException
 from ui.main_ui import Ui_MainWindow
 from ui.ass_atmgr_ui import Ui_Dialog
 from ui.default_settings_ui import Default_settings_Dialog
-from utils.Ass_util import subprocess_call, subprocess_getoutput, dev
+from common.Ass_util import subprocess_call, subprocess_getoutput, dev
 
-logger = logging.getLogger("ihblu")
-logger.setLevel(logging.DEBUG)
-
-# savelog_path = os.path.dirname(__file__) + '\syslog'
-savelog_path = 'syslog'
-
-if not os.path.exists(savelog_path):
-    os.makedirs(savelog_path)
-save_dir = os.path.join(savelog_path, 'runlog_{0:%Y%m%d%H%M%S}.log'.format(datetime.datetime.now()))
-fh = logging.FileHandler(save_dir, 'a', encoding="utf-8")
-ch = logging.StreamHandler()
-
-formatter = logging.Formatter(
-    fmt="%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s",
-    datefmt="%Y/%m/%d %X")
-
-# 为handler指定输出格式
-fh.setFormatter(formatter)
-ch.setFormatter(formatter)
-# 为logger添加的日志处理器
-logger.addHandler(fh)
-logger.addHandler(ch)
+from common.log import Log
 
 
 class Ass(QMainWindow, Ui_MainWindow, QComboBox):
     config_path = 'config/config.cfg'
-
+    log = Log().getlog()
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.ser = serial.Serial()
         self.init()
+        self.log = Log(__name__).getlog()
         self.port_check()
         self.process = []
         self.RECV_FLAG = True

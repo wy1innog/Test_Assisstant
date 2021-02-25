@@ -6,22 +6,21 @@ from PyQt5.QtWidgets import QDialog, QInputDialog
 
 from ui.ass_atmgr_ui import Ui_Dialog
 from ui.main_ui import Ui_MainWindow
-
+from common.log import Log
 
 class At_settings(Ui_Dialog, QDialog, Ui_MainWindow):
-    # config_path = '..\\config\\config.cfg'
-    config_path = 'config/config.cfg'
 
     def __init__(self):
         super(Ui_Dialog, self).__init__()
         self.setupUi(self)
-        # icon = '..\\img\\icon.ico'
         icon = 'img\icon.ico'
+        self.config_path = 'config/config.cfg'
+        self.log = Log(__name__).getlog()
         self.setWindowIcon(QIcon(icon))
         self.init()
 
     def init(self):
-        logger.info("######>>> Init settings AT Dialog")
+        self.log.info("######>>> Init settings AT Dialog")
 
         self.btn_add.clicked.connect(self.add_at_cmd)
         self.btn_sub.clicked.connect(self.remove_at_cmd)
@@ -32,11 +31,11 @@ class At_settings(Ui_Dialog, QDialog, Ui_MainWindow):
                 for cmd in AT_list:
                     self.listWidget.insertItem(0, cmd.strip())
         except JSONDecodeError:
-            logger.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新config）")
+            self.log.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新config）")
 
     def add_at_cmd(self):
         at_text, ok = QInputDialog.getText(self, "添加新指令", "请输入新指令:")
-        logger.info("######>>> Add new AT cmd: text=%s, status=%s" % (at_text, ok))
+        self.log.info("######>>> Add new AT cmd: text=%s, status=%s" % (at_text, ok))
         at_cmd = str(at_text).upper()
         if at_cmd.startswith("AT"):
             if at_cmd and ok:
@@ -46,15 +45,15 @@ class At_settings(Ui_Dialog, QDialog, Ui_MainWindow):
 
                 with open(self.config_path, 'w', encoding='utf-8') as f:
                     json.dump(config_file, fp=f, indent=4, ensure_ascii=False)
-                    logger.debug("write at: %s" % at_cmd)
+                    self.log.debug("write at: %s" % at_cmd)
                     self.listWidget.addItem(at_cmd.strip())
         else:
-            logger.info("######??? Add new AT cmd failed! format illegal")
+            self.log.info("######??? Add new AT cmd failed! format illegal")
 
     def remove_at_cmd(self):
         try:
             item = self.listWidget.currentItem()
-            logger.info("######>>> Remove AT Command: %s" % item.text())
+            self.log.info("######>>> Remove AT Command: %s" % item.text())
             self.listWidget.takeItem(self.listWidget.row(item))
 
             with open(self.config_path, 'r', encoding='utf-8') as f:
@@ -66,7 +65,7 @@ class At_settings(Ui_Dialog, QDialog, Ui_MainWindow):
                         AT_list.remove(i)
             with open(self.config_path, 'w', encoding='utf-8') as f:
                 json.dump(config_file, f, indent=4, ensure_ascii=False)
-                logger.info("######!!! Remove AT Command: %s success" % item.text())
+                self.log.info("######!!! Remove AT Command: %s success" % item.text())
 
         except Exception as e:
-            logger.error("No select item")
+            self.log.error("No select item")
