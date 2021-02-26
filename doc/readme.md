@@ -38,6 +38,11 @@ start.py   main方法
 
 
 hello
+将AP，CP关于main_ui界面的全部提取出来，使用一个方法独代
+def modifystatus(widget, message):
+    self.widget.setText(message)
+    
+
 
 
 #### Tab1 AT

@@ -8,10 +8,10 @@ from ui.ass_atmgr_ui import Ui_Dialog
 from ui.main_ui import Ui_MainWindow
 from common.log import Log
 
-class At_settings(Ui_Dialog, QDialog, Ui_MainWindow):
+class At_settings(Ui_Dialog, QDialog):
 
     def __init__(self):
-        super(Ui_Dialog, self).__init__()
+        super().__init__()
         self.setupUi(self)
         icon = 'img\icon.ico'
         self.config_path = 'config/config.cfg'

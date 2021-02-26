@@ -8,7 +8,7 @@ from ui.default_settings_ui import Default_settings_Dialog
 from ui.main_ui import Ui_MainWindow
 from common.log import Log
 
-class Default_settings(Default_settings_Dialog, QDialog, Ui_MainWindow):
+class Default_settings(Default_settings_Dialog, QDialog):
     config_path = 'config/config.cfg'
 
     def __init__(self):

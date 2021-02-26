@@ -9,11 +9,10 @@ from PyQt5.QtWidgets import QMainWindow
 
 from common.Ass_util import subprocess_getoutput, dev, subprocess_call, recv_to_bottom
 from common.log import Log
-
 from ui.main_ui import Ui_MainWindow
 
 
-class AP(QMainWindow, Ui_MainWindow):
+class AP(Ui_MainWindow, QMainWindow):
     config_path = 'config/config.cfg'
 
     def __init__(self):
@@ -21,9 +20,6 @@ class AP(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.log = Log(__name__).getlog()
         self.dev_check()
-        # Tab Android
-
-        # 停止正在进行的ap测试项
 
     def stop_test_ap(self):
         if self.TEST_FLAG == True:
