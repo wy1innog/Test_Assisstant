@@ -34,19 +34,19 @@ class At_settings(Ui_Dialog, QDialog, Ui_MainWindow):
             self.log.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新config）")
 
     def add_at_cmd(self):
-        at_text, ok = QInputDialog.getText(self, "添加新指令", "请输入新指令:")
-        self.log.info("######>>> Add new AT cmd: text=%s, status=%s" % (at_text, ok))
-        at_cmd = str(at_text).upper()
-        if at_cmd.startswith("AT"):
-            if at_cmd and ok:
+        at_text, status = QInputDialog.getText(self, "添加新指令", "请输入新指令:")
+
+        at_text = str(at_text).upper()
+        self.log.info("######>>> Add new AT cmd: text=%s, status=%s" % (at_text, status))
+        if at_text.startswith("AT"):
+            if at_text and status:
                 with open(self.config_path, 'r', encoding='utf-8') as f:
                     config_file = json.load(f)
-                    config_file['AT_list'].append(at_cmd)
+                    config_file['AT_list'].append(at_text)
 
                 with open(self.config_path, 'w', encoding='utf-8') as f:
                     json.dump(config_file, fp=f, indent=4, ensure_ascii=False)
-                    self.log.debug("write at: %s" % at_cmd)
-                    self.listWidget.addItem(at_cmd.strip())
+                    self.listWidget.addItem(at_text.strip())
         else:
             self.log.info("######??? Add new AT cmd failed! format illegal")
 

@@ -17,10 +17,11 @@ class Log(object):
             os.makedirs(file_dir)
         self.log_path = file_dir
 
-        self.log_name = self.log_path + "/" + log_cate + "." + self.log_time + '.log'
+        # self.log_name = self.log_path + "/" + log_cate + "." + self.log_time + '.log'
         # print（self.log_name）
 
-        # save_dir = os.path.join(file_dir, 'runlog_{0:%Y%m%d%H%M%S}.log'.format(datetime.datetime.now()))
+        self.log_name = os.path.join(self.log_path, 'runlog_{0:%Y%m%d%H%M%S}.log'.format(datetime.datetime.now()))
+        # log_name = os.path.join(file_dir, 'runlog_{0:%Y%m%d%H%M%S}.log'.format(datetime.datetime.now()))
         fh = logging.FileHandler(self.log_name, 'a', encoding="utf-8")
         fh.setLevel(logging.INFO)
 

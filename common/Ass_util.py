@@ -42,3 +42,11 @@ def dev():
         return devName
     else:
         return 2
+
+def recv_to_bottom(self):
+    # 获取到text光标
+    textCursor = self.CP_recv_textBrowser.textCursor()
+    # 滚动到底部
+    textCursor.movePosition(textCursor.End)
+    # 设置光标到text中
+    self.CP_recv_textBrowser.setTextCursor(textCursor)
