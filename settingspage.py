@@ -4,8 +4,8 @@ from json import JSONDecodeError
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 
-from ui.default_settings_ui import Default_settings_Dialog
-from ui.main_ui import Ui_MainWindow
+from ui.ui_settingspage import Default_settings_Dialog
+from ui.ui_mainpage import Ui_MainWindow
 from common.log import Log
 
 class Default_settings(Default_settings_Dialog, QDialog):
