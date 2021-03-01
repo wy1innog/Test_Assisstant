@@ -1,7 +1,0 @@
-2021/02/22 13:58:29 Ass_main.py[line:69] INFO ######## Tools start ########
-2021/02/22 13:58:29 Ass_main.py[line:166] INFO ######>>> Check device
-2021/02/22 13:58:29 Ass_main.py[line:181] DEBUG Device list:[]
-2021/02/22 13:58:29 Ass_main.py[line:430] INFO ######>>> Check port
-2021/02/22 13:58:29 Ass_main.py[line:438] DEBUG Port list:{}
-2021/02/22 13:58:29 Ass_main.py[line:907] INFO ######>>> Init settings AT Dialog
-2021/02/22 13:58:29 Ass_main.py[line:974] INFO ######>>> Init Default settings Dialog

@@ -64,5 +64,5 @@ class Default_settings_Dialog(object):
         self.label_called_number.setText(_translate("Dialog", "被叫号码"))
         self.label_test_interval.setText(_translate("Dialog", "通话测试间隔（秒）"))
         self.label_times.setText(_translate("Dialog", "默认测试次数"))
-        self.button_ok.setText(_translate("Dialog", "OK"))
-        self.button_cancel.setText(_translate("Dialog", "Cancel"))
+        self.button_ok.setText(_translate("Dialog", "确认"))
+        self.button_cancel.setText(_translate("Dialog", "取消"))

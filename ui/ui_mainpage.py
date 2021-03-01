@@ -50,7 +50,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.AP_func_center_GroupBox.sizePolicy().hasHeightForWidth())
         self.AP_func_center_GroupBox.setSizePolicy(sizePolicy)
         self.AP_func_center_GroupBox.setMinimumSize(QtCore.QSize(530, 0))
-        self.AP_func_center_GroupBox.setTitle("")
+        self.AP_func_center_GroupBox.setTitle("接收区")
         self.AP_func_center_GroupBox.setObjectName("AP_func_center_GroupBox")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.AP_func_center_GroupBox)
         self.gridLayout_3.setObjectName("gridLayout_3")
@@ -106,8 +106,8 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.AP_func_left_GroupBox.sizePolicy().hasHeightForWidth())
         self.AP_func_left_GroupBox.setSizePolicy(sizePolicy)
         self.AP_func_left_GroupBox.setMinimumSize(QtCore.QSize(0, 0))
-        self.AP_func_left_GroupBox.setMaximumSize(QtCore.QSize(180, 16777215))
-        self.AP_func_left_GroupBox.setTitle("")
+        self.AP_func_left_GroupBox.setMaximumWidth(230)
+        self.AP_func_left_GroupBox.setTitle("功能项")
         self.AP_func_left_GroupBox.setObjectName("AP_func_left_GroupBox")
         self.gridLayout_10 = QtWidgets.QGridLayout(self.AP_func_left_GroupBox)
         self.gridLayout_10.setContentsMargins(20, 20, -1, 20)
@@ -269,7 +269,6 @@ class Ui_MainWindow(object):
         # self.gridLayout_2.addLayout(self.CP_horLayout_left, 0, 0, 1, 1)
 
         self.AP_verLayout_left.addWidget(self.AP_test_left_GroupBox)
-        # self.AP_verLayout_left.addLayout(self.AP_verLayout_left)
         self.gridLayout_2.addLayout(self.AP_verLayout_left, 0, 0, 1, 1)
         self.tabWidget.addTab(self.tab, "")
 
@@ -410,9 +409,9 @@ class Ui_MainWindow(object):
         self.Edit_test_count.setObjectName("Edit_test_count")
         self.gridLayout_7.addWidget(self.Edit_test_count, 6, 2, 1, 1)
 
-        self.btn_run_test = QtWidgets.QPushButton(self.CP_test_left_GroupBox)
-        self.btn_run_test.setObjectName("btn_run_test")
-        self.gridLayout_7.addWidget(self.btn_run_test, 7, 0, 1, 2)
+        self.btn_run_test_cp = QtWidgets.QPushButton(self.CP_test_left_GroupBox)
+        self.btn_run_test_cp.setObjectName("btn_run_test_cp")
+        self.gridLayout_7.addWidget(self.btn_run_test_cp, 7, 0, 1, 2)
 
         self.btn_stop_test = QtWidgets.QPushButton(self.CP_test_left_GroupBox)
         self.btn_stop_test.setObjectName("btn_stop_test")
@@ -481,10 +480,9 @@ class Ui_MainWindow(object):
 
         self.CP_btn_start = QtWidgets.QPushButton(self.tab_CP)
         self.CP_btn_start.setObjectName("CP_btn_start")
+        self.CP_btn_start.setShortcut('enter')
         self.CP_gridLayout_right.addWidget(self.CP_btn_start, 3, 0, 1, 1)
-        # self.CP_btn_stop = QtWidgets.QPushButton(self.tab_CP)
-        # self.CP_btn_stop.setObjectName("CP_btn_stop")
-        # self.CP_gridLayout_right.addWidget(self.CP_btn_stop, 4, 0, 1, 1)
+
         self.CP_btn_clear_send = QtWidgets.QPushButton(self.tab_CP)
         self.CP_btn_clear_send.setObjectName("CP_btn_clear_send")
         self.CP_gridLayout_right.addWidget(self.CP_btn_clear_send, 5, 0, 1, 1)
@@ -572,7 +570,7 @@ class Ui_MainWindow(object):
         # self.Radio_send_mes.setText(_translate("MainWindow", "短信发送"))
         # self.Radio_recv_mes.setText(_translate("MainWindow", "短信接收"))
         self.label_test_count.setText(_translate("MainWindow", "测试次数"))
-        self.btn_run_test.setText(_translate("MainWindow", "开始"))
+        self.btn_run_test_cp.setText(_translate("MainWindow", "开始"))
         self.btn_stop_test.setText(_translate("MainWindow", "停止"))
         self.CP_recv_GroupBox.setTitle(_translate("MainWindow", "接收区"))
         self.CP_send_GroupBox.setTitle(_translate("MainWindow", "发送区"))

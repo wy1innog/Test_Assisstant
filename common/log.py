@@ -10,8 +10,7 @@ class Log(object):
 
         self.log_time = time.strftime("%Y_%m_%d")
         file_dir = os.getcwd() + '/../syslog'
-        # savelog_path = 'syslog'
-        # savelog_path = os.path.dirname(__file__) + '\syslog'
+
 
         if not os.path.exists(file_dir):
             os.makedirs(file_dir)
@@ -21,7 +20,7 @@ class Log(object):
         # print（self.log_name）
 
         self.log_name = os.path.join(self.log_path, 'runlog_{0:%Y%m%d%H%M%S}.log'.format(datetime.datetime.now()))
-        # log_name = os.path.join(file_dir, 'runlog_{0:%Y%m%d%H%M%S}.log'.format(datetime.datetime.now()))
+
         fh = logging.FileHandler(self.log_name, 'a', encoding="utf-8")
         fh.setLevel(logging.INFO)
 

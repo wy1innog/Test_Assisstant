@@ -9,25 +9,19 @@ import threading
 import serial
 import datetime
 import serial.tools.list_ports
-from PyQt5 import QtCore
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDialog, QComboBox
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QComboBox
 from PyQt5.QtCore import QTimer
-import logging.config
-
 from serial import SerialTimeoutException, SerialException
 
 from common.Ass_util import subprocess_getoutput, subprocess_call, dev, recv_to_bottom
+from settingspage import Default_settings
+from ui.ui_mainpage import Ui_MainWindow
+from common.log import Log
 
 parent_path = os.path.dirname(sys.path[0])
 if parent_path not in sys.path:
     sys.path.append(parent_path)
-
-from ui.ui_mainpage import Ui_MainWindow
-from atpage import At_settings
-from settingspage import Default_settings
-from common.log import Log
-
 
 class Ass(QMainWindow, QComboBox, Ui_MainWindow):
     config_path = 'config/config.cfg'
@@ -46,7 +40,6 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         self.RECV_FLAG = True
         self.TEST_FLAG = False
         self.NETWORK_REGISTERED = False
-
 
 
     def initUI(self):
@@ -74,13 +67,24 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         self.btn_sp_close.clicked.connect(self.port_close)
         self.btn_at_exec.clicked.connect(self.exec_choose_at)
 
-        self.btn_run_test.clicked.connect(self.run_test_choice_cp)
+        self.btn_run_test_cp.clicked.connect(self.run_test_choice_cp)
         self.btn_stop_test.clicked.connect(self.stop_test_cp)
         self.CP_btn_start.clicked.connect(self.data_send)
         self.CP_btn_clear_recv.clicked.connect(self.cp_clear_recv)
         self.CP_btn_clear_send.clicked.connect(self.cp_clear_send)
 
+        # 定时器接收数据
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.data_receive)
+
+        self.settingspage = Default_settings()
+        self.settingspage.my_Signal.connect(self.cp_test_times_load)
+
     def stop_test_ap(self):
+        """
+        强制停止AP侧测试项
+        :return: None
+        """
         if self.TEST_FLAG == True:
             self.TEST_FLAG = False
             self.AP_recv_textBrowser.append("测试被强制停止！！！本次测试结束后终止测试")
@@ -88,27 +92,12 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         else:
             pass
 
-        # 打印当前连接的设备
-
-    def check_device(self):
-        pattern = re.compile('[a-zA-Z0-9]+\sdevice$')
-        devices_list = subprocess_getoutput('adb devices').strip().split('\n')
-        self.log.debug('######>>> Devices: %s' % devices_list[1:])
-        devices_count = 0
-        for d in devices_list:
-            r = pattern.match(d)
-            if r:
-                devices_count += 1
-        if devices_count == 0:
-            self.AP_recv_textBrowser.append("No devices/emulators found")
-            return 0
-        elif devices_count == 1:
-            return 1
-        else:
-            return 2
 
     def dev_check(self):
-        # 检测所有存在的安卓设备
+        """
+        AP 设备下拉框选项添加
+        :return: None
+        """
         self.log.info("######>>> Check device")
         self.combox_dev_choice.clear()
         dev_list = []
@@ -120,7 +109,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 dev_list.append(dev[:-7])
 
         if len(dev_list) == 0:
-            self.combox_dev_choice.addItem("   无设备")
+            self.combox_dev_choice.addItem("  无设备")
         for dev in dev_list:
             self.combox_dev_choice.addItem(dev)
 
@@ -140,13 +129,18 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
             self.log.warning("Bluetooth status error, flag=%s" % flag)
 
     def bt_status(self):
-        # 打印蓝牙开关状态
+        """
+        AP 打印蓝牙开关状态
+        :return: None
+        """
         self.log.info("######>>> Bluetooth status")
-        if self.check_device() != 0:
+        if dev() != 0:
             if self._bt_status():
                 self.AP_recv_textBrowser.append("蓝牙状态: 开启\n")
             else:
                 self.AP_recv_textBrowser.append("蓝牙状态: 关闭\n")
+        else:
+            self.AP_recv_textBrowser.append("无设备连接")
 
     def _wifi_status(self):
         wifi_status = subprocess_getoutput('adb -s %s shell dumpsys wifi | findstr Wi-Fi' % dev())
@@ -161,9 +155,12 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
             return 2
 
     def wifi_status(self):
-        # 打印wifi开关状态
+        """
+        AP 打印wifi开启状态
+        :return: None
+        """
         self.log.info("######>>> wifi status")
-        if self.check_device() != 0:
+        if dev() != 0:
             wifi_code = self._wifi_status()
             if wifi_code == 1:
                 self.AP_recv_textBrowser.append("WiFi状态: 开启\n")
@@ -173,6 +170,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.log.info("######>>> check wifi status: closed")
             else:
                 self.AP_recv_textBrowser.append("WiFi状态异常\n")
+        self.AP_recv_textBrowser.append("无设备连接")
 
     def _wifi_info(self, key):
         mWifiInfo = \
@@ -197,9 +195,12 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.AP_recv_textBrowser.append(WLAN_MAC)
 
     def wifi_info(self):
-        # 打印wifi详细状态
+        """
+        AP 打印已连接wifi详细状态
+        :return: None
+        """
         self.log.info("######>>> wifi info")
-        if self.check_device() != 0:
+        if dev() != 0:
             wifi_code = self._wifi_status()
             if wifi_code == 1:
                 mWifiInfo = subprocess_getoutput('adb -s %s shell dumpsys wifi | findstr mWifiInfo' %
@@ -221,11 +222,16 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.log.info("######>>> check wifi status: closed")
             elif wifi_code == 2:
                 self.AP_recv_textBrowser.append("WiFi状态异常\n")
+        else:
+            self.AP_recv_textBrowser.append("无设备连接")
 
     def sim_status(self):
-        # 打印SIM卡状态
+        """
+        检测SIM卡是否安装，getprop | grep gsm.sim.state
+        :return: None
+        """
         self.log.info("######>>> SIM status")
-        if self.check_device() != 0:
+        if dev() != 0:
             sim_result = subprocess_getoutput('adb -s %s shell getprop | findstr gsm.sim.state' % dev())
             self.log.debug("SIM status:%s" % sim_result)
             if sim_result == '[gsm.sim.state]: [NOT_READY]\n':
@@ -248,11 +254,17 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.AP_recv_textBrowser.append("双卡，有钱有钱\n")
             else:
                 self.AP_recv_textBrowser.append("check SIM card error!\n")
+        else:
+            self.AP_recv_textBrowser.append("无设备连接")
 
     def sdcard_status(self):
+        """
+        AP SD卡检测是否存在，storage/sdcard1 and SD card icon
+        :return:
+        """
         # 打印SDcard状态
         self.log.info("######>>> Sdcard status")
-        if self.check_device() != 0:
+        if dev() != 0:
             # 判断/storage/sdcard1下文件夹大小是否为0
             used_storage = subprocess_getoutput('adb -s %s shell du -sH storage/sdcard1' % dev()).split('\t')[0]
             self.log.debug("used_storage:%s" % used_storage)
@@ -265,23 +277,31 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.AP_recv_textBrowser.append("已识别SD卡\n")
             else:
                 self.AP_recv_textBrowser.append("check SD card error!\n")
-
-        # list package
+        else:
+            self.AP_recv_textBrowser.append("无设备连接")
 
     def list_package(self):
-        if self.check_device() != 0:
+        """
+        列出设备已安装应用
+        :return:None
+        """
+        if dev() != 0:
             listpkg = subprocess_getoutput('adb -s %s shell pm list packages' % dev())
             self.AP_recv_textBrowser.append("已安装应用包名：\n" + listpkg + "\n")
+        else:
+            self.AP_recv_textBrowser.append("无设备连接")
 
     def get_locallog(self):
         thread_getlog = threading.Thread(target=self._get_locallog)
         thread_getlog.start()
 
-        # 抓取data/local/log目录下文件
-
     def _get_locallog(self):
+        """
+        AP 获取设备data/local/log目录下log到本地/logs/
+        :return: None
+        """
         self.log.info("######>>> get local log")
-        if self.check_device() != 0:
+        if dev() != 0:
             self.AP_recv_textBrowser.append("log抓取中……")
             # savelog_path = os.path.dirname(__file__) + '\logs'
             savelog_path = '\logs'
@@ -298,70 +318,92 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.AP_recv_textBrowser.append("log抓取完成，已保存至" + save_dir + "\n")
             else:
                 self.AP_recv_textBrowser.append("log保存失败，请检查设备状态\n")
+        else:
+            self.AP_recv_textBrowser.append("无设备连接")
 
     def run_test_choice_ap(self):
+        """
+        AP测试项选择
+        :return: None
+        """
         if self.TEST_FLAG == False:
             self.TEST_FLAG = True
-            if self.check_device() != 0:
-                if self.reboot_test.isChecked():
-                    times_text = self.Edit_test_count_AP.text()
-                    if times_text == '':
-                        with open(self.config_path, 'r', encoding='utf-8') as f:
-                            config = json.load(f)
-                            times_text = config['Test_times']
-                    elif times_text.isdigit():
-                        pass
-                    t1 = threading.Thread(target=self.run, args=(times_text,))
-                    t1.start()
-                else:
-                    self.log.info("未选择测试项")
+        if dev() != 0 and self.reboot_test.isChecked():
+            times_text = self.Edit_test_count_AP.text()
+            if times_text == '':
+                with open(self.config_path, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                    times_text = config['Test_times']
+            elif times_text.isdigit():
+                pass
+            t1 = threading.Thread(target=self.reboot, args=(times_text,))
+            t1.start()
         else:
-            pass
+            self.AP_recv_textBrowser.append("无设备连接或未选择测试项")
+            self.log.info("无设备连接或未选择测试项")
 
-        # reboot,timeout=120
 
-    def run(self, times):
+    def reboot(self, times):
+        """
+        AP reboot, timeout=120s
+        :param times: 重启次数
+        :return: None
+        """
         global i
         pass_count = 0
+        timeout = 120
         with open(self.config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
             config['Test_times'] = times
         self.AP_recv_textBrowser.append("测试项：reboot重启 次数：%s" % times)
         self.log.info("测试项：reboot重启 次数：%s" % times)
         for i in range(int(times)):
-            if self.TEST_FLAG == True:
-                self.AP_recv_textBrowser.append("reboot重启 >> 第%d次测试 共%s次,正在测试..." % (i + 1, times))
+            if self.TEST_FLAG==True and dev()!=0:
+                self.AP_recv_textBrowser.append("reboot重启 >> 第%d次测试 共%s次,正在测试..." % (i+1, times))
+                self.log.info("AP reboot重启：共%s次，第%d次测试" % (times, i+1))
                 subprocess_call('adb reboot')
 
                 start = time.time()
+                self.log.debug("reboot test start time: {}".format(start))
                 time.sleep(5)
-                if dev() == False:
-                    while True:
-                        timef = time.time()
+                end = time.time()
+                while end-start <= timeout:
+                    if dev() != 0:
                         ensure_boot = subprocess_getoutput('adb shell dumpsys power | findstr mBootCompleted')
                         if 'true' in ensure_boot:
                             end = time.time()
+                            self.log.debug("reboot test end time: {}".format(end))
                             pass_count += 1
                             self.AP_recv_textBrowser.append("reboot重启 >> 第%d次测试完成，剩余%s次,用时%d seconds" %
-                                                            (i + 1, int(times) - (i + 1), end - start))
+                                                            (i+1, int(times)-(i+1), end - start))
                             break
-                        if timef - start >= 120:
-                            self.AP_recv_textBrowser.append("reboot重启 ?? 重启时间超过120s，重启超时！")
-                            break
-                        recv_to_bottom()
+
+                    else:
+                        time.sleep(5)
+                        end = time.time()
+                else:
+                    self.AP_recv_textBrowser.append("reboot重启 ?? 重启时间超过120s，重启超时！")
             else:
-                pass
+                self.AP_recv_textBrowser.append("无设备连接，测试终止")
+                break
+
         self.AP_recv_textBrowser.append("reboot重启测试完成，测试%d次, pass:%d次\n" % (i + 1, pass_count))
         self.log.info("reboot重启测试结束，测试%d次" % (i + 1))
 
     def ap_clear_recv(self):
+        # 清楚AP接收区内容
         self.AP_recv_textBrowser.clear()
 
     def ap_clear_send(self):
+        # 清除AP发送区内容
         self.textEdit_number.clear()
 
     def dial(self):
-        if self.check_device() != 0:
+        """
+        AP Tab 拨号
+        :return: None
+        """
+        if dev() != 0:
 
             number = self.textEdit_number.text().strip()
             self.log.debug("deviceName: {}  dial number:{}".format(dev(), number))
@@ -374,15 +416,14 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.AP_recv_textBrowser.append("正在拨号：{}\r\n".format(number))
             else:
                 self.AP_recv_textBrowser.append("电话号码必须为数字")
+        else:
+            self.CP_recv_textBrowser.append("无设备连接")
 
-
-        # 定时器接收数据
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.data_receive)
-
-
-# 停止正在进行的cp测试项
     def stop_test_cp(self):
+        """
+        CP 停止测试项
+        :return:
+        """
         if self.TEST_FLAG == True:
             self.TEST_FLAG = False
             self.CP_recv_textBrowser.append("测试被强制停止！！！本次测试结束后终止测试")
@@ -390,8 +431,11 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         else:
             pass
 
-    # 导入config.json中所有指令
     def _prepare_AT(self):
+        """
+        导入/config/config.cfg中AT指令
+        :return: None
+        """
         try:
             with open(self.config_path, 'r', encoding='utf-8') as f:
                 config = json.load(f)
@@ -415,10 +459,11 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         except (JSONDecodeError, TypeError) as e:
             self.log.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新配置文件）")
 
-
-
     def port_check(self):
-        # 检测所有存在的串口
+        """
+        CP 检测连接PC的端口
+        :return: None
+        """
         self.log.info("######>>> Check port")
         self.Com_Dict = {}
         port_list = list(serial.tools.list_ports.comports())
@@ -432,16 +477,18 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
             self.combox_sp_choice.setCurrentText("无串口")
 
     def port_open(self):
-        # 打开串口
+        """
+        打开串口
+        :return: None
+        """
         self.log.info("######>>> Open port")
         self.ser.port = self.combox_sp_choice.currentText()
         self.ser.baudrate = int(self.combox_baudrate.currentText())
         self.log.info("Port:%s  baudrate:%s  bytesize:8  parity:N  stopbits:1" % (self.ser.port, self.ser.baudrate))
         try:
             self.ser.open()
-
+            self.__exec_cmd('AT^DSCI=1')
         except:
-            # QMessageBox.critical(self, "Port Error", "此串口不能被打开！")
             QMessageBox.critical(self, "Port Error", "此串口不能被打开！")
             return None
 
@@ -453,6 +500,10 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
             self.CP_func_left_GroupBox.setTitle("串口状态（已开启） %s" % self.ser.name)
 
     def port_close(self):
+        """
+        CP 关闭串口
+        :return:
+        """
         self.log.info("######>>> Close port")
         try:
             self.ser.close()
@@ -462,15 +513,11 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         self.btn_sp_close.setEnabled(True)
         self.CP_func_left_GroupBox.setTitle("串口状态（已关闭）")
 
-    # def refresh_at_list(self):
-    #     ds.listWidget.clear()
-    #     with open(self.config_path, 'r', encoding='utf-8') as f:
-    #         AT_list = json.load(f)['AT_list']
-    #         for line in AT_list:
-    #             ds.listWidget.addItem(line.strip())
-    #     self.log.info("######>>> Refresh at list")
-
     def refresh_at_combobox(self):
+        """
+        CP 刷新AT下拉框
+        :return:
+        """
         self.combox_at_choice.clear()
         self.combox_at_choice.addItem("刷新")
         with open(self.config_path, 'r', encoding='utf-8') as f:
@@ -481,23 +528,24 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         self.log.debug("######>>> Refresh at combobox")
 
     def exec_choose_at(self):
-        at_cmd1 = self.combox_at_choice.currentText()
-        if at_cmd1 != "刷新":
+        """
+        执行选择的
+        :return:
+        """
+        at_cmd = self.combox_at_choice.currentText()
+        if at_cmd != "刷新":
             if self.ser.is_open:
-                try:
-                    self.RECV_FLAG = True
-                    at_cmd = (at_cmd1 + '\r\n').encode('utf-8')
-                    self.ser.write(at_cmd)
-                    self.log.info("Send Combobox Cmd: %s" % at_cmd1)
-                except SerialTimeoutException:
-                    pass
+                self.RECV_FLAG = True
+                self.__exec_cmd(at_cmd)
+                self.log.info("exec AT combobox：{}".format(at_cmd))
         else:
             self.refresh_at_combobox()
 
-
-
-    # 发送数据
     def data_send(self):
+        """
+        串口发送数据
+        :return:
+        """
         if self.ser.is_open:
             at_cmd = self.CP_send_textEdit.toPlainText().strip()
             self.RECV_FLAG = True
@@ -507,11 +555,14 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.ser.write(input_s)
                 self.log.info("Send At Cmd: %s" % at_cmd)
         else:
-            self.CP_recv_textBrowser.append("终端状态异常")
             self.log.warning("终端连接状态异常")
 
-    # 接收数据
+
     def data_receive(self):
+        """
+        串口接收数据
+        :return:
+        """
         try:
             if self.ser.inWaiting():
 
@@ -529,42 +580,53 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
             if self.ser.is_open:
                 self.port_close()
 
-    # 清除显示
     def cp_clear_send(self):
+        """
+        清除CP发送框内容
+        """
         self.CP_send_textEdit.setText("")
 
     def cp_clear_recv(self):
+        """
+        清除CP接收框内容
+        """
         self.CP_recv_textBrowser.setText("")
 
-    # 根据选框执行相应测试项
     def run_test_choice_cp(self):
-        self._exec_cmd("AT^DSCI=1")
-        self._exec_cmd("AT+CREG?")
+        """
+        CP 执行测试选项
+        """
+        self.RECV_FLAG = False
+        self.__exec_cmd("AT+CREG?")
         if self.TEST_FLAG == False:
             self.TEST_FLAG = True
 
-            if self.ser.is_open:
+        if self.ser.is_open:
 
-                if self.Radio_calling_to_answer.isChecked():
-                    self.call_test('calling_to_answer')
+            if self.Radio_calling_to_answer.isChecked():
+                self.call_test('calling_to_answer')
 
-                elif self.Radio_caller_hangs_up.isChecked():
-                    self.call_test('caller_hangs_up')
+            elif self.Radio_caller_hangs_up.isChecked():
+                self.call_test('caller_hangs_up')
 
-                elif self.Radio_calling_reject.isChecked():
-                    self.call_test('calling_reject')
+            elif self.Radio_calling_reject.isChecked():
+                self.call_test('calling_reject')
 
-                elif self.Radio_no_caller_answer.isChecked():
-                    self.call_test('no_caller_answer')
-
-                else:
-                    self.CP_recv_textBrowser.append("未选择测试项")
+            elif self.Radio_no_caller_answer.isChecked():
+                self.call_test('no_caller_answer')
 
             else:
-                self.log.warning("终端状态异常")
+                self.CP_recv_textBrowser.append("未选择测试项")
+
+        else:
+            self.log.warning("串口未打开")
 
 
-    def _exec_cmd(self, cmd):
+    def __exec_cmd(self, cmd):
+        """
+        执行AT指令
+        :param cmd: AT指令
+        """
         cmd1 = (cmd + '\r\n').encode('utf-8')
         try:
             self.ser.write(cmd1)
@@ -574,6 +636,10 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
             self.CP_recv_textBrowser.append("终端状态异常")
 
     def call_check(self, line):
+        """
+        通话测试关键词
+        :param line: 接收的数据
+        """
         with open(self.config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
         number = config['number']
@@ -655,7 +721,23 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
             self.process.append("通话结束")
             self.log.info("通话结束\n")
 
+    def cp_test_times_load(self):
+        """
+        刷新CP 测试次数
+        :return:
+        """
+        with open(self.config_path, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+            times = int(config['Test_times'])
+        self.Edit_test_count.setText(times)
+        self.log.info("close settings page, modify test times")
+
+
     def call_test(self, test_item):
+        """
+        通话测试选择
+        :param test_item: 测试项
+        """
         with open(self.config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
             number = config['number']
@@ -724,7 +806,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.process.clear()
                 time.sleep(interval)
                 self.CP_recv_textBrowser.append("主叫主挂 >> 第%s次, 共 %s次" % (i+1, times))
-                self._exec_cmd('ATD%s;' % number)
+                self.__exec_cmd('ATD%s;' % number)
 
                 self.log.info("主叫主挂 >> 第%s次, 共%s次," % (i+1, times))
 
@@ -735,7 +817,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                         if self.process[-1] == "对端接听":
                             # 等待5s超时，自动挂断
                             time.sleep(5)
-                            self._exec_cmd('AT+CHUP')
+                            self.__exec_cmd('AT+CHUP')
 
                         elif self.process[-1] == "通话结束":
                             if self.process == current_process:
@@ -785,7 +867,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.process.clear()
                 time.sleep(interval)
                 self.CP_recv_textBrowser.append("主叫被挂 >> 第%s次, 共%s次," % (i+1, times))
-                self._exec_cmd('ATD%s;' % number)
+                self.__exec_cmd('ATD%s;' % number)
                 self.log.info("主叫被挂 >> 第%s次, 共%s次," % (i+1, times))
 
                 while True:
@@ -794,7 +876,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                         self.log.debug("dial process: %s" % self.process)
                         if self.process[-1] == "对端接听":
                             time.sleep(5)
-                            self._exec_cmd('AT+CHUP')
+                            self.__exec_cmd('AT+CHUP')
                         elif self.process[-1] == "通话结束":
                             if self.process == current_process:
                                 pass_hangs_up += 1
@@ -812,6 +894,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                         break
             else:
                 i -= 1
+                self.CP_recv_textBrowser.append("网络未注册")
                 break
         self.TEST_FLAG = False
         self.CP_recv_textBrowser.append("测试项：主叫被挂 测试次数:%d, pass:%d, fail:%d\r\n" %
@@ -842,7 +925,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 time.sleep(interval)
                 self.process.clear()
                 self.CP_recv_textBrowser.append("主叫拒接 >> 第%s次, 共%s次," % (i+1, times))
-                self._exec_cmd('ATD%s;' % number)
+                self.__exec_cmd('ATD%s;' % number)
                 self.log.info("主叫拒接 >> 第%s次, 共%s次," % (i+1, times))
 
                 while True:
@@ -865,6 +948,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                         break
             else:
                 i -= 1
+                self.CP_recv_textBrowser.append("网络未注册")
                 break
         self.TEST_FLAG = False
         self.CP_recv_textBrowser.append("测试项：主叫拒接 测试次数:%s, pass:%d, fail:%d\r\n" %
@@ -896,7 +980,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.process.clear()
                 time.sleep(interval)
                 self.CP_recv_textBrowser.append("主叫未接 >> 第%s次, 共%s次," % (i+1, times))
-                self._exec_cmd('ATD%s;' % number)
+                self.__exec_cmd('ATD%s;' % number)
                 self.log.info("主叫未接 >> 第%s次, 共%s次," % (i+1, times))
 
                 while True:
@@ -921,6 +1005,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                         break
             else:
                 i -= 1
+                self.CP_recv_textBrowser.append("网络未注册")
                 break
         self.TEST_FLAG = False
         self.CP_recv_textBrowser.append("测试项：主叫未接 测试次数:%s, pass:%d, fail:%d\r\n" %
@@ -929,16 +1014,3 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         self.log.info("测试项：主叫未接 测试次数:%s, pass:%d, fail:%d\r\n" %
                     (i+1, pass_no_caller_answer, fail_no_caller_answer))
 
-if __name__ == '__main__':
-    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
-    app = QApplication(sys.argv)
-
-    et = Ass()
-
-    dsa = At_settings()
-    ds = Default_settings()
-    btn = et.actionAT_manager.triggered.connect(dsa.show)
-    btn1 = et.actionDefSet.triggered.connect(ds.show)
-    et.show()
-
-    sys.exit(app.exec_())

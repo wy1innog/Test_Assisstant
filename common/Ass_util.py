@@ -27,9 +27,13 @@ def subprocess_call(*args, **kwargs):
     return retcode
 
 def dev():
+    """
+    检测设备，有设备，返回设备名；无设备，返回0
+    :return: 设备名
+    :return: 0
+    """
     pattern = re.compile('[a-zA-Z0-9]+\sdevice$')
     devices_list = subprocess_getoutput('adb devices').strip().split('\n')
-    # logger.debug('######>>> Devices: %s' % devices_list[1:])
     devName = devices_list[-1].split('\t')[0]
     devices_count = 0
     for d in devices_list:
