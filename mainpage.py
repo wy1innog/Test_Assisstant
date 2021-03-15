@@ -4,7 +4,6 @@ import re
 import sys
 import time
 import json
-from json import JSONDecodeError
 import threading
 import serial
 import datetime
@@ -12,7 +11,7 @@ import serial.tools.list_ports
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QComboBox
 from PyQt5.QtCore import QTimer
-from serial import SerialTimeoutException, SerialException
+from serial import SerialException
 
 from common.Ass_util import subprocess_getoutput, subprocess_call, dev, recv_to_bottom
 from settingspage import Default_settings
@@ -24,7 +23,7 @@ if parent_path not in sys.path:
     sys.path.append(parent_path)
 
 class Ass(QMainWindow, QComboBox, Ui_MainWindow):
-    config_path = 'config/config.cfg'
+    config_path = 'config.cfg'
 
     def __init__(self):
         super().__init__()
@@ -44,7 +43,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
 
     def initUI(self):
         self.setWindowTitle("Test Assistant")
-        icon = 'img\icon.ico'
+        icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
         self.setWindowIcon(QIcon(icon))
         self.actionAT_manager.triggered.connect(self.refresh_at_combobox)
 
@@ -438,26 +437,29 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         """
         try:
             with open(self.config_path, 'r', encoding='utf-8') as f:
-                config = json.load(f)
+                config = json.load(f, strict=False)
                 AT_list = config['AT_list']
+                interval = config['interval']
+                number = config['number']
                 self.Edit_test_count_AP.setPlaceholderText(config['Test_times'])
                 self.Edit_test_count.setPlaceholderText(config['Test_times'])
                 for line in AT_list:
                     self.combox_at_choice.addItem(line.strip())
 
-        except FileNotFoundError:
+        except Exception:
             info = {
                 "number": "18701997306",
                 "content": "AT",
-                "Test_times": "1",
+                "Test_times": "3",
                 "interval": "5",
                 "AT_list": ["AT", "AT+CFUN?", "AT+CREG?", "AT^DMSN", "AT+CGMR"]
             }
+
             with open(self.config_path, 'w', encoding='utf-8') as fp:
                 json.dump(info, fp=fp, indent=4, ensure_ascii=False)
-                self._prepare_AT()
-        except (JSONDecodeError, TypeError) as e:
-            self.log.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新配置文件）")
+                # self._prepare_AT()
+        # except (JSONDecodeError, TypeError) as e:
+        #     self.log.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新配置文件）")
 
     def port_check(self):
         """
@@ -653,6 +655,9 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
 
         # 表明主叫电话终止成功，原因正常呼叫清除
         hang_up_active = '^DSCI: 1,0,6,0,0,"{}",129,,16,3'.format(number)
+        # 对端挂断
+        reject_hang_up = '^DSCI: 1,0,6,0,0,"{}",129,,16,6'.format(number)
+        reject_hang_up = '^DSCI: 1,0,6,0,0,"{}",129,,16,130'.format(number)
         # NO CARRIER表明异常挂断,原因协议错误，未指定，ap侧显示呼出界面直接清除
         dial_error = '^DSCI: 1,0,6,0,0,"{}",129,,111'.format(number)
         # NO CARRIER表示电话状态为电话终止，未接通原因目的地障碍， APP侧语音提示所拨打电话已关机。
@@ -853,7 +858,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         :param number: 对端号码
         :return: None
         """
-        global i
+        global starttime
         pass_hangs_up = 0
         fail_hangs_up = 0
         self.CP_recv_textBrowser.append("测试项：主叫被挂 测试次数:%s" % times)
@@ -875,13 +880,17 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                         time.sleep(3)
                         self.log.debug("dial process: %s" % self.process)
                         if self.process[-1] == "对端接听":
-                            time.sleep(5)
-                            self.__exec_cmd('AT+CHUP')
+                            starttime = time.time()
                         elif self.process[-1] == "通话结束":
+                            endtime = time.time()
                             if self.process == current_process:
-                                pass_hangs_up += 1
-                                self.log.info("通话流程为正确流程：{}".format(self.process))
-
+                                # 如果挂断时间小于70s，属对端挂断
+                                if endtime-starttime<200:
+                                    pass_hangs_up += 1
+                                    self.log.info("通话流程为正确流程：{}".format(self.process))
+                                else:
+                                    fail_hangs_up += 1
+                                    self.log.warning("主叫拒接：通话")
                             else:
                                 fail_hangs_up += 1
                                 self.log.warning("通话流程有误：{}".format(self.process))

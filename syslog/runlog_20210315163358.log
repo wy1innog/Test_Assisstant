@@ -1,0 +1,18 @@
+2021/03/15 16:33:58 mainpage.py->dev_check [line:100] INFO ######>>> Check device
+2021/03/15 16:33:58 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:33:58 mainpage.py->port_check [line:469] INFO ######>>> Check port
+2021/03/15 16:33:58 atpage.py->init [line:22] INFO ######>>> Init settings AT Dialog
+2021/03/15 16:33:58 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:33:58 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:34:06 mainpage.py->port_check [line:469] INFO ######>>> Check port
+2021/03/15 16:34:26 mainpage.py->port_check [line:469] INFO ######>>> Check port
+2021/03/15 16:34:30 mainpage.py->port_check [line:469] INFO ######>>> Check port
+2021/03/15 16:34:30 mainpage.py->port_open [line:486] INFO ######>>> Open port
+2021/03/15 16:34:30 mainpage.py->port_open [line:489] INFO Port:COM8  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/03/15 16:34:30 mainpage.py->__exec_cmd [line:635] INFO exec >> AT^DSCI=1
+2021/03/15 16:34:33 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:34:33 mainpage.py->_calling_to_answer [line:848] INFO 测试项：主叫主挂 测试次数: 0, pass: 0, fail: 0
+
+2021/03/15 16:34:38 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:34:38 mainpage.py->_calling_to_answer [line:848] INFO 测试项：主叫主挂 测试次数: 0, pass: 0, fail: 0
+

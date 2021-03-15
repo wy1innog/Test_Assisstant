@@ -1,0 +1,40 @@
+2021/03/15 16:21:04 mainpage.py->dev_check [line:100] INFO ######>>> Check device
+2021/03/15 16:21:04 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:21:04 mainpage.py->port_check [line:469] INFO ######>>> Check port
+2021/03/15 16:21:04 atpage.py->init [line:22] INFO ######>>> Init settings AT Dialog
+2021/03/15 16:21:04 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:21:04 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:21:09 atpage.py->add_at_cmd [line:39] INFO ######>>> Add new AT cmd: text=AT, status=True
+2021/03/15 16:21:18 mainpage.py->port_open [line:486] INFO ######>>> Open port
+2021/03/15 16:21:18 mainpage.py->port_open [line:489] INFO Port:COM8  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/03/15 16:21:19 mainpage.py->__exec_cmd [line:635] INFO exec >> AT^DSCI=1
+2021/03/15 16:21:22 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CFUN?
+2021/03/15 16:21:22 mainpage.py->exec_choose_at [line:542] INFO exec AT combobox：AT+CFUN?
+2021/03/15 16:21:32 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:21:32 mainpage.py->_calling_to_answer [line:848] INFO 测试项：主叫主挂 测试次数: 0, pass: 0, fail: 0
+
+2021/03/15 16:21:35 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:21:35 mainpage.py->_calling_to_answer [line:848] INFO 测试项：主叫主挂 测试次数: 0, pass: 0, fail: 0
+
+2021/03/15 16:21:39 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:21:39 mainpage.py->_calling_to_answer [line:848] INFO 测试项：主叫主挂 测试次数: 0, pass: 0, fail: 0
+
+2021/03/15 16:21:41 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:21:41 mainpage.py->_caller_hangs_up [line:906] INFO 测试项：主叫被挂 测试次数:0, pass:0, fail:0
+
+2021/03/15 16:21:42 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:21:42 mainpage.py->_calling_reject [line:960] INFO 测试项：主叫拒接 测试次数:0, pass:0, fail:0
+
+2021/03/15 16:21:43 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:21:43 mainpage.py->_no_caller_answer [line:1017] INFO 测试项：主叫未接 测试次数:0, pass:0, fail:0
+
+2021/03/15 16:21:46 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:21:46 mainpage.py->_no_caller_answer [line:1017] INFO 测试项：主叫未接 测试次数:0, pass:0, fail:0
+
+2021/03/15 16:22:09 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:22:09 mainpage.py->_no_caller_answer [line:1017] INFO 测试项：主叫未接 测试次数:0, pass:0, fail:0
+
+2021/03/15 16:22:15 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CFUN?
+2021/03/15 16:22:15 mainpage.py->exec_choose_at [line:542] INFO exec AT combobox：AT+CFUN?
+2021/03/15 16:22:18 mainpage.py->port_close [line:509] INFO ######>>> Close port
+2021/03/15 16:22:20 mainpage.py->port_check [line:469] INFO ######>>> Check port

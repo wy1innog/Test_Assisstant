@@ -9,7 +9,7 @@ class Log(object):
         self.logger.setLevel(logging.DEBUG)
 
         self.log_time = time.strftime("%Y_%m_%d")
-        file_dir = os.getcwd() + '/../syslog'
+        file_dir = os.getcwd() + '/syslog'
 
 
         if not os.path.exists(file_dir):
@@ -22,10 +22,10 @@ class Log(object):
         self.log_name = os.path.join(self.log_path, 'runlog_{0:%Y%m%d%H%M%S}.log'.format(datetime.datetime.now()))
 
         fh = logging.FileHandler(self.log_name, 'a', encoding="utf-8")
-        fh.setLevel(logging.INFO)
+        fh.setLevel(logging.DEBUG)
 
         ch = logging.StreamHandler()
-        ch.setLevel(logging.DEBUG)
+        ch.setLevel(logging.INFO)
 
         formatter = logging.Formatter(
         fmt="%(asctime)s %(filename)s->%(funcName)s [line:%(lineno)d] %(levelname)s %(message)s",

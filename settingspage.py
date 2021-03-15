@@ -8,7 +8,7 @@ from ui.ui_settingspage import Default_settings_Dialog
 from common.log import Log
 
 class Default_settings(Default_settings_Dialog, QDialog):
-    config_path = 'config/config.cfg'
+    config_path = 'config.cfg'
     # 让多窗口之间传递信号，刷新主窗口信息
     my_Signal = QtCore.pyqtSignal(str)
 
@@ -16,8 +16,7 @@ class Default_settings(Default_settings_Dialog, QDialog):
         super(Default_settings_Dialog, self).__init__()
         self.setupUi(self)
         self.log = Log(__name__).getlog()
-        # icon = '..\\img\\icon.ico'
-        icon = 'img\icon.ico'
+        icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
         self.setWindowIcon(QIcon(icon))
         self.init()
 
@@ -31,14 +30,14 @@ class Default_settings(Default_settings_Dialog, QDialog):
         try:
 
             with open(self.config_path, 'r', encoding='utf-8') as f:
-                config = json.load(f)
+                config = json.load(f, strict=False)
                 number = config['number']
                 times = config['Test_times']
                 interval = config['interval']
                 self.edit_called_number.setPlaceholderText(number)
-                # self.edit_times.setPlaceholderText(times)
-                # self.edit_test_interval.setPlaceholderText(interval)
-        except JSONDecodeError:
+                self.edit_times.setPlaceholderText(times)
+                self.edit_test_interval.setPlaceholderText(interval)
+        except (FileNotFoundError, JSONDecodeError) as e:
             self.log.error("配置文件出现问题，请删除配置文件重新打开程序（会自动生成新config）")
 
     def sendEditContent(self):

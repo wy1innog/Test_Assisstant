@@ -1,0 +1,1724 @@
+2021/03/15 16:50:36 mainpage.py->dev_check [line:100] INFO ######>>> Check device
+2021/03/15 16:50:36 mainpage.py->dev_check [line:115] DEBUG Device list:[]
+2021/03/15 16:50:36 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:50:36 mainpage.py->port_check [line:469] INFO ######>>> Check port
+2021/03/15 16:50:36 mainpage.py->port_check [line:477] DEBUG Port list:{'COM8': 'LeadCore CMCC AT Interface (COM8)', 'COM7': 'LeadCore CMCC Diagnoses (COM7)'}
+2021/03/15 16:50:36 atpage.py->init [line:22] INFO ######>>> Init settings AT Dialog
+2021/03/15 16:50:36 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:50:36 settingspage.py->init [line:24] INFO ######>>> Init Default settings Dialog
+2021/03/15 16:50:40 mainpage.py->port_open [line:486] INFO ######>>> Open port
+2021/03/15 16:50:40 mainpage.py->port_open [line:489] INFO Port:COM8  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/03/15 16:50:40 mainpage.py->__exec_cmd [line:635] INFO exec >> AT^DSCI=1
+2021/03/15 16:50:40 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+2021/03/15 16:50:45 mainpage.py->refresh_at_combobox [line:530] DEBUG ######>>> Refresh at combobox
+2021/03/15 16:50:50 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+^SATSIGNAL:-114,122
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 16:50:51 atpage.py->add_at_cmd [line:39] INFO ######>>> Add new AT cmd: text=AT+CREG?, status=True
+2021/03/15 16:50:56 mainpage.py->refresh_at_combobox [line:530] DEBUG ######>>> Refresh at combobox
+2021/03/15 16:51:00 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:51:00 mainpage.py->exec_choose_at [line:542] INFO exec AT combobox：AT+CREG?
+2021/03/15 16:51:00 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CREG: 0,1
+
+OK
+
+2021/03/15 16:51:00 mainpage.py->call_check [line:674] INFO NETWORK_REGISTERED  +CREG: 0,1
+2021/03/15 16:51:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 27,2
+
++CSQ: 27,2
+
+^SATSIGNAL:-112,77
+
+^CPSTATE: -112,201,36,94
+
+^SATSIGNAL:-112,77
+
+2021/03/15 16:51:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -112,201,34,94
+
+^SATSIGNAL:-112,77
+
+^CPSTATE: -112,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:51:12 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:51:12 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:51:13 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+^SATSIGNAL:-114,126
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 16:51:19 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 27,2
+
++CSQ: 27,2
+
+^SATSIGNAL:-112,77
+
+^CPSTATE: -112,201,36,94
+
+^SATSIGNAL:-112,77
+
+2021/03/15 16:51:19 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -112,201,34,94
+
+^SATSIGNAL:-112,77
+
+^CPSTATE: -112,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:51:21 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:51:21 mainpage.py->call_test [line:776] DEBUG caller_hangs_up
+2021/03/15 16:51:21 mainpage.py->_caller_hangs_up [line:865] DEBUG Test times:5
+2021/03/15 16:51:21 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CREG: 0,6
+
+OK
+
+2021/03/15 16:51:24 mainpage.py->__exec_cmd [line:635] INFO exec >> ATD10086;
+2021/03/15 16:51:24 mainpage.py->_caller_hangs_up [line:873] INFO 主叫被挂 >> 第1次, 共5次,
+2021/03/15 16:51:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+NO CARRIER
+
+^DSCI: 1,0,2,0,0,"10086",129,,,127,"",255
+
+^DSCI: 1,0,6,0,0,"10086",129,,111,131,"",255
+
+2021/03/15 16:51:24 mainpage.py->call_check [line:679] INFO 正在拨号>> 10086
+2021/03/15 16:51:24 mainpage.py->call_check [line:708] INFO 通话结束
+
+2021/03/15 16:51:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:51:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:51:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+^SATSIGNAL:-114,121
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 16:51:27 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '通话结束']
+2021/03/15 16:51:27 mainpage.py->_caller_hangs_up [line:889] WARNING 通话流程有误：['拨号', '通话结束']
+2021/03/15 16:51:30 mainpage.py->__exec_cmd [line:635] INFO exec >> ATD10086;
+2021/03/15 16:51:30 mainpage.py->_caller_hangs_up [line:873] INFO 主叫被挂 >> 第2次, 共5次,
+2021/03/15 16:51:30 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+2021/03/15 16:51:30 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DSCI: 1,0,2,0,0,"10086",129,,,127,"",255
+
+^SATSIGNAL:-114,122
+
+^CPSTATE: -114,201,30,84
+
+2021/03/15 16:51:30 mainpage.py->call_check [line:679] INFO 正在拨号>> 10086
+2021/03/15 16:51:30 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
+2021/03/15 16:51:30 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,4
+
+^SATSIGNAL:-114,122
+
+^CPSTATE: -114,201,30,85
+
+2021/03/15 16:51:33 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:51:34 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,130
+
+^CPSTATE: -115,201,30,85
+
+2021/03/15 16:51:36 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:51:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,129
+
+^CPSTATE: -114,201,24,85
+
+^SATSIGNAL:-114,129
+
+2021/03/15 16:51:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,30,85
+
+2021/03/15 16:51:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,129
+
+2021/03/15 16:51:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,26,85
+
+^DGSQU: 25,4
+
+2021/03/15 16:51:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,4
+
+2021/03/15 16:51:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,129
+
+^CPSTATE: -114,201,26,92
+
+^SATSIGNAL:-114,129
+
+^CPSTATE: -114,201,30,92
+
+2021/03/15 16:51:38 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,116
+
+^CPSTATE: -115,201,32,92
+
+^SATSIGNAL:-115,116
+
+^CPSTATE: -115,201,39,92
+
+^DGSQU: 24,4
+
+2021/03/15 16:51:38 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 24,4
+
+2021/03/15 16:51:39 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:51:40 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,70
+
+^CPSTATE: -114,201,40,92
+
+2021/03/15 16:51:42 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:51:45 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:51:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,112
+
+^CPSTATE: -115,201,41,92
+
+^DSCI: 1,0,3,0,0,"10086",129,,,132,"",255
+
+2021/03/15 16:51:46 mainpage.py->call_check [line:683] INFO 对端振铃
+2021/03/15 16:51:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
++COLP: "",0,"",0
+
+^SATSIGNAL:-115,116
+
+^CPSTATE: -115,201,42,92
+
+2021/03/15 16:51:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,116
+
+^CPSTATE: -115,201,43,92
+
+^DGSQU: 24,4
+
++CSQ: 24,4
+
++CIEV: 6,1
+
+2021/03/15 16:51:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DSCI: 1,0,0,0,0,"10086",129,,,132,"",0
+
+2021/03/15 16:51:46 mainpage.py->call_check [line:687] INFO 对端已接听
+2021/03/15 16:51:48 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃', '对端接听']
+2021/03/15 16:51:53 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CHUP
+2021/03/15 16:51:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
++CIEV: 6,0
+
+2021/03/15 16:51:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DSCI: 1,0,6,0,0,"10086",129,,16,4,"",0
+
+2021/03/15 16:51:53 mainpage.py->call_check [line:724] INFO 通话结束
+
+2021/03/15 16:51:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,128
+
+^CPSTATE: -114,201,44,92
+
+^DGSQU: 25,4
+
+2021/03/15 16:51:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,4
+
+2021/03/15 16:51:54 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,127
+
+^CPSTATE: -115,201,53,92
+
+^SATSIGNAL:-115,127
+
+^CPSTATE: -115,201,46,92
+
+2021/03/15 16:51:54 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+2021/03/15 16:51:56 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃', '对端接听', '通话结束']
+2021/03/15 16:51:56 mainpage.py->_caller_hangs_up [line:885] INFO 通话流程为正确流程：['拨号', '对端振铃', '对端接听', '通话结束']
+2021/03/15 16:51:56 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,95
+
+^CPSTATE: -115,201,36,92
+
+2021/03/15 16:51:57 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,3
+
++CSQ: 24,3
+
+^SATSIGNAL:-115,92
+
+2021/03/15 16:51:57 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:51:59 mainpage.py->__exec_cmd [line:635] INFO exec >> ATD10086;
+2021/03/15 16:51:59 mainpage.py->_caller_hangs_up [line:873] INFO 主叫被挂 >> 第3次, 共5次,
+2021/03/15 16:51:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+^DSCI: 1,0,2,0,0,"10086",129,,,127,"",255
+
+^SATSIGNAL:-115,92
+
+2021/03/15 16:51:59 mainpage.py->call_check [line:679] INFO 正在拨号>> 10086
+2021/03/15 16:51:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,30,84
+
+2021/03/15 16:51:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,3
+
++CSQ: 25,3
+
+^SATSIGNAL:-114,89
+
+^CPSTATE: -114,201,30,84
+
+2021/03/15 16:51:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,3
+
++CSQ: 25,3
+
+^SATSIGNAL:-114,89
+
+^CPSTATE: -114,201,30,85
+
+2021/03/15 16:52:02 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:52:05 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:52:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,99
+
+^CPSTATE: -115,201,24,85
+
+^SATSIGNAL:-115,99
+
+2021/03/15 16:52:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,30,85
+
+2021/03/15 16:52:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,105
+
+^CPSTATE: -115,201,26,85
+
+^DGSQU: 24,4
+
+2021/03/15 16:52:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 24,4
+
+^SATSIGNAL:-115,105
+
+2021/03/15 16:52:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,26,92
+
+^SATSIGNAL:-115,105
+
+^CPSTATE: -115,201,30,92
+
+2021/03/15 16:52:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,123
+
+^CPSTATE: -115,201,32,92
+
+^SATSIGNAL:-115,123
+
+2021/03/15 16:52:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,39,92
+
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+2021/03/15 16:52:08 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:52:09 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,102
+
+2021/03/15 16:52:09 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,40,92
+
+2021/03/15 16:52:11 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:52:14 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:52:16 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,124
+
+2021/03/15 16:52:16 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,41,92
+
+^DSCI: 1,0,3,0,0,"10086",129,,,133,"",255
+
+2021/03/15 16:52:16 mainpage.py->call_check [line:683] INFO 对端振铃
+2021/03/15 16:52:16 mainpage.py->data_receive [line:572] DEBUG Receive data:
++COLP: "",0,"",0
+
+^SATSIGNAL:-114,125
+
+2021/03/15 16:52:16 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,42,92
+
+^SATSIGNAL:-114,125
+
+^CPSTATE: -114,201,43,92
+
+2021/03/15 16:52:16 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
++CIEV: 6,1
+
+^DSCI: 1,0,0,0,0,"10086",129,,,133,"",0
+
+2021/03/15 16:52:16 mainpage.py->call_check [line:687] INFO 对端已接听
+2021/03/15 16:52:17 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃', '对端接听']
+2021/03/15 16:52:22 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CHUP
+2021/03/15 16:52:22 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
++CIEV: 6,0
+
+^DSCI: 1,0,6,0,0,"10086",129,,16,5,"",0
+
+2021/03/15 16:52:22 mainpage.py->call_check [line:724] INFO 通话结束
+
+2021/03/15 16:52:22 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,122
+
+^CPSTATE: -115,201,44,92
+
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+2021/03/15 16:52:23 mainpage.py->stop_test_cp [line:429] WARNING force stop test !!!
+2021/03/15 16:52:23 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,125
+
+^CPSTATE: -114,201,53,92
+
+2021/03/15 16:52:23 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,125
+
+^CPSTATE: -114,201,46,92
+
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 16:52:25 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃', '对端接听', '通话结束']
+2021/03/15 16:52:25 mainpage.py->_caller_hangs_up [line:885] INFO 通话流程为正确流程：['拨号', '对端振铃', '对端接听', '通话结束']
+2021/03/15 16:52:25 mainpage.py->_caller_hangs_up [line:906] INFO 测试项：主叫被挂 测试次数:3, pass:2, fail:1
+
+2021/03/15 16:52:26 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,122
+
+^CPSTATE: -115,201,36,92
+
+2021/03/15 16:52:26 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+^SATSIGNAL:-115,123
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:52:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 27,2
+
+2021/03/15 16:52:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 27,2
+
+^SATSIGNAL:-112,76
+
+^CPSTATE: -112,201,36,94
+
+^SATSIGNAL:-112,76
+
+2021/03/15 16:52:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -112,201,34,94
+
+^SATSIGNAL:-112,76
+
+^CPSTATE: -112,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:52:41 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:52:41 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:52:41 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+^SATSIGNAL:-115,119
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:52:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 27,2
+
+2021/03/15 16:52:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 27,2
+
+^SATSIGNAL:-112,77
+
+^CPSTATE: -112,201,36,94
+
+^SATSIGNAL:-112,77
+
+2021/03/15 16:52:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -112,201,34,94
+
+^SATSIGNAL:-112,77
+
+^CPSTATE: -112,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:53:04 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:53:04 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:53:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+^SATSIGNAL:-115,106
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:53:35 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+^SATSIGNAL:-114,118
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 16:53:45 settingspage.py->modify_config [line:70] INFO config.cfg modified interval: 10
+2021/03/15 16:53:45 settingspage.py->modify_config [line:70] INFO config.cfg modified interval: 10
+2021/03/15 16:54:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 23,4
+
++CSQ: 23,4
+
+^SATSIGNAL:-116,110
+
+2021/03/15 16:54:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -116,201,36,84
+
+2021/03/15 16:54:06 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
+2021/03/15 16:54:06 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 24,4
+
+^SATSIGNAL:-115,108
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:54:23 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,1
+
++CSQ: 25,1
+
+2021/03/15 16:54:23 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,60
+
+^CPSTATE: -114,201,36,94
+
+^SATSIGNAL:-114,60
+
+^CPSTATE: -114,201,34,94
+
+^SATSIGNAL:-114,60
+
+2021/03/15 16:54:23 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:54:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:54:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:54:26 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,0
+
++CSQ: 25,0
+
+^SATSIGNAL:-114,11
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 16:54:31 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,0
+
++CSQ: 25,0
+
+^SATSIGNAL:-114,9
+
+^CPSTATE: -114,201,36,94
+
+^SATSIGNAL:-114,9
+
+2021/03/15 16:54:31 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,34,94
+
+^SATSIGNAL:-114,9
+
+^CPSTATE: -114,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:54:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:54:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:54:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,1
+
++CSQ: 24,1
+
+^SATSIGNAL:-115,47
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:54:41 settingspage.py->modify_config [line:58] INFO config.cfg modified number: 18701997306
+2021/03/15 16:54:41 settingspage.py->modify_config [line:58] INFO config.cfg modified number: 18701997306
+2021/03/15 16:54:41 settingspage.py->modify_config [line:70] INFO config.cfg modified interval: 10
+2021/03/15 16:54:41 settingspage.py->modify_config [line:70] INFO config.cfg modified interval: 10
+2021/03/15 16:54:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 27,0
+
++CSQ: 27,0
+
+^SATSIGNAL:-112,22
+
+^CPSTATE: -112,201,36,94
+
+2021/03/15 16:54:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-112,22
+
+^CPSTATE: -112,201,34,94
+
+^SATSIGNAL:-112,22
+
+^CPSTATE: -112,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:54:49 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:54:49 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:54:49 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,1
+
++CSQ: 24,1
+
+^SATSIGNAL:-115,42
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:54:50 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 16:54:50 mainpage.py->call_test [line:776] DEBUG caller_hangs_up
+2021/03/15 16:54:50 mainpage.py->_caller_hangs_up [line:865] DEBUG Test times:5
+2021/03/15 16:54:50 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CREG: 0,1
+
+OK
+
+2021/03/15 16:54:50 mainpage.py->call_check [line:674] INFO NETWORK_REGISTERED  +CREG: 0,1
+2021/03/15 16:55:00 mainpage.py->__exec_cmd [line:635] INFO exec >> ATD18701997306;
+2021/03/15 16:55:00 mainpage.py->_caller_hangs_up [line:873] INFO 主叫被挂 >> 第1次, 共5次,
+2021/03/15 16:55:00 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+^DSCI: 1,0,2,0,0,"18701997306",129,,,127,"",255
+
+^SATSIGNAL:-115,45
+
+^CPSTATE: -115,201,30,84
+
+2021/03/15 16:55:00 mainpage.py->call_check [line:679] INFO 正在拨号>> 18701997306
+2021/03/15 16:55:00 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,1
+
++CSQ: 24,1
+
+2021/03/15 16:55:00 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,45
+
+^CPSTATE: -115,201,30,85
+
+2021/03/15 16:55:03 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:55:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,107
+
+^CPSTATE: -115,201,24,85
+
+2021/03/15 16:55:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,107
+
+^CPSTATE: -115,201,30,85
+
+2021/03/15 16:55:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,107
+
+^CPSTATE: -116,201,26,85
+
+^DGSQU: 23,4
+
+2021/03/15 16:55:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 23,4
+
+^SATSIGNAL:-116,107
+
+2021/03/15 16:55:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -116,201,26,92
+
+^SATSIGNAL:-116,107
+
+^CPSTATE: -116,201,30,92
+
+2021/03/15 16:55:06 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:55:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,115
+
+^CPSTATE: -116,201,32,92
+
+^SATSIGNAL:-116,115
+
+2021/03/15 16:55:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -116,201,39,92
+
+^DGSQU: 23,4
+
++CSQ: 23,4
+
+2021/03/15 16:55:09 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:55:10 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,112
+
+^CPSTATE: -116,201,40,92
+
+2021/03/15 16:55:12 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:55:15 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:55:16 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,114
+
+2021/03/15 16:55:16 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,41,92
+
+^DSCI: 1,0,3,0,0,"18701997306",129,,,134,"",255
+
+2021/03/15 16:55:16 mainpage.py->call_check [line:683] INFO 对端振铃
+2021/03/15 16:55:18 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:55:21 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:55:24 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:55:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
++COLP: "",0,"",0
+
+^SATSIGNAL:-116,114
+
+^CPSTATE: -116,201,42,92
+
+^SATSIGNAL:-116,114
+
+2021/03/15 16:55:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -116,201,43,92
+
+^DGSQU: 23,4
+
++CSQ: 23,4
+
++CIEV: 6,1
+
+^DSCI: 1,0,0,0,0,"18701997306",129,,,134,"",0
+
+2021/03/15 16:55:24 mainpage.py->call_check [line:687] INFO 对端已接听
+2021/03/15 16:55:27 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃', '对端接听']
+2021/03/15 16:55:32 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CHUP
+2021/03/15 16:55:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+2021/03/15 16:55:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CIEV: 6,0
+
+^DSCI: 1,0,6,0,0,"18701997306",129,,16,6,"",0
+
+2021/03/15 16:55:32 mainpage.py->call_check [line:724] INFO 通话结束
+
+2021/03/15 16:55:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,117
+
+2021/03/15 16:55:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -116,201,44,92
+
+^DGSQU: 23,4
+
++CSQ: 23,4
+
+2021/03/15 16:55:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,114
+
+^CPSTATE: -116,201,53,92
+
+2021/03/15 16:55:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,114
+
+^CPSTATE: -116,201,46,92
+
+^DGSQU: 23,4
+
++CSQ: 23,4
+
+2021/03/15 16:55:35 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃', '对端接听', '通话结束']
+2021/03/15 16:55:35 mainpage.py->_caller_hangs_up [line:885] INFO 通话流程为正确流程：['拨号', '对端振铃', '对端接听', '通话结束']
+2021/03/15 16:55:35 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,113
+
+2021/03/15 16:55:35 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -116,201,36,92
+
+2021/03/15 16:55:36 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+^SATSIGNAL:-115,110
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:55:45 mainpage.py->__exec_cmd [line:635] INFO exec >> ATD18701997306;
+2021/03/15 16:55:45 mainpage.py->_caller_hangs_up [line:873] INFO 主叫被挂 >> 第2次, 共5次,
+2021/03/15 16:55:45 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+^DSCI: 1,0,2,0,0,"18701997306",129,,,127,"",255
+
+^SATSIGNAL:-115,99
+
+2021/03/15 16:55:45 mainpage.py->call_check [line:679] INFO 正在拨号>> 18701997306
+2021/03/15 16:55:45 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,30,84
+
+2021/03/15 16:55:45 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,3
+
+2021/03/15 16:55:45 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 24,3
+
+^SATSIGNAL:-115,97
+
+^CPSTATE: -115,201,30,85
+
+2021/03/15 16:55:48 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:55:50 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,106
+
+2021/03/15 16:55:50 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,24,85
+
+^SATSIGNAL:-114,106
+
+^CPSTATE: -114,201,30,85
+
+2021/03/15 16:55:50 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,106
+
+2021/03/15 16:55:50 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,26,85
+
+^DGSQU: 25,4
+
+2021/03/15 16:55:50 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,4
+
+^SATSIGNAL:-114,106
+
+^CPSTATE: -114,201,26,92
+
+^SATSIGNAL:-114,106
+
+^CPSTATE: -114,201,30,92
+
+2021/03/15 16:55:51 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:55:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,92
+
+^CPSTATE: -115,201,30,92
+
+2021/03/15 16:55:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,97
+
+^CPSTATE: -116,201,32,92
+
+2021/03/15 16:55:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,97
+
+^CPSTATE: -116,201,39,92
+
+^DGSQU: 23,3
+
++CSQ: 23,3
+
+2021/03/15 16:55:54 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:55:54 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,108
+
+^CPSTATE: -116,201,40,92
+
+2021/03/15 16:55:57 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:56:00 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号']
+2021/03/15 16:56:01 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,117
+
+^CPSTATE: -116,201,41,92
+
+^DSCI: 1,0,3,0,0,"18701997306",129,,,128,"",255
+
+2021/03/15 16:56:01 mainpage.py->call_check [line:683] INFO 对端振铃
+2021/03/15 16:56:03 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:06 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:09 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:12 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:15 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:18 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:21 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:24 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:27 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:30 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:33 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:36 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:39 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 16:56:39 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,115
+
+^CPSTATE: -116,201,52,92
+
+2021/03/15 16:56:39 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 23,4
+
++CSQ: 23,4
+
+2021/03/15 16:56:40 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,111
+
+^CPSTATE: -116,201,54,92
+
+2021/03/15 16:56:40 mainpage.py->data_receive [line:572] DEBUG Receive data:
+NO CARRIER
+
+^DSCI: 1,0,6,0,0,"18701997306",129,,16,128,"",255
+
+2021/03/15 16:56:40 mainpage.py->call_check [line:724] INFO 通话结束
+
+2021/03/15 16:56:41 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-116,97
+
+^CPSTATE: -116,201,36,92
+
+2021/03/15 16:56:42 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '对端振铃', '通话结束']
+2021/03/15 16:56:42 mainpage.py->_caller_hangs_up [line:889] WARNING 通话流程有误：['拨号', '对端振铃', '通话结束']
+2021/03/15 16:56:44 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 29,1
+
++CSQ: 29,1
+
+^SATSIGNAL:-110,50
+
+^CPSTATE: -110,201,36,94
+
+2021/03/15 16:56:44 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-110,50
+
+^CPSTATE: -110,201,34,94
+
+^SATSIGNAL:-110,50
+
+^CPSTATE: -110,201,36,94
+
+2021/03/15 16:56:44 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^HP: 1,0
+
+2021/03/15 16:56:44 mainpage.py->stop_test_cp [line:429] WARNING force stop test !!!
+2021/03/15 16:56:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:56:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:56:47 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 23,4
+
++CSQ: 23,4
+
+^SATSIGNAL:-116,117
+
+2021/03/15 16:56:47 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -116,201,36,84
+
+2021/03/15 16:56:47 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 23,4
+
++CSQ: 23,4
+
+2021/03/15 16:56:52 mainpage.py->__exec_cmd [line:635] INFO exec >> ATD18701997306;
+2021/03/15 16:56:52 mainpage.py->_caller_hangs_up [line:873] INFO 主叫被挂 >> 第3次, 共5次,
+2021/03/15 16:56:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+2021/03/15 16:56:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DSCI: 1,0,2,0,0,"18701997306",129,,,127,"",255
+
+^SATSIGNAL:-112,88
+
+^CPSTATE: -112,201,36,84
+
+^SATSIGNAL:-112,88
+
+2021/03/15 16:56:52 mainpage.py->call_check [line:679] INFO 正在拨号>> 18701997306
+2021/03/15 16:56:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -112,201,30,84
+
+2021/03/15 16:56:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
+NO CARRIER
+
+^DGSQU: 27,2
+
++CSQ: 27,2
+
+^SATSIGNAL:-112,65
+
+^CPSTATE: -112,201,30,94
+
+2021/03/15 16:56:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-112,65
+
+^CPSTATE: -112,201,34,94
+
+^SATSIGNAL:-112,65
+
+^CPSTATE: -112,201,36,94
+
+2021/03/15 16:56:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^HP: 1,0
+
+^DSCI: 1,0,6,0,0,"18701997306",129,,111,129,"",255
+
+2021/03/15 16:56:53 mainpage.py->call_check [line:708] INFO 通话结束
+
+2021/03/15 16:56:55 mainpage.py->_caller_hangs_up [line:878] DEBUG dial process: ['拨号', '通话结束']
+2021/03/15 16:56:55 mainpage.py->_caller_hangs_up [line:889] WARNING 通话流程有误：['拨号', '通话结束']
+2021/03/15 16:56:55 mainpage.py->_caller_hangs_up [line:906] INFO 测试项：主叫被挂 测试次数:3, pass:1, fail:2
+
+2021/03/15 16:57:02 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:57:02 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:57:03 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 23,2
+
++CSQ: 23,2
+
+^SATSIGNAL:-116,62
+
+^CPSTATE: -116,201,36,84
+
+2021/03/15 16:57:03 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 23,2
+
++CSQ: 23,2
+
+^SATSIGNAL:-116,62
+
+^CPSTATE: -116,201,36,85
+
+2021/03/15 16:57:31 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,2
+
++CSQ: 25,2
+
+^SATSIGNAL:-114,66
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 16:57:43 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 29,0
+
+2021/03/15 16:57:43 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 29,0
+
+^SATSIGNAL:-110,7
+
+^CPSTATE: -110,201,36,94
+
+^SATSIGNAL:-110,7
+
+^CPSTATE: -110,201,34,94
+
+^SATSIGNAL:-110,7
+
+2021/03/15 16:57:43 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -110,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:58:19 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:58:19 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:58:19 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
+2021/03/15 16:58:19 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 24,4
+
+^SATSIGNAL:-115,107
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 16:58:48 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 29,0
+
++CSQ: 29,0
+
+^SATSIGNAL:-110,35
+
+^CPSTATE: -110,201,36,94
+
+^SATSIGNAL:-110,35
+
+2021/03/15 16:58:48 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -110,201,34,94
+
+^SATSIGNAL:-110,35
+
+^CPSTATE: -110,201,36,94
+
+^HP: 1,0
+
+2021/03/15 16:59:15 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 16:59:15 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 16:59:15 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 23,4
+
+2021/03/15 16:59:15 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 23,4
+
+^SATSIGNAL:-116,112
+
+^CPSTATE: -116,201,36,84
+
+2021/03/15 16:59:45 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
+2021/03/15 16:59:45 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,4
+
+^SATSIGNAL:-114,108
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 17:00:16 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:01:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,3
+
+2021/03/15 17:01:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,3
+
+2021/03/15 17:02:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 9,2
+
++CSQ: 9,2
+
+^SATSIGNAL:-130,74
+
+2021/03/15 17:02:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -130,201,36,94
+
+^SATSIGNAL:-130,74
+
+^CPSTATE: -130,201,34,94
+
+2021/03/15 17:02:52 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-130,74
+
+^CPSTATE: -130,201,36,94
+
+^HP: 1,5
+
+2021/03/15 17:02:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 17:02:53 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 17:02:57 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 9,2
+
++CSQ: 9,2
+
+2021/03/15 17:02:57 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-130,72
+
+^CPSTATE: -130,201,34,94
+
+^SATSIGNAL:-130,72
+
+^CPSTATE: -130,201,36,94
+
+2021/03/15 17:02:57 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^HP: 1,5
+
+2021/03/15 17:02:58 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 17:02:58 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 17:02:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,0
+
+2021/03/15 17:02:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,0
+
+^SATSIGNAL:-114,19
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 17:03:00 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,0
+
++CSQ: 25,0
+
+2021/03/15 17:03:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 9,0
+
++CSQ: 9,0
+
+^SATSIGNAL:-130,33
+
+^CPSTATE: -130,201,36,94
+
+2021/03/15 17:03:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-130,33
+
+^CPSTATE: -130,201,34,94
+
+^SATSIGNAL:-130,33
+
+^CPSTATE: -130,201,36,94
+
+2021/03/15 17:03:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^HP: 1,5
+
+2021/03/15 17:03:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 17:03:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 17:03:34 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,0
+
+2021/03/15 17:03:34 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,0
+
+^SATSIGNAL:-114,33
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 17:03:41 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 9,0
+
++CSQ: 9,0
+
+^SATSIGNAL:-130,32
+
+2021/03/15 17:03:42 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -130,201,36,94
+
+^SATSIGNAL:-130,32
+
+^CPSTATE: -130,201,34,94
+
+^SATSIGNAL:-130,32
+
+^CPSTATE: -130,201,36,94
+
+2021/03/15 17:03:42 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^HP: 1,5
+
+2021/03/15 17:03:42 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 17:03:42 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 17:03:42 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
+2021/03/15 17:03:42 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 24,4
+
+^SATSIGNAL:-115,115
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 17:03:46 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CREG?
+2021/03/15 17:03:46 mainpage.py->call_test [line:766] DEBUG no_caller_answer
+2021/03/15 17:03:46 mainpage.py->_no_caller_answer [line:978] DEBUG Test times: 1
+2021/03/15 17:03:46 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CREG: 0,1
+
+OK
+
+2021/03/15 17:03:46 mainpage.py->call_check [line:674] INFO NETWORK_REGISTERED  +CREG: 0,1
+2021/03/15 17:03:56 mainpage.py->__exec_cmd [line:635] INFO exec >> ATD18701997306;
+2021/03/15 17:03:56 mainpage.py->_no_caller_answer [line:986] INFO 主叫未接 >> 第1次, 共1次,
+2021/03/15 17:03:56 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
+^DSCI: 1,0,2,0,0,"18701997306",129,,,127,"",255
+
+^SATSIGNAL:-114,121
+
+2021/03/15 17:03:56 mainpage.py->call_check [line:679] INFO 正在拨号>> 18701997306
+2021/03/15 17:03:56 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,36,84
+
+^SATSIGNAL:-114,121
+
+^CPSTATE: -114,201,30,84
+
+2021/03/15 17:03:56 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:03:58 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,121
+
+^CPSTATE: -114,201,30,85
+
+2021/03/15 17:03:59 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号']
+2021/03/15 17:04:02 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号']
+2021/03/15 17:04:04 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,109
+
+^CPSTATE: -114,201,24,85
+
+^SATSIGNAL:-114,109
+
+2021/03/15 17:04:04 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,30,85
+
+2021/03/15 17:04:04 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,109
+
+2021/03/15 17:04:04 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,26,85
+
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:04:04 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,109
+
+2021/03/15 17:04:04 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,26,92
+
+^SATSIGNAL:-114,109
+
+^CPSTATE: -114,201,30,92
+
+2021/03/15 17:04:05 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号']
+2021/03/15 17:04:05 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,117
+
+^CPSTATE: -115,201,30,92
+
+2021/03/15 17:04:06 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,117
+
+^CPSTATE: -114,201,32,92
+
+2021/03/15 17:04:06 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,117
+
+^CPSTATE: -114,201,39,92
+
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:04:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,106
+
+^CPSTATE: -115,201,40,92
+
+2021/03/15 17:04:08 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号']
+2021/03/15 17:04:11 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号']
+2021/03/15 17:04:13 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,129
+
+^CPSTATE: -114,201,41,92
+
+2021/03/15 17:04:13 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DSCI: 1,0,3,0,0,"18701997306",129,,,130,"",255
+
+2021/03/15 17:04:13 mainpage.py->call_check [line:683] INFO 对端振铃
+2021/03/15 17:04:14 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:17 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:20 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:23 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:26 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:29 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:32 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:35 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:38 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:41 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:44 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:47 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CIEV: 2,3
+
+2021/03/15 17:04:47 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:50 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:51 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 17:04:51 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,117
+
+^CPSTATE: -114,201,41,92
+
+2021/03/15 17:04:53 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:56 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:04:59 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:05:02 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:05:05 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:05:08 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:05:11 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:05:14 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:05:17 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:05:20 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃']
+2021/03/15 17:05:22 mainpage.py->__exec_cmd [line:635] INFO exec >> AT+CHUP
+2021/03/15 17:05:22 mainpage.py->exec_choose_at [line:542] INFO exec AT combobox：AT+CHUP
+2021/03/15 17:05:22 mainpage.py->data_receive [line:572] DEBUG Receive data:
+OK
+
++CIEV: 6,0
+
+^DSCI: 1,0,6,0,0,"18701997306",129,,16,2,"",255
+
+2021/03/15 17:05:22 mainpage.py->call_check [line:724] INFO 通话结束
+
+2021/03/15 17:05:22 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,119
+
+2021/03/15 17:05:22 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,44,92
+
+^DGSQU: 25,4
+
++CSQ: 25,4
+
++CIEV: 2,4
+
+2021/03/15 17:05:23 mainpage.py->_no_caller_answer [line:990] DEBUG dial process: ['拨号', '对端振铃', '通话结束']
+2021/03/15 17:05:23 mainpage.py->_no_caller_answer [line:995] INFO 通话流程为正确流程：['拨号', '对端振铃', '通话结束']
+2021/03/15 17:05:23 mainpage.py->_no_caller_answer [line:1017] INFO 测试项：主叫未接 测试次数:1, pass:1, fail:0
+
+2021/03/15 17:05:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,114
+
+2021/03/15 17:05:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,53,92
+
+^SATSIGNAL:-114,114
+
+^CPSTATE: -114,201,46,92
+
+^DGSQU: 25,4
+
+2021/03/15 17:05:24 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 25,4
+
+2021/03/15 17:05:26 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,127
+
+^CPSTATE: -115,201,36,92
+
+2021/03/15 17:05:27 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
+2021/03/15 17:05:27 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 24,4
+
+^SATSIGNAL:-115,126
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 17:05:57 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+2021/03/15 17:07:28 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:07:28 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,119
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 17:07:59 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:09:00 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+2021/03/15 17:09:00 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,121
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 17:09:31 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+^SATSIGNAL:-114,123
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 17:09:31 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:10:02 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+^SATSIGNAL:-115,121
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 17:10:02 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+^SATSIGNAL:-114,123
+
+2021/03/15 17:10:02 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -114,201,36,84
+
+2021/03/15 17:10:34 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:11:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 8,2
+
+2021/03/15 17:11:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 8,2
+
+^SATSIGNAL:-131,71
+
+^CPSTATE: -131,201,36,94
+
+^SATSIGNAL:-131,71
+
+2021/03/15 17:11:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -131,201,34,94
+
+^SATSIGNAL:-131,71
+
+^CPSTATE: -131,201,36,94
+
+2021/03/15 17:11:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^HP: 1,4
+
+2021/03/15 17:11:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 17:11:07 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 17:11:08 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+2021/03/15 17:11:08 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-115,121
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 17:11:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 9,4
+
++CSQ: 9,4
+
+2021/03/15 17:11:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-130,102
+
+^CPSTATE: -130,201,36,94
+
+^SATSIGNAL:-130,102
+
+^CPSTATE: -130,201,34,94
+
+2021/03/15 17:11:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-130,102
+
+^CPSTATE: -130,201,36,94
+
+^HP: 1,5
+
+2021/03/15 17:11:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 17:11:32 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 17:11:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
+2021/03/15 17:11:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
++CSQ: 24,4
+
+^SATSIGNAL:-115,129
+
+^CPSTATE: -115,201,36,84
+
+2021/03/15 17:11:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:11:33 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-114,128
+
+^CPSTATE: -114,201,36,84
+
+2021/03/15 17:11:35 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 25,4
+
++CSQ: 25,4
+
+2021/03/15 17:11:44 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 8,1
+
++CSQ: 8,1
+
+^SATSIGNAL:-131,50
+
+2021/03/15 17:11:44 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -131,201,36,94
+
+^SATSIGNAL:-131,50
+
+^CPSTATE: -131,201,34,94
+
+2021/03/15 17:11:44 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^SATSIGNAL:-131,50
+
+^CPSTATE: -131,201,36,94
+
+^HP: 1,4
+
+2021/03/15 17:11:47 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MESINFO:0,0
+
+2021/03/15 17:11:47 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^MODE:15,8
+
+2021/03/15 17:11:47 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^DGSQU: 24,4
+
++CSQ: 24,4
+
+^SATSIGNAL:-115,125
+
+2021/03/15 17:11:47 mainpage.py->data_receive [line:572] DEBUG Receive data:
+^CPSTATE: -115,201,36,84
+

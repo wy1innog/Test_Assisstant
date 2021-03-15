@@ -1,0 +1,6 @@
+2021/03/15 13:49:56 mainpage.py->dev_check [line:101] INFO ######>>> Check device
+2021/03/15 13:49:56 settingspage.py->init [line:25] INFO ######>>> Init Default settings Dialog
+2021/03/15 13:49:56 mainpage.py->port_check [line:470] INFO ######>>> Check port
+2021/03/15 13:49:56 atpage.py->init [line:22] INFO ######>>> Init settings AT Dialog
+2021/03/15 13:49:56 settingspage.py->init [line:25] INFO ######>>> Init Default settings Dialog
+2021/03/15 13:49:56 settingspage.py->init [line:25] INFO ######>>> Init Default settings Dialog

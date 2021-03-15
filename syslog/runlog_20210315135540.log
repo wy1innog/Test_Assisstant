@@ -1,0 +1,21 @@
+2021/03/15 13:55:40 mainpage.py->dev_check [line:101] INFO ######>>> Check device
+2021/03/15 13:55:40 settingspage.py->init [line:25] INFO ######>>> Init Default settings Dialog
+2021/03/15 13:55:40 mainpage.py->port_check [line:470] INFO ######>>> Check port
+2021/03/15 13:55:40 atpage.py->init [line:22] INFO ######>>> Init settings AT Dialog
+2021/03/15 13:55:40 settingspage.py->init [line:25] INFO ######>>> Init Default settings Dialog
+2021/03/15 13:55:40 settingspage.py->init [line:25] INFO ######>>> Init Default settings Dialog
+2021/03/15 13:55:48 atpage.py->add_at_cmd [line:39] INFO ######>>> Add new AT cmd: text=AT, status=True
+2021/03/15 13:55:54 settingspage.py->modify_config [line:65] INFO config.cfg modified Test times: 3
+2021/03/15 13:55:54 settingspage.py->modify_config [line:65] INFO config.cfg modified Test times: 3
+2021/03/15 13:56:03 mainpage.py->port_open [line:487] INFO ######>>> Open port
+2021/03/15 13:56:03 mainpage.py->port_open [line:490] INFO Port:  baudrate:115200  bytesize:8  parity:N  stopbits:1
+2021/03/15 13:56:05 mainpage.py->port_close [line:510] INFO ######>>> Close port
+2021/03/15 13:58:35 settingspage.py->modify_config [line:65] INFO config.cfg modified Test times: 3
+2021/03/15 13:58:35 settingspage.py->modify_config [line:65] INFO config.cfg modified Test times: 3
+2021/03/15 13:58:48 settingspage.py->modify_config [line:65] INFO config.cfg modified Test times: 3
+2021/03/15 13:58:48 settingspage.py->modify_config [line:65] INFO config.cfg modified Test times: 3
+2021/03/15 13:58:56 atpage.py->add_at_cmd [line:39] INFO ######>>> Add new AT cmd: text=ATI, status=True
+2021/03/15 13:59:02 atpage.py->remove_at_cmd [line:55] INFO ######>>> Remove AT Command: ATI
+2021/03/15 13:59:02 atpage.py->remove_at_cmd [line:67] INFO ######!!! Remove AT Command: ATI success
+2021/03/15 13:59:17 settingspage.py->modify_config [line:65] INFO config.cfg modified Test times: 3
+2021/03/15 13:59:17 settingspage.py->modify_config [line:65] INFO config.cfg modified Test times: 3

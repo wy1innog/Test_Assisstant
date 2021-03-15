@@ -5,7 +5,6 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QInputDialog
 
 from ui.ui_atpage import Ui_Dialog
-from ui.ui_mainpage import Ui_MainWindow
 from common.log import Log
 
 class At_settings(Ui_Dialog, QDialog):
@@ -13,8 +12,8 @@ class At_settings(Ui_Dialog, QDialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        icon = 'img\icon.ico'
-        self.config_path = 'config/config.cfg'
+        icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
+        self.config_path = 'config.cfg'
         self.log = Log(__name__).getlog()
         self.setWindowIcon(QIcon(icon))
         self.init()

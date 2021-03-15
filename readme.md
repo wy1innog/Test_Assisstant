@@ -1,75 +1,50 @@
 #### Test_Assistant
 
----
 
-doc/  文档
 
 img/   图片素材
 
-syslog/   运行log
-
-utils/  常用方法
+common/  常用方法,log配置
 
 ——Ass_util.py  常规用方法
 
-——CP_util.py   Tab CP中常用方法
-
-——AP_util.py   Tab AP中常用方法
+——log.py log配置
 
 ui/
 
-——main_ui.py   主界面ui
+——ui_mainpage.py   主界面ui
 
-——at_settings_ui.py   AT管理界面ui
+——ui_atpage.py   AT界面ui
 
-——default_settings_ui.py   默认设置界面ui
+——ui_settingspage.py   设置界面ui
 
-AP.py    Tab AP操作
+config/
 
-CP.py    Tab CP操作
+——config.cfg 配置文件
 
-_at_settings   AT界面操作
+mainpage.py 主界面操作
 
-default_settings  默认设置界面操作
+atpage.py  AT界面操作
+
+settingspage.py  设置界面操作
 
 start.py   main方法
 
+readme.md
+
 ---
 
+Tab AP
 
-hello
+![image-20210301174402435](D:\ihblu\wyrepo\Test_Assistant\readme.assets\image-20210301174402435.png)
 
+Tab CP
 
-#### Tab1 AT
+![image-20210301174214601](D:\ihblu\wyrepo\Test_Assistant\readme.assets\image-20210301174214601.png)
 
-##### 功能
+##### CP 测试项
 
-- [x] 蓝牙状态
-- [x] Wifi状态
-- [x] Wifi信息
-- [x] SIM卡状态
-- [x] SD卡状态
-- [x] 设备log抓取
-
-##### 测试项
-
-- [x] reboot重启
-
-  
-
-#### Tab2 CP
-
-##### 功能
-
-- [x] 端口检测
-- [x] 串口选择
-- [x] 波特率
-- [x] 串口开关
-- [x] 常用命令快捷键（可自定义）
-
-##### 测试项
-
-- [x] 主叫主挂：终端通过串口连接pc，通过ATD;拨打默认号码，对端需要接听后，5s后终端主动挂断
+- [x] 主叫主挂：终端通过串口连接pc，通过ATD;拨打默认号码，对端接听后，5s后终端主动挂断
 
 ​					完整流程：["拨号"，"对端振铃"，"对端接听"，"通话结束"]
 
@@ -83,30 +58,20 @@ hello
 
 - [x] 主叫未接：终端通过串口连接pc，通过ATD;拨打默认号码，对端响铃后，等待响铃结束，不接听
 
-​					完整流程：["拨号"，"对端振铃"，“对端无应答，通话结束”]
+​					完整流程：["拨号"，"对端振铃"，“通话结束”]
 
 
 
 
  ***Q:***
 
- - wifi信息如果未联系，显示已搜到的wifi列表；如果已连接，显示已连接wifi的详细信息
- - 蓝牙详细信息显示已匹配过的设备名称
- - AT添加新指令，因格式或其他错误添加失败后无提示
 
-问题：
 
-​	1.选择测试项执行时会先打电话，而不是先提示开始测试，再进行测试内容的执行；多通电话下判断上一通电话是否结束，等待5s再进行下一通的电话
+1.CP点击开始测试后会先检测入网状态，入网成功会开始测试，失败会提示网络问题
 
-​	2.测试主叫接听时，拨号，对端响铃正常再接收区正常显示，对端接听无法捕获到，通话结束可以
+2.增加自定义设置通话测试间隔，
 
-添加一个流程列表，比如测试主叫接听，将每次运行的过程记录进去
-
-['正在拨号', '对端响铃', '对端已接听', '通话结束']
-
-拨打电话后如果用time，这个期间list不会添加步骤，尝试用thread，一边进行判断，一边进行process的收集
-
-异常过程还未添加
+优化结构
 
 20/11/17
 
