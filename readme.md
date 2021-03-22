@@ -6,7 +6,7 @@ img/   图片素材
 
 common/  常用方法,log配置
 
-——Ass_util.py  常规用方法
+——Ass_util.py  常规使用方法
 
 ——log.py log配置
 
@@ -18,9 +18,7 @@ ui/
 
 ——ui_settingspage.py   设置界面ui
 
-config/
-
-——config.cfg 配置文件
+config.cfg  配置文件
 
 mainpage.py 主界面操作
 
@@ -138,3 +136,12 @@ Q:
 **AT+CGATT(查询网络是否激活)** 返回：+CGATT:1，表示网络已激活；若返回：+CGATT:0，则表示网络未激活，请尝试重启模组激活网络。 例： 发送命令： AT+CGATT? 模块返回： +CGATT:1 OK  AT+CEREG(查询网络注册状态) 该命令用于查询终端EPS网络注册状态。当使能提示时，终端的网络注册状态信息有变化，会主动上报给用户终端。通过不同的设置可以上报EPS注册状态、位置区码、小区ID、服务小区的接入技术等信息，通常情况下只需要设置为自动上报EPS注册状态。 例：设置网络注册状态上报信息 发送命令： AT+CEREG=1 模块返回： OK 设置成功后，当网络注册状态信息有变化，会主动上报给用户终端，如： +CEREG:1,1 OK 
 
 AT+CGATT?   return：1：attach  0:detach
+
+
+
+测试项可以以下拉框的方式显示，AP功能项按钮缩小，添加内存信息变化，monkey测试等
+
+##### 2021年3月16日
+sat-fi2.0: com.jiaze.satfi  JPC1701
+HY:com.jiaze.hycom       JDB2008E
+ZBK:com.jiaze.zbk  JPC1705 

@@ -1,0 +1,6 @@
+dist/
+syslog/*
+venv
+start.spec
+build
+readme.assets

@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QListView
 
 
 class Ui_MainWindow(object):
@@ -29,9 +30,9 @@ class Ui_MainWindow(object):
         self.AP_verLayout_right.setObjectName("AP_verLayout_right")
         spacerItem = QtWidgets.QSpacerItem(0, 800, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         self.AP_verLayout_right.addItem(spacerItem)
-        self.AP_btn_clear_recv = QtWidgets.QPushButton(self.tab)
-        self.AP_btn_clear_recv.setObjectName("AP_btn_clear_recv")
-        self.AP_verLayout_right.addWidget(self.AP_btn_clear_recv)
+        self.Btn_AP_clearBrowser = QtWidgets.QPushButton(self.tab)
+        self.Btn_AP_clearBrowser.setObjectName("Btn_AP_clearBrowser")
+        self.AP_verLayout_right.addWidget(self.Btn_AP_clearBrowser)
         spacerItem1 = QtWidgets.QSpacerItem(20, 75, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.MinimumExpanding)
         self.AP_verLayout_right.addItem(spacerItem1)
         self.AP_btn_start = QtWidgets.QPushButton(self.tab)
@@ -144,7 +145,7 @@ class Ui_MainWindow(object):
         self.btn_catchLog.setSizePolicy(sizePolicy)
         self.btn_catchLog.setObjectName("btn_catchLog")
         self.gridLayout_10.addWidget(self.btn_catchLog, 8, 0, 1, 2)
-        
+
         self.label_dev_choice = QtWidgets.QLabel(self.AP_func_left_GroupBox)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -158,16 +159,16 @@ class Ui_MainWindow(object):
         self.label_dev_choice.setObjectName("label_dev_choice")
         self.gridLayout_10.addWidget(self.label_dev_choice, 1, 0, 1, 1)
 
-        self.combox_dev_choice = QtWidgets.QComboBox(self.AP_func_left_GroupBox)
+        self.ComboBox_dev_select = QtWidgets.QComboBox(self.AP_func_left_GroupBox)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.combox_dev_choice.sizePolicy().hasHeightForWidth())
-        self.combox_dev_choice.setSizePolicy(sizePolicy)
-        self.combox_dev_choice.setInsertPolicy(QtWidgets.QComboBox.InsertAtCurrent)
-        self.combox_dev_choice.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
-        self.combox_dev_choice.setObjectName("combox_dev_choice")
-        self.gridLayout_10.addWidget(self.combox_dev_choice, 1, 1, 1, 1)
+        sizePolicy.setHeightForWidth(self.ComboBox_dev_select.sizePolicy().hasHeightForWidth())
+        self.ComboBox_dev_select.setSizePolicy(sizePolicy)
+        self.ComboBox_dev_select.setInsertPolicy(QtWidgets.QComboBox.InsertAtCurrent)
+        self.ComboBox_dev_select.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
+        self.ComboBox_dev_select.setObjectName("ComboBox_dev_select")
+        self.gridLayout_10.addWidget(self.ComboBox_dev_select, 1, 1, 1, 1)
 
         self.btn_simStatus = QtWidgets.QPushButton(self.AP_func_left_GroupBox)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -202,7 +203,7 @@ class Ui_MainWindow(object):
         self.btn_wifiStatus.setSizePolicy(sizePolicy)
         self.btn_wifiStatus.setObjectName("btn_wifiStatus")
         self.gridLayout_10.addWidget(self.btn_wifiStatus, 3, 0, 1, 2)
- 
+
         self.btn_sdStatus = QtWidgets.QPushButton(self.AP_func_left_GroupBox)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -233,12 +234,26 @@ class Ui_MainWindow(object):
         self.AP_test_left_GroupBox.setObjectName("AP_test_left_GroupBox")
         self.gridLayout_9 = QtWidgets.QGridLayout(self.AP_test_left_GroupBox)
         self.gridLayout_9.setContentsMargins(10, 20, -1, 10)
-        self.gridLayout_9.setObjectName("gridLayout_7")
+        self.gridLayout_9.setObjectName("gridLayout_9")
 
+        # 测试项 下拉框
+        # self.label_test_empty = QtWidgets.QLabel(self.AP_test_left_GroupBox)
+        # self.label_test_empty.setObjectName("label_test_empty")
+        # self.gridLayout_9.addWidget(self.label_test_empty, 0, 0, 0, 0)
+        self.ap_test_combobox = QtWidgets.QComboBox(self.AP_test_left_GroupBox)
+        self.ap_test_combobox.setObjectName("cp_test_combobox")
+        self.ap_test_combobox.addItem("")
+        self.ap_test_combobox.addItem("")
+        # self.ap_test_combobox.setMinimumSize(QtCore.QSize(180, 0))
+        self.gridLayout_9.addWidget(self.ap_test_combobox, 0, 0, 2, 3)
+
+        # 设置下拉框高度25px
+        self.ap_test_combobox.setStyleSheet("QAbstractItemView::item {height: 25px;}")
+        self.ap_test_combobox.setView(QListView())
         # reboot重启
-        self.reboot_test = QtWidgets.QCheckBox(self.AP_test_left_GroupBox)
-        self.reboot_test.setObjectName("reboot_test")
-        self.gridLayout_9.addWidget(self.reboot_test, 0, 0, 1, 1)
+        # self.reboot_test = QtWidgets.QCheckBox(self.AP_test_left_GroupBox)
+        # self.reboot_test.setObjectName("reboot_test")
+        # self.gridLayout_9.addWidget(self.reboot_test, 0, 0, 1, 1)
 
 
         self.label_test_count_ap = QtWidgets.QLabel(self.AP_test_left_GroupBox)
@@ -256,13 +271,13 @@ class Ui_MainWindow(object):
         self.Edit_test_count_AP.setObjectName("Edit_test_count_AP")
         self.gridLayout_9.addWidget(self.Edit_test_count_AP, 6, 2, 1, 1)
 
-        self.btn_run_test_ap = QtWidgets.QPushButton(self.AP_test_left_GroupBox)
-        self.btn_run_test_ap.setObjectName("btn_run_test_ap")
-        self.gridLayout_9.addWidget(self.btn_run_test_ap, 7, 0, 1, 2)
+        self.Btn_AP_runTest = QtWidgets.QPushButton(self.AP_test_left_GroupBox)
+        self.Btn_AP_runTest.setObjectName("Btn_AP_runTest")
+        self.gridLayout_9.addWidget(self.Btn_AP_runTest, 7, 0, 1, 2)
 
-        self.btn_stop_test_ap = QtWidgets.QPushButton(self.AP_test_left_GroupBox)
-        self.btn_stop_test_ap.setObjectName("btn_stop_test_ap")
-        self.gridLayout_9.addWidget(self.btn_stop_test_ap, 7, 2, 1, 1)
+        self.Btn_AP_stopTest = QtWidgets.QPushButton(self.AP_test_left_GroupBox)
+        self.Btn_AP_stopTest.setObjectName("Btn_AP_stopTest")
+        self.gridLayout_9.addWidget(self.Btn_AP_stopTest, 7, 2, 1, 1)
 
         # self.CP_verLayout_left.addWidget(self.AP_test_left_GroupBox)
         # self.CP_horLayout_left.addLayout(self.CP_verLayout_left)
@@ -296,17 +311,17 @@ class Ui_MainWindow(object):
         self.label_sp_check = QtWidgets.QLabel(self.CP_func_left_GroupBox)
         self.label_sp_check.setObjectName("label_sp_check")
         self.gridLayout_8.addWidget(self.label_sp_check, 0, 0, 1, 2)
-        self.btn_sp_check = QtWidgets.QPushButton(self.CP_func_left_GroupBox)
-        self.btn_sp_check.setObjectName("btn_sp_check")
-        self.gridLayout_8.addWidget(self.btn_sp_check, 0, 2, 1, 1)
+        self.Btn_port_check = QtWidgets.QPushButton(self.CP_func_left_GroupBox)
+        self.Btn_port_check.setObjectName("Btn_port_check")
+        self.gridLayout_8.addWidget(self.Btn_port_check, 0, 2, 1, 1)
 
         # 串口选择
         self.label_sp_choice = QtWidgets.QLabel(self.CP_func_left_GroupBox)
         self.label_sp_choice.setObjectName("label_sp_choice")
         self.gridLayout_8.addWidget(self.label_sp_choice, 1, 0, 1, 2)
-        self.combox_sp_choice = QtWidgets.QComboBox(self.CP_func_left_GroupBox)
-        self.combox_sp_choice.setObjectName("combox_sp_choice")
-        self.gridLayout_8.addWidget(self.combox_sp_choice, 1, 2, 1, 1)
+        self.ComboBox_port_select = QtWidgets.QComboBox(self.CP_func_left_GroupBox)
+        self.ComboBox_port_select.setObjectName("ComboBox_port_select")
+        self.gridLayout_8.addWidget(self.ComboBox_port_select, 1, 2, 1, 1)
 
         # 波特率
         self.label_baudrate = QtWidgets.QLabel(self.CP_func_left_GroupBox)
@@ -329,14 +344,14 @@ class Ui_MainWindow(object):
         self.gridLayout_8.addWidget(self.combox_baudrate, 2, 2, 1, 1)
 
         # 打开串口
-        self.btn_sp_open = QtWidgets.QPushButton(self.CP_func_left_GroupBox)
-        self.btn_sp_open.setObjectName("btn_sp_open")
-        self.gridLayout_8.addWidget(self.btn_sp_open, 3, 0, 1, 2)
+        self.Btn_port_open = QtWidgets.QPushButton(self.CP_func_left_GroupBox)
+        self.Btn_port_open.setObjectName("Btn_port_open")
+        self.gridLayout_8.addWidget(self.Btn_port_open, 3, 0, 1, 2)
 
         # 关闭串口
-        self.btn_sp_close = QtWidgets.QPushButton(self.CP_func_left_GroupBox)
-        self.btn_sp_close.setObjectName("btn_sp_close")
-        self.gridLayout_8.addWidget(self.btn_sp_close, 3, 2, 1, 1)
+        self.Btn_port_close = QtWidgets.QPushButton(self.CP_func_left_GroupBox)
+        self.Btn_port_close.setObjectName("Btn_port_close")
+        self.gridLayout_8.addWidget(self.Btn_port_close, 3, 2, 1, 1)
 
         # at指令选择
         self.label_at_choice = QtWidgets.QLabel(self.CP_func_left_GroupBox)
@@ -347,14 +362,14 @@ class Ui_MainWindow(object):
         self.gridLayout_8.addWidget(self.combox_at_choice, 4, 1, 1, 2)
 
         # 执行按钮
-        self.btn_at_exec = QtWidgets.QPushButton(self.CP_func_left_GroupBox)
+        self.Btn_at_exec = QtWidgets.QPushButton(self.CP_func_left_GroupBox)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.btn_at_exec.sizePolicy().hasHeightForWidth())
-        self.btn_at_exec.setSizePolicy(sizePolicy)
-        self.btn_at_exec.setObjectName("btn_at_exec")
-        self.gridLayout_8.addWidget(self.btn_at_exec, 5, 0, 1, 3)
+        sizePolicy.setHeightForWidth(self.Btn_at_exec.sizePolicy().hasHeightForWidth())
+        self.Btn_at_exec.setSizePolicy(sizePolicy)
+        self.Btn_at_exec.setObjectName("Btn_at_exec")
+        self.gridLayout_8.addWidget(self.Btn_at_exec, 5, 0, 1, 3)
 
         self.CP_verLayout_left.addWidget(self.CP_func_left_GroupBox)
 
@@ -386,14 +401,7 @@ class Ui_MainWindow(object):
         self.Radio_no_caller_answer = QtWidgets.QRadioButton(self.CP_test_left_GroupBox)
         self.Radio_no_caller_answer.setObjectName("Radio_no_caller_answer")
         self.gridLayout_7.addWidget(self.Radio_no_caller_answer, 3, 0, 1, 1)
-        # # 短信发送
-        # self.checkBox_send_mes = QtWidgets.QRadioButton(self.CP_test_left_GroupBox)
-        # self.checkBox_send_mes.setObjectName("checkBox_send_mes")
-        # self.gridLayout_7.addWidget(self.checkBox_send_mes, 4, 0, 1, 1)
-        # # 短信接收
-        # self.checkBox_recv_mes = QtWidgets.QRadioButton(self.CP_test_left_GroupBox)
-        # self.checkBox_recv_mes.setObjectName("checkBox_recv_mes")
-        # self.gridLayout_7.addWidget(self.checkBox_recv_mes, 5, 0, 1, 1)
+
 
         self.label_test_count = QtWidgets.QLabel(self.CP_test_left_GroupBox)
         self.label_test_count.setObjectName("label_test_count")
@@ -409,13 +417,13 @@ class Ui_MainWindow(object):
         self.Edit_test_count.setObjectName("Edit_test_count")
         self.gridLayout_7.addWidget(self.Edit_test_count, 6, 2, 1, 1)
 
-        self.btn_run_test_cp = QtWidgets.QPushButton(self.CP_test_left_GroupBox)
-        self.btn_run_test_cp.setObjectName("btn_run_test_cp")
-        self.gridLayout_7.addWidget(self.btn_run_test_cp, 7, 0, 1, 2)
+        self.Btn_CP_runTest = QtWidgets.QPushButton(self.CP_test_left_GroupBox)
+        self.Btn_CP_runTest.setObjectName("Btn_CP_runTest")
+        self.gridLayout_7.addWidget(self.Btn_CP_runTest, 7, 0, 1, 2)
 
-        self.btn_stop_test = QtWidgets.QPushButton(self.CP_test_left_GroupBox)
-        self.btn_stop_test.setObjectName("btn_stop_test")
-        self.gridLayout_7.addWidget(self.btn_stop_test, 7, 2, 1, 1)
+        self.Btn_CP_stopTest = QtWidgets.QPushButton(self.CP_test_left_GroupBox)
+        self.Btn_CP_stopTest.setObjectName("Btn_CP_stopTest")
+        self.gridLayout_7.addWidget(self.Btn_CP_stopTest, 7, 2, 1, 1)
 
         self.CP_verLayout_left.addWidget(self.CP_test_left_GroupBox)
         self.CP_horLayout_left.addLayout(self.CP_verLayout_left)
@@ -471,21 +479,21 @@ class Ui_MainWindow(object):
         self.CP_gridLayout_right.setObjectName("CP_gridLayout_right")
         spacerItem2 = QtWidgets.QSpacerItem(20, 800, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         self.CP_gridLayout_right.addItem(spacerItem2, 0, 0, 1, 1)
-        self.CP_btn_clear_recv = QtWidgets.QPushButton(self.tab_CP)
-        self.CP_btn_clear_recv.setObjectName("CP_btn_clear_recv")
-        self.CP_gridLayout_right.addWidget(self.CP_btn_clear_recv, 1, 0, 1, 1)
+        self.Btn_CP_recvBroswer_clear = QtWidgets.QPushButton(self.tab_CP)
+        self.Btn_CP_recvBroswer_clear.setObjectName("Btn_CP_recvBroswer_clear")
+        self.CP_gridLayout_right.addWidget(self.Btn_CP_recvBroswer_clear, 1, 0, 1, 1)
         spacerItem3 = QtWidgets.QSpacerItem(20, 75, QtWidgets.QSizePolicy.Minimum,
                                             QtWidgets.QSizePolicy.MinimumExpanding)
         self.CP_gridLayout_right.addItem(spacerItem3, 2, 0, 1, 1)
 
-        self.CP_btn_start = QtWidgets.QPushButton(self.tab_CP)
-        self.CP_btn_start.setObjectName("CP_btn_start")
-        self.CP_btn_start.setShortcut('enter')
-        self.CP_gridLayout_right.addWidget(self.CP_btn_start, 3, 0, 1, 1)
+        self.Btn_CP_send = QtWidgets.QPushButton(self.tab_CP)
+        self.Btn_CP_send.setObjectName("Btn_CP_send")
+        self.Btn_CP_send.setShortcut('enter')
+        self.CP_gridLayout_right.addWidget(self.Btn_CP_send, 3, 0, 1, 1)
 
-        self.CP_btn_clear_send = QtWidgets.QPushButton(self.tab_CP)
-        self.CP_btn_clear_send.setObjectName("CP_btn_clear_send")
-        self.CP_gridLayout_right.addWidget(self.CP_btn_clear_send, 5, 0, 1, 1)
+        self.Btn_CP_clear_sendEdit = QtWidgets.QPushButton(self.tab_CP)
+        self.Btn_CP_clear_sendEdit.setObjectName("Btn_CP_clear_sendEdit")
+        self.CP_gridLayout_right.addWidget(self.Btn_CP_clear_sendEdit, 5, 0, 1, 1)
 
         self.gridLayout_4.addLayout(self.CP_gridLayout_right, 0, 2, 1, 1)
         self.tabWidget.addTab(self.tab_CP, "")
@@ -519,7 +527,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.AP_btn_clear_recv.setText(_translate("MainWindow", "清除"))
+        self.Btn_AP_clearBrowser.setText(_translate("MainWindow", "清除"))
         self.AP_btn_start.setText(_translate("MainWindow", "拨号"))
         self.AP_btn_clear_send.setText(_translate("MainWindow", "清除"))
         self.label_number.setText(_translate("MainWindow", "对端号码"))
@@ -535,15 +543,18 @@ class Ui_MainWindow(object):
         self.btn_sdStatus.setText(_translate("MainWindow", "SD卡状态"))
         self.btn_listPkg.setText(_translate("MainWindow", "列出已安装应用"))
         self.AP_test_left_GroupBox.setTitle(_translate("MainWindow", "测试项"))
-        self.reboot_test.setText(_translate("MainWindow", "reboot重启"))
+        # self.label_test_empty.setText(_translate("MainWindow", ""))
+        self.ap_test_combobox.setItemText(0, _translate("MainWindow", "reboot重启"))
+        self.ap_test_combobox.setItemText(1, _translate("MainWindow", "ZBK控制终端重启"))
+
         self.label_test_count_ap.setText(_translate("MainWindow", "测试次数"))
         self.label_test_count.setText(_translate("MainWindow", "测试次数"))
-        self.btn_run_test_ap.setText(_translate("MainWindow", "开始"))
-        self.btn_stop_test_ap.setText(_translate("MainWindow", "停止"))
+        self.Btn_AP_runTest.setText(_translate("MainWindow", "开始"))
+        self.Btn_AP_stopTest.setText(_translate("MainWindow", "停止"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "AP"))
         self.CP_func_left_GroupBox.setTitle(_translate("MainWindow", "串口状态（已关闭）"))
         self.label_sp_check.setText(_translate("MainWindow", "串口检测"))
-        self.btn_sp_check.setText(_translate("MainWindow", "检测串口"))
+        self.Btn_port_check.setText(_translate("MainWindow", "检测串口"))
         self.label_sp_choice.setText(_translate("MainWindow", "串口选择"))
         self.label_baudrate.setText(_translate("MainWindow", "波特率"))
         self.combox_baudrate.setItemText(0, _translate("MainWindow", "115200"))
@@ -558,10 +569,10 @@ class Ui_MainWindow(object):
         self.combox_baudrate.setItemText(9, _translate("MainWindow", "57600"))
         self.combox_baudrate.setItemText(10, _translate("MainWindow", "128000"))
         self.combox_baudrate.setItemText(11, _translate("MainWindow", "256000"))
-        self.btn_sp_open.setText(_translate("MainWindow", "打开串口"))
-        self.btn_sp_close.setText(_translate("MainWindow", "关闭串口"))
+        self.Btn_port_open.setText(_translate("MainWindow", "打开串口"))
+        self.Btn_port_close.setText(_translate("MainWindow", "关闭串口"))
         self.label_at_choice.setText(_translate("MainWindow", "AT指令"))
-        self.btn_at_exec.setText(_translate("MainWindow", "执行"))
+        self.Btn_at_exec.setText(_translate("MainWindow", "执行"))
         self.CP_test_left_GroupBox.setTitle(_translate("MainWindow", "测试项"))
         self.Radio_caller_hangs_up.setText(_translate("MainWindow", "主叫被挂"))
         self.Radio_calling_reject.setText(_translate("MainWindow", "主叫拒接"))
@@ -570,15 +581,15 @@ class Ui_MainWindow(object):
         # self.Radio_send_mes.setText(_translate("MainWindow", "短信发送"))
         # self.Radio_recv_mes.setText(_translate("MainWindow", "短信接收"))
         self.label_test_count.setText(_translate("MainWindow", "测试次数"))
-        self.btn_run_test_cp.setText(_translate("MainWindow", "开始"))
-        self.btn_stop_test.setText(_translate("MainWindow", "停止"))
+        self.Btn_CP_runTest.setText(_translate("MainWindow", "开始"))
+        self.Btn_CP_stopTest.setText(_translate("MainWindow", "停止"))
         self.CP_recv_GroupBox.setTitle(_translate("MainWindow", "接收区"))
         self.CP_send_GroupBox.setTitle(_translate("MainWindow", "发送区"))
         # self.CP_send_textEdit.setPlaceholderText(_translate("MainWindow", "AT"))
-        self.CP_btn_clear_recv.setText(_translate("MainWindow", "清除"))
-        self.CP_btn_start.setText(_translate("MainWindow", "发送"))
+        self.Btn_CP_recvBroswer_clear.setText(_translate("MainWindow", "清除"))
+        self.Btn_CP_send.setText(_translate("MainWindow", "发送"))
         # self.CP_btn_stop.setText(_translate("MainWindow", "停止"))
-        self.CP_btn_clear_send.setText(_translate("MainWindow", "清除"))
+        self.Btn_CP_clear_sendEdit.setText(_translate("MainWindow", "清除"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_CP), _translate("MainWindow", "CP"))
         self.menu.setTitle(_translate("MainWindow", "设置"))
         self.actionAT_manager.setText(_translate("MainWindow", "AT指令管理"))
