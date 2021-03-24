@@ -1,6 +1,7 @@
-dist/
-syslog/*
+dist
+app
+build
+syslog
+demo.py
 venv
 start.spec
-build
-readme.assets

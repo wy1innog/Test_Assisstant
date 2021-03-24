@@ -54,3 +54,4 @@ def recv_to_bottom(self):
     textCursor.movePosition(textCursor.End)
     # 设置光标到text中
     self.CP_recv_textBrowser.setTextCursor(textCursor)
+

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>976</width>
-    <height>724</height>
+    <width>938</width>
+    <height>665</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,10 +29,15 @@
         <height>0</height>
        </size>
       </property>
-      <property name="currentIndex">
-       <number>0</number>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
       </property>
-      <widget class="QWidget" name="AP_2">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="AP">
        <attribute name="title">
         <string>AP</string>
        </attribute>
@@ -63,10 +68,10 @@
           <widget class="QLabel" name="Label_dev_check">
            <property name="geometry">
             <rect>
-             <x>20</x>
-             <y>10</y>
-             <width>61</width>
-             <height>41</height>
+             <x>30</x>
+             <y>20</y>
+             <width>81</width>
+             <height>50</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -77,8 +82,8 @@
            </property>
            <property name="font">
             <font>
-             <family>Agency FB</family>
-             <pointsize>9</pointsize>
+             <family>微软雅黑</family>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
@@ -88,77 +93,10 @@
           <widget class="QPushButton" name="Btn_dev_check">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>20</y>
+             <x>120</x>
+             <y>30</y>
              <width>110</width>
-             <height>25</height>
-            </rect>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>设备检测</string>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="ComboBox_dev_select">
-           <property name="geometry">
-            <rect>
-             <x>110</x>
-             <y>60</y>
-             <width>110</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_SIM_test">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>150</y>
-             <width>91</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="statusTip">
-            <string>检测SIM卡状态</string>
-           </property>
-           <property name="text">
-            <string>SIM卡检测</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_reboot_test">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>190</y>
-             <width>101</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="statusTip">
-            <string>开关机重启</string>
-           </property>
-           <property name="text">
-            <string>开关机测试</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="Label_dev_select">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>50</y>
-             <width>61</width>
-             <height>41</height>
+             <height>30</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -169,118 +107,52 @@
            </property>
            <property name="font">
             <font>
-             <family>Agency FB</family>
-             <pointsize>9</pointsize>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="ComboBox_dev_select">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>70</y>
+             <width>110</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+          <widget class="QLabel" name="Label_dev_select">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>60</y>
+             <width>81</width>
+             <height>50</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>微软雅黑</family>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
             <string>设备选择</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_SDcard_test">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>150</y>
-             <width>91</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="statusTip">
-            <string>检测SD卡状态</string>
-           </property>
-           <property name="text">
-            <string>SD卡检测</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_BT_test">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>190</y>
-             <width>121</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>蓝牙开关测试</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_GPS_test">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>230</y>
-             <width>111</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>GPS开关测试</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_AP_caller_hang_up_test">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>440</y>
-             <width>91</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="statusTip">
-            <string>主叫对端，接通后，主动挂断</string>
-           </property>
-           <property name="text">
-            <string>主叫主挂</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_AP_caller_was_hang_up_test">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>440</y>
-             <width>91</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="statusTip">
-            <string>主叫对端，接通后，对端挂断</string>
-           </property>
-           <property name="text">
-            <string>主叫被挂</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_AP_caller_was_refused_test">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>480</y>
-             <width>91</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="statusTip">
-            <string>主叫对端，对端拒接</string>
-           </property>
-           <property name="text">
-            <string>主叫拒接</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_AP_no_answer_test">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>480</y>
-             <width>91</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="statusTip">
-            <string>主叫对端，对端未接听，直至超时挂断</string>
-           </property>
-           <property name="text">
-            <string>主叫未接</string>
            </property>
           </widget>
           <widget class="QPushButton" name="Btn_AP_runTest">
@@ -290,7 +162,7 @@
            <property name="geometry">
             <rect>
              <x>10</x>
-             <y>560</y>
+             <y>490</y>
              <width>120</width>
              <height>28</height>
             </rect>
@@ -313,6 +185,12 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>微软雅黑</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="statusTip">
             <string>测试项：{}   测试次数：{}</string>
            </property>
@@ -330,10 +208,16 @@
            <property name="geometry">
             <rect>
              <x>150</x>
-             <y>560</y>
+             <y>490</y>
              <width>120</width>
              <height>28</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>微软雅黑</family>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="statusTip">
             <string>当前测试完成后结束测试</string>
@@ -342,160 +226,62 @@
             <string>停止测试</string>
            </property>
           </widget>
-          <widget class="QLabel" name="Label_call_test_title">
+          <widget class="QLabel" name="Label_AP_test_times">
            <property name="geometry">
             <rect>
-             <x>10</x>
-             <y>400</y>
+             <x>20</x>
+             <y>430</y>
              <width>81</width>
-             <height>21</height>
+             <height>25</height>
             </rect>
            </property>
            <property name="font">
             <font>
              <family>微软雅黑</family>
-             <pointsize>11</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>通话测试</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="Label_AP_test_times">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>520</y>
-             <width>72</width>
-             <height>25</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>测试次数:</string>
+            <string>测试次数</string>
            </property>
           </widget>
           <widget class="QLineEdit" name="LineEdit_AP_test_times">
            <property name="geometry">
             <rect>
              <x>110</x>
-             <y>520</y>
-             <width>90</width>
-             <height>25</height>
+             <y>430</y>
+             <width>110</width>
+             <height>30</height>
             </rect>
            </property>
           </widget>
-          <widget class="QLabel" name="Label_func_test_title">
+          <widget class="QTextBrowser" name="textBrowser">
            <property name="geometry">
             <rect>
-             <x>10</x>
-             <y>110</y>
-             <width>101</width>
-             <height>21</height>
+             <x>15</x>
+             <y>120</y>
+             <width>251</width>
+             <height>191</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>350</y>
+             <width>141</width>
+             <height>51</height>
             </rect>
            </property>
            <property name="font">
             <font>
              <family>微软雅黑</family>
-             <pointsize>11</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>功能项测试</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_WIFI_test">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>230</y>
-             <width>121</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>WIFI开关测试</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_APP_startexit_test">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>270</y>
-             <width>111</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>APP启动退出</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_Camera_test">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>270</y>
-             <width>111</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Camera测试</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_Contact_test">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>310</y>
-             <width>111</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>联系人测试</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_OTA_test">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>310</y>
-             <width>111</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>OTA压测</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_APKoper_test">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>350</y>
-             <width>111</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>APK测试</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="CheckBox_APK_install_test">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>350</y>
-             <width>141</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>APK安装卸载测试</string>
+            <string>测试项选择</string>
            </property>
           </widget>
          </widget>
@@ -572,7 +358,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="AP_verLayout_right_2">
+         <layout class="QVBoxLayout" name="AP_verLayout_right">
           <item>
            <spacer name="AP_verticalSpacer">
             <property name="orientation">
@@ -609,7 +395,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="CP_2">
+      <widget class="QWidget" name="CP">
        <attribute name="title">
         <string>CP</string>
        </attribute>
@@ -635,7 +421,7 @@
            </size>
           </property>
           <property name="title">
-           <string>串口状态</string>
+           <string/>
           </property>
           <widget class="QPushButton" name="Btn_at_exec">
            <property name="geometry">
@@ -652,6 +438,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>执行</string>
            </property>
@@ -661,7 +452,7 @@
             <rect>
              <x>20</x>
              <y>10</y>
-             <width>61</width>
+             <width>81</width>
              <height>41</height>
             </rect>
            </property>
@@ -674,7 +465,7 @@
            <property name="font">
             <font>
              <family>Agency FB</family>
-             <pointsize>9</pointsize>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
@@ -696,6 +487,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>关闭串口</string>
            </property>
@@ -705,7 +501,7 @@
             <rect>
              <x>20</x>
              <y>50</y>
-             <width>61</width>
+             <width>71</width>
              <height>41</height>
             </rect>
            </property>
@@ -718,7 +514,7 @@
            <property name="font">
             <font>
              <family>Agency FB</family>
-             <pointsize>9</pointsize>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
@@ -739,6 +535,11 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>打开串口</string>
@@ -778,6 +579,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="statusTip">
             <string>检测当前连接PC的串口</string>
            </property>
@@ -803,7 +609,7 @@
            <property name="font">
             <font>
              <family>Agency FB</family>
-             <pointsize>9</pointsize>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
@@ -824,6 +630,11 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="statusTip">
             <string>显示当前选择的波特率</string>
@@ -904,6 +715,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>AT指令</string>
            </property>
@@ -923,6 +739,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="statusTip">
             <string>显示当前准备发送的AT指令</string>
            </property>
@@ -931,10 +752,15 @@
            <property name="geometry">
             <rect>
              <x>10</x>
-             <y>530</y>
+             <y>510</y>
              <width>100</width>
              <height>25</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="statusTip">
             <string>测试项：{}   测试次数：{}</string>
@@ -947,10 +773,15 @@
            <property name="geometry">
             <rect>
              <x>130</x>
-             <y>530</y>
+             <y>510</y>
              <width>100</width>
              <height>25</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="statusTip">
             <string>当前测试完成后结束测试</string>
@@ -963,10 +794,15 @@
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>320</y>
+             <y>300</y>
              <width>219</width>
              <height>19</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="statusTip">
             <string>主叫对端，接通后，主动挂断</string>
@@ -979,10 +815,15 @@
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>360</y>
+             <y>340</y>
              <width>219</width>
              <height>19</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="statusTip">
             <string>主叫对端，接通后，对端挂断</string>
@@ -995,10 +836,15 @@
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>440</y>
+             <y>420</y>
              <width>219</width>
              <height>19</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="statusTip">
             <string>主叫对端，对端未接听，直至超时挂断</string>
@@ -1011,10 +857,15 @@
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>400</y>
+             <y>380</y>
              <width>219</width>
              <height>19</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="statusTip">
             <string>主叫对端，对端拒接</string>
@@ -1027,10 +878,15 @@
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>480</y>
-             <width>60</width>
+             <y>460</y>
+             <width>71</width>
              <height>25</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>测试次数</string>
@@ -1040,7 +896,7 @@
            <property name="geometry">
             <rect>
              <x>100</x>
-             <y>480</y>
+             <y>460</y>
              <width>90</width>
              <height>25</height>
             </rect>
@@ -1050,7 +906,7 @@
            <property name="geometry">
             <rect>
              <x>10</x>
-             <y>280</y>
+             <y>260</y>
              <width>72</width>
              <height>21</height>
             </rect>
@@ -1123,9 +979,9 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="CP_verLayout_right_2">
+         <layout class="QVBoxLayout" name="CP_verLayout_right">
           <item>
-           <spacer name="CP_verticalSpacer_3">
+           <spacer name="CP_verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -1141,12 +997,17 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="Btn_CP_recvBroswer_clear">
+           <widget class="QPushButton" name="Btn_CP_clear_recvBrowser">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>5</verstretch>
              </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
             </property>
             <property name="statusTip">
              <string>清除接收区内容</string>
@@ -1157,7 +1018,7 @@
            </widget>
           </item>
           <item>
-           <spacer name="CP_verticalSpacer_4">
+           <spacer name="CP_verticalSpacer_2">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -1177,6 +1038,11 @@
               <verstretch>5</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
             <property name="statusTip">
              <string>发送AT指令</string>
             </property>
@@ -1195,6 +1061,11 @@
               <horstretch>0</horstretch>
               <verstretch>5</verstretch>
              </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
             </property>
             <property name="statusTip">
              <string>清除发送区内容</string>
@@ -1217,24 +1088,30 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>976</width>
+     <width>938</width>
      <height>26</height>
     </rect>
    </property>
-   <widget class="QMenu" name="Menu_ATmgr">
+   <widget class="QMenu" name="Menu_set">
     <property name="title">
      <string>设置</string>
     </property>
+    <addaction name="actionLog"/>
+    <addaction name="actionAT"/>
    </widget>
-   <widget class="QMenu" name="Menu_Settings">
-    <property name="title">
-     <string>AT指令</string>
-    </property>
-   </widget>
-   <addaction name="Menu_ATmgr"/>
-   <addaction name="Menu_Settings"/>
+   <addaction name="Menu_set"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionLog">
+   <property name="text">
+    <string>Log</string>
+   </property>
+  </action>
+  <action name="actionAT">
+   <property name="text">
+    <string>AT</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
