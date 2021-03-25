@@ -72,12 +72,13 @@ $Id: inquiry.py 401 2006-05-05 19:07:48Z albert $
 from common.pysql_connect import *
 
 cursor, conn = conn_db()
-test_case = select_case("all")
-if test_case is None:
-    print("数据库无数据")
-else:
-    for case in test_case:
-        print(case)
-        Case_title = case['Case_title']
-    cursor.close()
-    conn.close()
+sql = "update android_testcases set checked=%s where Case_title=%s"
+rows = cursor.execute(sql, (1, 'SD卡检测'))
+print(rows)
+cursor.close()
+conn.close()
+#
+# hello_dict = {'a':'1', 'b':'2', 'c':'3'}
+# print(hello_dict.values())
+# for i in hello_dict.items():
+#     print(i[1])

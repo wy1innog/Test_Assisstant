@@ -1,6 +1,7 @@
 import pymysql
+from common.log import Log
 
-
+use_table = 'android_testcases'
 def conn_db():
     conn = pymysql.connect(
         host='127.0.0.1',
@@ -17,29 +18,45 @@ def conn_db():
 
 
 def insert_case(Case_title, Case_belong, Case_discription=None):
-    cursor = conn_db()
+    cursor, conn = conn_db()
     sql = "insert into android_testcases(Case_title, Case_belong, Case_discription) values(%s, %s, %s)"
     try:
-        rows = cursor.execute(sql, (Case_title, Case_belong, Case_discription))
+        cursor.execute(sql, (Case_title, Case_belong, Case_discription))
     except Exception as e:
-        print(e)
         cursor.close()
+        conn.close()
+        print(e)
 
-
-def select_case(Case_title):
+def exec_sql(sql, *args):
     cursor, conn = conn_db()
-    if Case_title.upper() == 'ALL':
+    return cursor.execute(sql, args), cursor.fetchall()
+
+def recover_checked_state():
+    sql = "update android_testcases set checked=0"
+    exec_sql(sql)
+
+def update_checked(case_title, state):
+    sql = "update android_testcases set checked=%s where Case_title=%s"
+    exec_sql(sql, int(state), case_title)
+
+def select_case(condition):
+    cursor, conn = conn_db()
+    if condition.upper() == 'ALL':
         select_sql = "select * from android_testcases"
         rows = cursor.execute(select_sql)
-    else:
-        select_sql = "select * from android_testcases where Case_title=%s"
-        rows = cursor.execute(select_sql, Case_title)
+        try:
+            if rows:
+                result = cursor.fetchall()
+                return result
+            else:
+                return None
+        except Exception:
+            pass
+        finally:
+            cursor.close()
+            conn.close()
 
-    if rows:
-        # cursor.scroll(1, 'absolute')
-        return cursor.fetchall()
-    cursor.close()
-    conn.close()
+
 
 
 if __name__ == '__main__':

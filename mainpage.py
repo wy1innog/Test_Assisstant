@@ -15,10 +15,11 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QComboBox
 from serial import SerialException
 
-from case_tablepage import TestCaseTable
+from caseTable_Page import TestCaseTable_Page
 from common.Ass_util import subprocess_getoutput, subprocess_call, dev, recv_to_bottom
 from common.log import Log
-from ui.main_new import Ui_MainWindow
+from ui.main import Ui_MainWindow
+import common.pysql_connect as pysql
 
 parent_path = os.path.dirname(sys.path[0])
 if parent_path not in sys.path:
@@ -42,12 +43,13 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         self.RECV_FLAG = True
         self.TEST_FLAG = False
         self.NETWORK_REGISTERED = False
+        pysql.recover_checked_state()
 
     def initUI(self):
         self.setWindowTitle("Test Assistant")
         icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
         self.setWindowIcon(QIcon(icon))
-        self.caseTable_window = TestCaseTable()
+        self.caseTable_window = TestCaseTable_Page()
         self.Btn_dev_check.clicked.connect(self.dev_check)
         self.Btn_select_case.clicked.connect(self.show_caseTable)
 

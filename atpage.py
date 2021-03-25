@@ -4,7 +4,7 @@ from json import JSONDecodeError
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QInputDialog
 
-from ui.ui_atpage import Ui_Dialog
+from ui.atmgr import Ui_Dialog
 from common.log import Log
 
 class At_settings(Ui_Dialog, QDialog):
