@@ -3,8 +3,8 @@
 block_cipher = None
 
 
-a = Analysis(['start.py'],
-             pathex=['common/', 'img/', 'D:\\ihblu\\wyrepo\\Ass_env'],
+a = Analysis(['D:\\ihblu\\wyrepo\\Test_Assistant\\start.py'],
+             pathex=['D:\\ihblu\\wyrepo\\Test_Assistant\\common', 'D:\\ihblu\\wyrepo\\Test_Assistant\\img', 'D:\\ihblu\\wyrepo\\Test_Assistant'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=True , icon='img\\icon.ico')
+          console=True , icon='D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico')

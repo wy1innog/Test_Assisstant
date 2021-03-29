@@ -44,6 +44,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         self.TEST_FLAG = False
         self.NETWORK_REGISTERED = False
         pysql.recover_checked_state()
+        self.fresh_test_show()
 
     def initUI(self):
         self.setWindowTitle("Test Assistant")
@@ -52,6 +53,8 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
         self.caseTable_window = TestCaseTable_Page()
         self.Btn_dev_check.clicked.connect(self.dev_check)
         self.Btn_select_case.clicked.connect(self.show_caseTable)
+        self.Btn_select_case.clicked.connect(pysql.recover_checked_state)
+        self.Btn_select_case.clicked.connect(self.caseTable_window.recover_check)
 
         self.Btn_AP_runTest.clicked.connect(self.run_AP_selected_test)
         self.Btn_AP_stopTest.clicked.connect(self.stop_test_ap)
@@ -515,7 +518,7 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
             self.Com_Dict["%s" % port[0]] = "%s" % port[1]
             self.ComboBox_port_select.addItem(port[0])
 
-        self.log.debug("Port list:%s" % self.Com_Dict)
+        self.log.debug("Port list:%s\n" % self.Com_Dict)
         if len(self.Com_Dict) == 0:
             self.ComboBox_port_select.setCurrentText("无串口")
 
@@ -583,6 +586,9 @@ class Ass(QMainWindow, QComboBox, Ui_MainWindow):
                 self.log.info("exec AT combobox：{}".format(at_cmd))
         else:
             self.refresh_at_combobox()
+
+    def fresh_test_show(self):
+        self.textBrowser.setText("正在执行：xx\n\n共xx条用例，已测试xx条，\n未测试xx条\nPASS:XX\nFAILED:XX")
 
     def data_send(self):
         """

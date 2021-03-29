@@ -1,10 +1,8 @@
 import sys
-
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication
 
 from atpage import At_settings
-from caseTable_Page import TestCaseTable_Page
 from mainpage import Ass
 from settingspage import Default_settings
 

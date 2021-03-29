@@ -2,6 +2,7 @@ dist
 app
 build
 syslog
-demo.py
+demo/demo.py
 venv
 start.spec
+config/
