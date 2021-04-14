@@ -1,7 +1,7 @@
 
 import yaml
 from PyQt5.QtWidgets import QMainWindow
-from ui.caseConfig import Ui_Case_config as cf
+from ui.caseConfigUI import Ui_Case_config as cf
 
 from common.log import Log
 

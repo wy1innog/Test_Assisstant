@@ -1,36 +1,36 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QMainWindow, QDialog, QPushButton
 
-from common.pysql_connect import *
-from ui.caseTable import Ui_Testcase_table
+from ui.caseTableUI import Ui_Testcase_table
 from caseConfig_Page import CaseConfig_Page
 from ensureCaseTable_Page import EnsureCaseTable_Page
 import common.pysql_connect as pysql
 from common.log import Log
+import Word
 
-class TestCaseTable_Page(QMainWindow, Ui_Testcase_table):
-    def __init__(self):
+
+class CaseTable_Page(QMainWindow, Ui_Testcase_table):
+
+    def __init__(self, Tab):
         super().__init__()
         self.setupUi(self)
         self.log = Log(__name__).getlog()
+        self.TAB = Tab
         self.case_Qtree_dict = {}
         self.case_module_Qtree_dict = {}
         self.init()
 
     def init(self):
-        self.load_case()
+
         self.caseConfig_window = CaseConfig_Page()
         self.ensureTable_window = EnsureCaseTable_Page()
         self.Btn_cancel_case.clicked.connect(self.close)
-        self.Btn_save_case.clicked.connect(self.save_case_state)
-        self.ensureTable_window.my_Signal.connect(self.ensureTable_window.clear_case)
+        self.Btn_save_case.clicked.connect(self.saveBeTestcase)
         self.ensureTable_window.Btn_ensure_ok.clicked.connect(self.close)
+        # self.ensureTable_window.Btn_ensureTable_cancel.clicked.connect(self.clearList)
         self.Btn_config_case.clicked.connect(self.show_caseConfig_window)
-        # 点击保存后整体查看case_Qtree_dict chekced情况，写入到数据库并生成待测表
-        # self.Btn_save_case.clicked.connect(self.update_table)
 
-    def show_ensureTable_window(self):
-        self.ensureTable_window.show()
+
 
     def show_caseConfig_window(self):
         self.caseConfig_window.show()
@@ -65,47 +65,62 @@ class TestCaseTable_Page(QMainWindow, Ui_Testcase_table):
         label_mes.setText("未选择测试用例！")
 
         dialog.setWindowTitle("提示")
-        # dialog.setWindowModality(Qt.ApplicationModal)
         dialog.exec_()
 
+    def saveBeTestcase(self):
+        """
+        将勾选的测试项保存格式
+            [{'title':'xx', 'module': 'xx', 'execStatus':0, 'passCount': 10, 'failCount': 10}, {...},...]
+        :return:
+        """
+        # self.load_ensure_case()
+        QTreeWidgetItemIterator = self.get_QTreeItemIterator(self.TreeWidget_case)
 
-    def save_case_state(self):
-        self.update_checked_state()
-        sql = "select * from android_testcases where checked=1"
-        rows = pysql.exec_sql(sql)
-        print(rows[0])
-        if rows[0] == 0:
-            self.showEmptyMessageBox()
+        module = self.getModlue()
+        self.log.debug("module : %s" % module)
+        while QTreeWidgetItemIterator.value():
+            value = QTreeWidgetItemIterator.value()
+
+            if value.checkState(0) == QtCore.Qt.Checked and value.text(0) not in module:
+                Word.be_testcase.append({'title': value.text(0), 'execStatus': 0, 'passCount': 0, 'failCount': 0})
+            else:
+                pass
+
+            QTreeWidgetItemIterator.__iadd__(1)
+
+        self.ensureTable_window.ListWidget_ensureTable.clear()
+
+        # 用例名称添加到待测表
+        if len(Word.be_testcase) != 0:
+            for i in Word.be_testcase:
+                self.ensureTable_window.show_case(i['title'])
+
+            self.ensureTable_window.show()
+
         else:
-            self.show_ensureTable_window()
-            self.load_ensure_case()
+            self.showEmptyMessageBox()
+            self.log.warning("No matching data")
+
 
     def get_QTreeItemIterator(self, TreeWidget):
         return QtWidgets.QTreeWidgetItemIterator(TreeWidget)
 
-    def load_ensure_case(self):
-        rows, test_case_dict = pysql.exec_sql("select Case_title from android_testcases where checked=1")
-        if rows:
-            for i in test_case_dict:
-                self.ensureTable_window.show_case(i['Case_title'])
-                self.ensureTable_window.testcase_ready_list.append(i['Case_title'])
+    def get_useTable(self):
+        if self.TAB.upper() == 'AP':
+            return 'ap_testcases'
         else:
-            self.log.warning("No matching data")
+            return 'cp_testcases'
 
+    def getModlue(self):
+        module_list = []
+        use_table = self.get_useTable()
+        sql = "select DISTINCT belong from %s" % use_table
+        result = pysql.exec_sql(sql)
+        for i in range(len(result)):
+            module_list.append(result[i]['belong'])
 
-    def update_checked_state(self):
-        """
-        修改数据库对应case_title的checked状态
-        使用QTreeWidgetItemInterator遍历item，__iadd__(1), __isub__(1)分别用来到下/上一个节点
-        """
-        item = self.get_QTreeItemIterator(self.TreeWidget_case)
-        while item.value():
-            if item.value().checkState(0) == QtCore.Qt.Checked:
-                pysql.update_checked(item.value().text(0), '1')
-            elif item.value().checkState(0) == QtCore.Qt.Unchecked:
-                pysql.update_checked(item.value().text(0), '0')
-                # 到下一个节点
-            item.__iadd__(1)
+        return module_list
+
 
 
     # 添加模块标题
@@ -141,40 +156,34 @@ class TestCaseTable_Page(QMainWindow, Ui_Testcase_table):
         assert QtCore.Qt.Unchecked == item_1.checkState(0)
         self.case_Qtree_dict[title_name] = item_1
 
+    # 测试用例添加到用例表中
+    def loadCase(self):
+        cursor, conn = pysql.conn_db()
+        self.TreeWidget_case.clear()
+        useTable = self.get_useTable()
+        # pysql.exec_sql("select belong, count(*) as count from %s GROUP BY belong"% useTable)
+        all_case = pysql.exec_sql("select title, belong from %s" % useTable)
+        # [{'title': '主叫主挂', 'belong': '通话测试'}, {'title': '主叫被挂', 'belong': '通话测试'}, {'title': '主叫拒接', 'belong': '通话测试'}, {'title': '主叫未接', 'belong': '通话测试'}]
 
-    # def update_table(self):
-    #     cursor, conn = conn_db()
-    #     for item in self.case_Qtree_dict.items():
-    #         if item[1].setCheckState(0, QtCore.Qt.checked)
-    #
-    #
-    #     update_sql = 'update %s set checked=1 where Case_title=%s'
-    #     cursor.execute(update_sql, (use_table, title))
+        all_module = pysql.exec_sql("select DISTINCT belong from %s order by belong" % useTable)
+        if all_case is None:
+            self.log.info("表中无内容!")
 
-    # 加载数据库到用例表中
-    def load_case(self):
-        cursor, conn = conn_db()
-        test_case = select_case("all")
-        if test_case is None:
-            print("数据库无数据")
-        # assert test_case != '', "数据库无数据"
         else:
-            rows, Case_belong = exec_sql("select DISTINCT Case_belong from android_testcases order by Case_belong ")
             # 添加模块级
-            for belong in Case_belong:
-                module_title, module_title_obj = self.add_top_item(belong['Case_belong'])
+            for belong in all_module:
+                # 返回模块title, 模块对象
+                module_title, module_title_obj = self.add_top_item(belong['belong'])
                 self.case_module_Qtree_dict[module_title] = module_title_obj
 
             # 添加测试子项
-            for case in test_case:
+            for case in all_case:
                 for case_module in self.case_module_Qtree_dict.items():
+                    if case['belong'] == case_module[0]:
 
-                    if case['Case_belong'] == case_module[0]:
                         case_module_obj = self.case_module_Qtree_dict[case_module[0]]
-                        self.add_item(case['Case_title'], case_module_obj)
+                        self.add_item(case['title'], case_module_obj)
                     else:
                         pass
             cursor.close()
             conn.close()
-
-
