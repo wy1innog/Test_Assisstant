@@ -25,9 +25,9 @@ class Call_func(object):
         while True:
             starttime = time.time()
             time.sleep(1)
-            # if nf.process == []:
-            #     self.log.info("空流程")
-            #     return nf.process
+            if nf.process == []:
+                self.log.info("空流程")
+                return nf.process
 
             if nf.process[-1] == "拨号":
                 endtime = time.time()
