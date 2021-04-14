@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QMainWindow
 
-from ui.ensureCaseTable import Ui_EnsureCase_table
+from ui.ensureCaseTableUI import Ui_EnsureCase_table
 
 class EnsureCaseTable_Page(QMainWindow, Ui_EnsureCase_table):
     # 让多窗口之间传递信号 刷新主窗口信息
@@ -27,6 +27,7 @@ class EnsureCaseTable_Page(QMainWindow, Ui_EnsureCase_table):
         self.sendEditContent()
 
     def show_case(self, case_title):
+
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -34,8 +35,6 @@ class EnsureCaseTable_Page(QMainWindow, Ui_EnsureCase_table):
         item.setText(case_title)
         self.ListWidget_ensureTable.addItem(item)
 
-    def clear_case(self):
-        """
-        清空待测表的用例
-        """
+    def clearList(self):
         self.ListWidget_ensureTable.clear()
+
