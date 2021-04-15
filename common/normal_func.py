@@ -1,11 +1,9 @@
 import re
 import subprocess
 import sys
+
 import serial
 import yaml
-from PyQt5.QtCore import QTimer
-
-from serial import SerialException
 
 import Word
 from ui.mainUI import Ui_MainWindow
@@ -24,27 +22,12 @@ class Normal_func(Ui_MainWindow):
 
     def __init__(self):
         self.log = Log(__name__).getlog()
-        self.ser = self.getSer()
-        self.process = []
-        self.RECV_FLAG = True
+        # self.RECV_FLAG = True
 
     def getSer(self):
         self.ser = serial.Serial()
         self.ser.baudrate = 115200
         return self.ser
-
-    def exec_cmd(self, cmd):
-        """
-        执行AT指令
-        :param cmd: AT指令
-        """
-        cmd = (cmd + '\r\n').encode('utf-8')
-        try:
-            print("exec_cmd:", self.ser)
-            self.ser.write(cmd)
-            return 1
-        except SerialException:
-            return 0
 
     @classmethod
     def getBeTestCaseTitle(cls):
@@ -53,15 +36,28 @@ class Normal_func(Ui_MainWindow):
             casetitle.append(case['title'])
         return casetitle
 
+    @classmethod
+    def clearTestStatus(self):
+        Word.testcase_sum = 0
+        Word.waittest_testcase = 0
+        Word.already_testcase = 0
+        Word.pass_case = 0
+        Word.fail_case = 0
+
     def port_open(self):
-        self.ser.setPort(self.ComboBox_port_select.currentText())
+        Word.ser.setPort(self.ComboBox_port_select.currentText())
 
         try:
-            self.ser.open()
+            if Word.ser.is_open:
+                pass
+            else:
+                Word.ser.open()
+            self.exec_cmd("AT^DSCI=1")
             self.Btn_port_open.setEnabled(False)
             self.Btn_port_close.setEnabled(True)
-            self.GroupBox_CP_test.setTitle("串口状态(%s)" % self.ser.port)
-            self.log.info(self.ser)
+            self.GroupBox_CP_test.setTitle("串口状态(%s)" % Word.ser.port)
+            self.log.info("ser is open: %s" % Word.ser)
+
         except:
             # QMessageBox.critical( "Port Error", "此串口不能被打开！")
             self.log.warning("此串口不能被打开")
@@ -82,15 +78,22 @@ class Normal_func(Ui_MainWindow):
         self.Btn_port_close.setEnabled(False)
         self.GroupBox_CP_test.setTitle("串口状态（已关闭）")
 
-
-
-
-
-
+    def exec_cmd(self, cmd):
+        """
+        执行AT指令
+        :param cmd: AT指令
+        """
+        cmd = (cmd + '\r\n').encode('utf-8')
+        try:
+            Word.ser.write(cmd)
+            self.log.debug("exec cmd: {}".format(cmd))
+            return 1
+        except serial.SerialException:
+            return 0
 
     @classmethod
     def network_check(self):
-        # todo:入网
+        # todo:入网检测
         pass
 
     @classmethod
@@ -136,13 +139,6 @@ class Normal_func(Ui_MainWindow):
         else:
             return 2
 
-    # def recv_to_bottom(self):
-    #     # 获取到text光标
-    #     textCursor = CP_recv_textBrowser.textCursor()
-    #     # 滚动到底部
-    #     textCursor.movePosition(textCursor.End)
-    #     # 设置光标到text中
-    #     self.CP_recv_textBrowser.setTextCursor(textCursor)
     @classmethod
     def getConfig(cls) -> dict:
         # 获取配置

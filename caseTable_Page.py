@@ -1,12 +1,12 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QMainWindow, QDialog, QPushButton
 
-from ui.caseTableUI import Ui_Testcase_table
-from caseConfig_Page import CaseConfig_Page
-from ensureCaseTable_Page import EnsureCaseTable_Page
-import common.pysql_connect as pysql
-from common.log import Log
 import Word
+import common.pysql_connect as pysql
+from caseConfig_Page import CaseConfig_Page
+from common.log import Log
+from ensureCaseTable_Page import EnsureCaseTable_Page
+from ui.caseTableUI import Ui_Testcase_table
 
 
 class CaseTable_Page(QMainWindow, Ui_Testcase_table):
@@ -73,7 +73,6 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
             [{'title':'xx', 'module': 'xx', 'execStatus':0, 'passCount': 10, 'failCount': 10}, {...},...]
         :return:
         """
-        # self.load_ensure_case()
         QTreeWidgetItemIterator = self.get_QTreeItemIterator(self.TreeWidget_case)
 
         module = self.getModlue()
@@ -83,8 +82,6 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
 
             if value.checkState(0) == QtCore.Qt.Checked and value.text(0) not in module:
                 Word.be_testcase.append({'title': value.text(0), 'execStatus': 0, 'passCount': 0, 'failCount': 0})
-            else:
-                pass
 
             QTreeWidgetItemIterator.__iadd__(1)
 

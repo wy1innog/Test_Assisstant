@@ -1,4 +1,7 @@
+import subprocess
 import time
+
+import Word
 from common.log import Log
 from common.normal_func import Normal_func
 
@@ -8,172 +11,221 @@ class Call_func(object):
         self.log = Log(__name__).getlog()
 
     @classmethod
-    def getCall_config(self) -> tuple:
+    def testReady(cls):
         call_config = Normal_func.getConfig()['config_call']
+        Word.call_process.clear()
         return call_config
 
-
-
-    def cp_calling_to_answer(self):
-        #todo:主叫主挂流程
-        global endtime
+    def dial(self, number):
         nf = Normal_func()
-        call_config = Call_func.getCall_config()
-        nf.process.clear()
-        nf.exec_cmd('ATD%s;' % call_config['call_number'])
+        nf.exec_cmd('ATD{};'.format(number))
+        starttime = time.time()
+        self.log.debug("拨号开始时间: {}".format(starttime))
+        time.sleep(3)
+        return nf, starttime
 
-        while True:
-            starttime = time.time()
+    def cp_calling_to_answer(self) -> int:
+        """
+        Pass Condition:
+            - 总体时间未超时
+            - 通话时长>= 保持时间
+            - ["拨号", "对端响铃", "对端接听", "通话结束"]
+
+        pass:
+​	        拨号成功后对端振铃，对端接听，通话时长>=保持时长，终端主动挂断  return 0
+        fail:
+            拨号失败 return 1
+​	        拨号成功后对端振铃，未接听，直至超时  return 2
+​	        拨号成功后对端振铃，对端拒接 return 3
+​	        拨号成功后对端振铃，对端接听，通话时长低于保持时长,电话挂断 return 4
+
+        :return:
+        """
+        call_config = Call_func.testReady()
+        timeout = int(call_config['call_timeout'])
+        hold_time = int(call_config['call_hold'])
+
+        nf, starttime = self.dial(call_config['call_number'])
+
+        while time.time() - starttime < timeout:
             time.sleep(1)
-            if nf.process == []:
-                self.log.info("空流程")
-                return nf.process
+            self.log.debug("process:{}".format(Word.call_process))
+            if Word.call_process != ["Error"] or Word.call_process == ['拨号', '通话结束']:
 
-            if nf.process[-1] == "拨号":
-                endtime = time.time()
-                self.log.info("dial process: %s" % nf.process)
-
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "对端接听":
-                self.log.warning("pnf: 拨号 -> 对端振铃 -> 对端接听 -> 通话结束")
-                endtime = time.time()
-                return nf.process
-
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "对端振铃":
-                self.log.warning("拨号 -> 对端振铃 -> 通话结束")
-                return nf.process
-
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "拨号":
-                self.log.warning("拨号 -> 通话结束")
-                return nf.process
-
-            elif endtime-starttime == call_config['call_timeout']:
-                self.log.debug("通话超时，主动挂断")
-                nf.exec_cmd('AT+CHUP')
-                return nf.process
+                if Word.call_process == ["拨号", "对端振铃", "通话结束"]:
+                    # 对端拒接
+                    return 3
+                elif Word.call_process == ["拨号", "对端振铃", "对端接听"]:
+                    print("==========对端接听")
+                    real_holdtime = time.time()
+                    while True:
+                        if time.time() - real_holdtime < hold_time and Word.call_process[-1] == "通话结束":
+                            # 对端接听，通话时长少于保持时长且已挂断
+                            return 4
+                        elif time.time() - real_holdtime >= hold_time:
+                            # pass
+                            nf.exec_cmd('AT+CHUP')
+                            time.sleep(3)
+                            return 0
             else:
-                endtime = time.time()
-                self.log.error("error:%s" %(__name__))
+                # 拨号失败
+                return 1
+        # 超时
+        return 2
 
+    def cp_caller_hangs_up(self) -> int:
+        """
+        Pass Condition：
+            - 总体时间未超时
+            - 通话时长>=保持时长，对端挂断电话
+            - ["拨号", "对端响铃", "对端接听", 通话结束"]
 
+        pass：
+​	        拨号成功后对端响铃，对端接听，通话时长>=保持时长，对端挂断电话  return 0
+        fail：
+​	        拨号失败 return 1
+​	        拨号成功后对端响铃，未接听，直至超时 return 2
+​	        拨号后对端响铃，对端拒接 return 3
+​	        拨号成功后对端响铃，对端接听，通话时长低于保持时长，挂断电话 return 4
 
-    def cp_caller_hangs_up(self) -> list:
-        # todo:主叫被挂流程
-        global endtime
-        nf = Normal_func()
-        nf.process.clear()
-        call_config = Call_func.getCall_config()
-        nf.exec_cmd('ATD%s;' % call_config['call_number'])
+        :return:
+        """
+        call_config = Call_func.testReady()
+        timeout = int(call_config['call_timeout'])
+        hold_time = int(call_config['call_hold'])
 
-        while True:
-            starttime = time.time()
+        nf, starttime = self.dial(call_config['call_number'])
+
+        while time.time() - starttime < timeout:
             time.sleep(1)
-            if nf.process == []:
-                self.log.info("空流程")
-                return nf.process
-            if nf.process[-1] == "拨号":
-                endtime = time.time()
-                self.log.debug("dial process: %s" % nf.process)
+            self.log.debug("process:{}".format(Word.call_process))
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "对端接听":
-                self.log.warning("pnf: 拨号 -> 对端振铃 -> 对端接听 -> 通话结束")
-                endtime = time.time()
-                return nf.process
+            if Word.call_process != ["Error"]:
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "对端振铃":
-                self.log.warning("拨号 -> 对端振铃 -> 通话结束")
-                return nf.process
+                if Word.call_process == ["拨号", "对端振铃", "通话结束"]:
+                    # 对端拒接
+                    return 3
+                elif Word.call_process == ["拨号", "对端振铃", "对端接听"]:
+                    real_holdtime = time.time()
+                    while True:
+                        if real_holdtime < hold_time and Word.call_process[-1] == "通话结束":
+                            # 对端接听，通话时长少于保持时长且已挂断
+                            return 4
+                        elif real_holdtime >= hold_time:
+                            # pass
+                            subprocess.call('adb shell input keyevent KEYCODE_ENDCALL')
+                            time.sleep(3)
+                            return 0
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "拨号":
-                self.log.warning("拨号 -> 通话结束")
-                return nf.process
-
-            elif endtime-starttime == call_config['call_timeout']:
-                self.log.debug("通话超时，主动挂断")
-                nf.exec_cmd('AT+CHUP')
-                return nf.process
+                else:
+                    self.log.debug("pass process: {}".format(Word.call_process))
             else:
-                endtime = time.time()
-                self.log.error("error:%s" %(__name__))
+                # 拨号失败
+                return 1
+        # 超时
+        return 2
 
+    def cp_call_reject(self) -> int:
+        """
+        Pass Condition:
+        - 总体时间未超时
+        - 预设值时长 <= 响铃时长 < 超时时长
+        - ["拨号", "对端响铃", 通话结束"]
 
-    def cp_call_reject(self) -> list:
-        # todo:主叫拒接流程
-        global endtime
-        nf = Normal_func()
-        nf.process.clear()
-        call_config = Call_func.getCall_config()
-        nf.exec_cmd('ATD%s;' % call_config['call_number'])
+        pass:
+​		    拨号后对端响铃，对端拒接 return 0
+        fail:
+​	        拨号失败 return 1
+​	        拨号成功后对端响铃，未接听，直至超时 return 2
+​	        拨号成功后对端响铃，对端接听 return 3
+​	        拨号成功后对端响铃，响铃时长 < 响铃预设值，通话结束 return 4
+        :return:
+        """
 
-        while True:
-            starttime = time.time()
-            time.sleep(1)
-            if nf.process == []:
-                self.log.info("空流程")
-                return nf.process
+        call_config = Call_func.testReady()
+        timeout = int(call_config['call_timeout'])
+        ring_time = int(call_config['call_ring'])
 
-            if nf.process[-1] == "拨号":
-                endtime = time.time()
-                self.log.debug("dial process: %s" % nf.process)
+        nf, starttime = self.dial(call_config['call_number'])
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "对端振铃":
-                self.log.warning("pnf: 拨号 -> 对端振铃 -> 通话结束")
-                return nf.process
+        while time.time() - starttime < timeout:
+            process = Word.call_process
+            self.log.debug("process:{}".format(process))
+            if process != ["Error"]:
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "对端接听":
-                self.log.warning("拨号 -> 对端振铃 -> 对端接听 -> 通话结束")
-                return nf.process
+                if process == ["拨号", "对端振铃"]:
+                    real_ringtime = time.time()
+                    self.log.debug("开始振铃时间；{}".format(real_ringtime))
+                    while True:
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "拨号":
-                self.log.warning("拨号 -> 通话结束")
-                return nf.process
-
-            elif endtime - starttime == call_config['call_timeout']:
-                self.log.debug("通话超时，主动挂断")
-                nf.exec_cmd('AT+CHUP')
-                return nf.process
+                        if time.time() - real_ringtime < ring_time and process[-1] == "通话结束":
+                            # 对端振铃，振铃时长小于预设值
+                            return 4
+                        elif time.time() - real_ringtime >= ring_time:
+                            # pass
+                            subprocess.call('adb shell input keyevent KEYCODE_ENDCALL')
+                            time.sleep(3)
+                            return 0
+                        elif process[-1] == "对端接听":
+                            # 对端接听
+                            return 3
+                else:
+                    self.log.debug("pass process: {}".format(process))
 
             else:
-                endtime = time.time()
-                self.log.error("error:%s" %(__name__))
+                # 拨号失败
+                return 1
+        # 超时
+        return 2
 
     def cp_call_no_answer(self) -> list:
-        # todo:主叫未接流程
-        global endtime
-        nf = Normal_func()
-        nf.process.clear()
-        call_config= Call_func.getCall_config()
-        nf.exec_cmd('ATD%s;' % call_config['call_number'])
+        """
+        Pass Condition:
+            - 总体时间未超时
+            - 预设值时长 <= 响铃时长 < 超时时长
+            - ["拨号", "对端响铃", 通话结束"]
 
-        while True:
-            starttime = time.time()
-            time.sleep(1)
-            if nf.process == []:
-                self.log.info("空流程")
-                return nf.process
+        pass：
+​	        拨号成功后对端响铃，未接听，直至超时 return 0
+        fail:
+​	        拨号失败 return 1
+​	        拨号后对端响铃，对端拒接 return 2
+​	        拨号成功后对端响铃，对端接听 return 3
+​	        拨号成功后对端响铃，响铃时长 < 响铃超时时间,通话结束 return 4
+        :return:
+        """
+        call_config = Call_func.testReady()
+        timeout = int(call_config['call_timeout'])
+        ring_timeout = int(call_config['call_ringtimeout'])
 
-            if nf.process[-1] == "拨号":
-                endtime = time.time()
-                self.log.debug("dial process: %s" % nf.process)
+        nf, starttime = self.dial(call_config['call_number'])
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "对端振铃":
-                self.log.warning("pnf: 拨号 -> 对端振铃 -> 通话结束")
-                return nf.process
+        while time.time() - starttime < timeout:
+            process = Word.call_process
+            self.log.debug("process:{}".format(process))
+            if process != ["Error"]:
+                if process == ["拨号", "对端振铃", "对端接听"]:
+                    # 对端接听
+                    return 3
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "对端接听":
-                self.log.warning("拨号 -> 对端振铃 -> 对端接听 -> 通话结束")
-                return nf.process
+                elif process == ["拨号", "对端振铃"]:
+                    real_ringtime = time.time()
+                    self.log.debug("开始振铃时间；{}".format(real_ringtime))
+                    while True:
 
-            elif nf.process[-1] == "通话结束" and nf.process[-2] == "拨号":
-                self.log.warning("拨号 -> 通话结束")
-                return nf.process
-
-            elif nf.process[-1] != "通话结束" and endtime-starttime == call_config['call_timeout']:
-                self.log.debug("振铃超时，未挂断，已超过设定值")
-
-            elif nf.process[-1] != "通话结束" and endtime-starttime > call_config['call_timeout']:
-                self.log.debug("对端未接，已挂断")
-                return nf.process
-
+                        if time.time() - real_ringtime < ring_timeout and process[-1] == "通话结束":
+                            # 对端振铃，振铃时长小于预设值
+                            return 4
+                        elif time.time() - real_ringtime >= ring_timeout:
+                            # pass
+                            if process == ["拨号", "对端振铃", "通话结束"]:
+                                return 0
+                            else:
+                                self.log.debug("主叫未接，已振铃{}".format(time.time() - real_ringtime))
+                else:
+                    self.log.debug("pass process: {}".format(process))
             else:
-                endtime = time.time()
-                self.log.error("error:%s" % (__name__))
+                # 拨号失败
+                return 1
+        # 超时
+        return 2

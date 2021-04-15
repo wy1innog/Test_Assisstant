@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>968</width>
-    <height>762</height>
+    <height>761</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,11 +34,14 @@
       </property>
       <property name="font">
        <font>
+        <family>等线</family>
         <pointsize>11</pointsize>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: white;</string>
+       <string notr="true">background-color: white;
+        border-color: rgb(0, 0, 0);
+       </string>
       </property>
       <property name="tabShape">
        <enum>QTabWidget::Rounded</enum>
@@ -115,6 +118,7 @@
            </property>
            <property name="font">
             <font>
+             <family>等线</family>
              <pointsize>-1</pointsize>
              <weight>75</weight>
              <italic>false</italic>
@@ -123,12 +127,12 @@
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: white;
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color: rgb(0, 170, 255);
-color:rgb(0, 170, 255);
-font: bold 14px;
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 10px;
+             border-color: #5A8EF4;
+             color:#5A8EF4;
+             font: bold 18px;
 </string>
            </property>
            <property name="text">
@@ -136,12 +140,13 @@ font: bold 14px;
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>C:/Users/wangyanlin/.designer/img/ue_check.png</normaloff>C:/Users/wangyanlin/.designer/img/ue_check.png</iconset>
+             <normaloff>../img/ue_select.png</normaloff>../img/ue_select.png
+            </iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>25</width>
+             <height>25</height>
             </size>
            </property>
            <property name="checkable">
@@ -168,13 +173,13 @@ font: bold 14px;
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: white;
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color: rgb(0, 170, 255);
-color:rgb(0, 170, 255);
-font: bold 14px;
-min-width: 10em;</string>
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 10px;
+             border-color: #5A8EF4;
+             color:#5A8EF4;
+             font: bold 16px;
+             min-width: 10em;</string>
            </property>
            <property name="editable">
             <bool>false</bool>
@@ -206,7 +211,7 @@ min-width: 10em;</string>
            </property>
            <property name="minimumSize">
             <size>
-             <width>164</width>
+             <width>184</width>
              <height>0</height>
             </size>
            </property>
@@ -218,7 +223,7 @@ min-width: 10em;</string>
            </property>
            <property name="font">
             <font>
-             <family>微软雅黑</family>
+             <family>等线</family>
              <pointsize>-1</pointsize>
              <weight>75</weight>
              <italic>false</italic>
@@ -232,14 +237,16 @@ min-width: 10em;</string>
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: #EFD560;
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color: rgb(0, 170, 255);
-color:white;
-font: bold 16px;
-min-width: 10em;</string>
+            <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #EEB84B,
+             stop:0.95 #EFD560);
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 10px;
+             border-color: #F7B500;
+             color:white;
+             font: bold 18px;
+             min-width: 10em;
+            </string>
            </property>
            <property name="text">
             <string>开始测试</string>
@@ -251,38 +258,69 @@ min-width: 10em;</string>
           <widget class="QPushButton" name="Btn_AP_stopTest">
            <property name="geometry">
             <rect>
-             <x>60</x>
-             <y>580</y>
-             <width>120</width>
-             <height>28</height>
+             <x>20</x>
+             <y>570</y>
+             <width>93</width>
+             <height>35</height>
             </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>93</width>
+             <height>0</height>
+            </size>
            </property>
            <property name="font">
             <font>
-             <family>微软雅黑</family>
-             <pointsize>10</pointsize>
+             <family>等线</family>
+             <pointsize>-1</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
             </font>
            </property>
            <property name="statusTip">
             <string>当前测试完成后结束测试</string>
            </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: white;
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 10px;
+             border-color: #E02020;
+             color:#E02020;
+             font: bold 16px;
+             min-width: 10em;
+            </string>
+           </property>
            <property name="text">
-            <string>停止测试</string>
+            <string>停止</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/stop.png</normaloff>../img/stop.png
+            </iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
           <widget class="QLabel" name="Label_AP_test_times">
            <property name="geometry">
             <rect>
-             <x>20</x>
-             <y>457</y>
+             <x>30</x>
+             <y>460</y>
              <width>81</width>
              <height>25</height>
             </rect>
            </property>
            <property name="font">
             <font>
-             <family>微软雅黑</family>
-             <pointsize>10</pointsize>
+             <family>等线</family>
+             <pointsize>11</pointsize>
             </font>
            </property>
            <property name="text">
@@ -321,15 +359,19 @@ min-width: 10em;</string>
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: white;
-border-style: outset;
-border-width: 2px;
-border-radius: 4px;
-border-color: rgb(0, 170, 255);
-color:rgb(0, 170, 255);
-font: bold 14px;</string>
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 4px;
+             border-color: rgb(0, 170, 255);
+             color:rgb(0, 170, 255);
+             font: bold 18px;
+            </string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="Btn_select_ap_case">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -340,7 +382,7 @@ font: bold 14px;</string>
            </property>
            <property name="font">
             <font>
-             <family>微软雅黑</family>
+             <family>等线</family>
              <pointsize>-1</pointsize>
              <weight>75</weight>
              <italic>false</italic>
@@ -349,11 +391,11 @@ font: bold 14px;</string>
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: rgb(69, 119, 255);
-border-style: outset;
-border-radius: 10px;
-color:white;
-font: bold 16px;
-min-width: 10em;</string>
+             border-style: outset;
+             border-radius: 10px;
+             color:white;
+             font: bold 18px;
+             min-width: 10em;</string>
            </property>
            <property name="text">
             <string>测试项选择</string>
@@ -365,7 +407,7 @@ min-width: 10em;</string>
              <x>20</x>
              <y>160</y>
              <width>203</width>
-             <height>195</height>
+             <height>201</height>
             </rect>
            </property>
            <property name="font">
@@ -374,21 +416,31 @@ min-width: 10em;</string>
              <pointsize>9</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border:none;
+             background-color: #EAEEF6;
+             border-color: #ADBFE2;
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 5px;
+             min-width: 10em;
+            </string>
+           </property>
            <property name="readOnly">
             <bool>false</bool>
            </property>
            <property name="markdown">
-            <string>### 正在执行：       ##### 共xx条用例，已测试xx条      ##### 未测试xx条  ##### PASS:xx     #####
-FAILED:xx
-
-</string>
+            <string/>
            </property>
            <property name="html">
             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;h3 style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;正在执行：       ##### 共xx条用例，已测试xx条      ##### 未测试xx条  ##### PASS:xx     ##### FAILED:xx&lt;/span&gt;&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+             p, li { white-space: pre-wrap; }
+             &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400;
+             font-style:normal;&quot;&gt;
+             &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
+             margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+            </string>
            </property>
           </widget>
          </widget>
@@ -423,6 +475,11 @@ p, li { white-space: pre-wrap; }
               <width>300</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>等线</family>
+             </font>
             </property>
             <property name="title">
              <string>接收区</string>
@@ -493,8 +550,24 @@ p, li { white-space: pre-wrap; }
               <verstretch>5</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>93</width>
+              <height>28</height>
+             </size>
+            </property>
             <property name="statusTip">
              <string>清除接收区内容</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #F4F8F9;
+              border-style: outset;
+              border-width: 2px;
+              border-radius: 3px;
+              border-color: #5A8EF4;
+              color:#5A8EF4;
+              font: bold 16px;
+             </string>
             </property>
             <property name="text">
              <string>清除</string>
@@ -530,6 +603,14 @@ p, li { white-space: pre-wrap; }
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>等线</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border:none;</string>
+          </property>
           <property name="title">
            <string/>
           </property>
@@ -537,7 +618,7 @@ p, li { white-space: pre-wrap; }
            <property name="geometry">
             <rect>
              <x>130</x>
-             <y>145</y>
+             <y>140</y>
              <width>90</width>
              <height>25</height>
             </rect>
@@ -550,8 +631,22 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <family>等线</family>
+             <pointsize>-1</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: white;
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 3px;
+             border-color: #5A8EF4;
+             color:#5A8EF4;
+             font: bold 16px;
+            </string>
            </property>
            <property name="text">
             <string>关闭串口</string>
@@ -560,8 +655,8 @@ p, li { white-space: pre-wrap; }
           <widget class="QPushButton" name="Btn_port_open">
            <property name="geometry">
             <rect>
-             <x>30</x>
-             <y>145</y>
+             <x>20</x>
+             <y>140</y>
              <width>90</width>
              <height>25</height>
             </rect>
@@ -572,10 +667,30 @@ p, li { white-space: pre-wrap; }
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <family>等线</family>
+             <pointsize>-1</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: white;
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 3px;
+             border-color: #5A8EF4;
+             color:#5A8EF4;
+             font: bold 16px;
+            </string>
            </property>
            <property name="text">
             <string>打开串口</string>
@@ -601,13 +716,13 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: white;
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color: rgb(0, 170, 255);
-color:rgb(0, 170, 255);
-font: bold 14px;
-min-width: 10em;</string>
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 10px;
+             border-color: #5A8EF4;
+             color:#5A8EF4;
+             font: bold 18px;
+             min-width: 10em;</string>
            </property>
           </widget>
           <widget class="QPushButton" name="Btn_port_check">
@@ -627,6 +742,7 @@ min-width: 10em;</string>
            </property>
            <property name="font">
             <font>
+             <family>等线</family>
              <pointsize>-1</pointsize>
              <weight>75</weight>
              <italic>false</italic>
@@ -638,16 +754,27 @@ min-width: 10em;</string>
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: white;
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color: rgb(0, 170, 255);
-color:rgb(0, 170, 255);
-font: bold 14px;
-</string>
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 10px;
+             border-color: #5A8EF4;
+             color:#5A8EF4;
+             font: bold 18px;
+            </string>
            </property>
            <property name="text">
             <string>检测串口</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/ue_check.png</normaloff>../img/ue_check.png
+            </iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
           <widget class="QPushButton" name="Btn_CP_runTest">
@@ -661,7 +788,7 @@ font: bold 14px;
            </property>
            <property name="font">
             <font>
-             <family>微软雅黑</family>
+             <family>等线</family>
              <pointsize>-1</pointsize>
              <weight>75</weight>
              <italic>false</italic>
@@ -672,14 +799,16 @@ font: bold 14px;
             <string>测试项：{}   测试次数：{}</string>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: #EFD560;
-border-style: outset;
-border-width: 2px;
-border-radius: 10px;
-border-color: rgb(0, 170, 255);
-color:white;
-font: bold 16px;
-min-width: 10em;</string>
+            <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #EEB84B,
+             stop:0.95 #EFD560);
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 10px;
+             border-color: #F7B500;
+             color:white;
+             font: bold 18px;
+             min-width: 10em;
+            </string>
            </property>
            <property name="text">
             <string>开始测试</string>
@@ -688,38 +817,69 @@ min-width: 10em;</string>
           <widget class="QPushButton" name="Btn_CP_stopTest">
            <property name="geometry">
             <rect>
-             <x>70</x>
-             <y>580</y>
-             <width>100</width>
-             <height>25</height>
+             <x>20</x>
+             <y>570</y>
+             <width>164</width>
+             <height>35</height>
             </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>164</width>
+             <height>0</height>
+            </size>
            </property>
            <property name="font">
             <font>
-             <family>微软雅黑</family>
-             <pointsize>10</pointsize>
+             <family>等线</family>
+             <pointsize>-1</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
             </font>
            </property>
            <property name="statusTip">
             <string>当前测试完成后结束测试</string>
            </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: white;
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 10px;
+             border-color: #E02020;
+             color:#E02020;
+             font: bold 16px;
+             min-width: 10em;
+            </string>
+           </property>
            <property name="text">
             <string>停止</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/stop.png</normaloff>../img/stop.png
+            </iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
           <widget class="QLabel" name="Label_CP_test_times">
            <property name="geometry">
             <rect>
-             <x>20</x>
-             <y>457</y>
+             <x>30</x>
+             <y>460</y>
              <width>81</width>
              <height>25</height>
             </rect>
            </property>
            <property name="font">
             <font>
-             <family>微软雅黑</family>
-             <pointsize>10</pointsize>
+             <family>等线</family>
+             <pointsize>11</pointsize>
             </font>
            </property>
            <property name="text">
@@ -737,21 +897,25 @@ min-width: 10em;</string>
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: white;
-border-style: outset;
-border-width: 2px;
-border-radius: 4px;
-border-color: rgb(0, 170, 255);
-color:rgb(0, 170, 255);
-font: bold 14px;</string>
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 4px;
+             border-color: rgb(0, 170, 255);
+             color:rgb(0, 170, 255);
+             font: bold 18px;
+            </string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
           <widget class="QTextBrowser" name="textBrowser_2">
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>190</y>
+             <y>185</y>
              <width>203</width>
-             <height>161</height>
+             <height>176</height>
             </rect>
            </property>
            <property name="font">
@@ -760,7 +924,14 @@ font: bold 14px;</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:none</string>
+            <string notr="true">border:none;
+             background-color: #EAEEF6;
+             border-color: #ADBFE2;
+             border-style: outset;
+             border-width: 2px;
+             border-radius: 5px;
+             min-width: 10em;
+            </string>
            </property>
            <property name="lineWidth">
             <number>1</number>
@@ -769,17 +940,17 @@ font: bold 14px;</string>
             <bool>false</bool>
            </property>
            <property name="markdown">
-            <string>**正在执行：       ##### 共xx条用例，已测试xx条      ##### 未测试xx条  ##### PASS:xx     #####
-FAILED:xx**
-
-</string>
+            <string/>
            </property>
            <property name="html">
             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;正在执行：       ##### 共xx条用例，已测试xx条      ##### 未测试xx条  ##### PASS:xx     ##### FAILED:xx&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+             p, li { white-space: pre-wrap; }
+             &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400;
+             font-style:normal;&quot;&gt;
+             &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
+             margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+            </string>
            </property>
            <property name="acceptRichText">
             <bool>true</bool>
@@ -799,7 +970,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="font">
             <font>
-             <family>微软雅黑</family>
+             <family>等线</family>
              <pointsize>-1</pointsize>
              <weight>75</weight>
              <italic>false</italic>
@@ -808,11 +979,11 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: rgb(69, 119, 255);
-border-style: outset;
-border-radius: 10px;
-color:white;
-font: bold 16px;
-min-width: 10em;</string>
+             border-style: outset;
+             border-radius: 10px;
+             color:white;
+             font: bold 18px;
+             min-width: 10em;</string>
            </property>
            <property name="text">
             <string>测试项选择</string>
@@ -829,6 +1000,12 @@ min-width: 10em;</string>
               <horstretch>9</horstretch>
               <verstretch>6</verstretch>
              </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>等线</family>
+              <pointsize>9</pointsize>
+             </font>
             </property>
             <property name="title">
              <string>接收区</string>
@@ -853,6 +1030,11 @@ min-width: 10em;</string>
               <horstretch>0</horstretch>
               <verstretch>2</verstretch>
              </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>等线</family>
+             </font>
             </property>
             <property name="title">
              <string>发送区</string>
@@ -894,18 +1076,37 @@ min-width: 10em;</string>
           <item>
            <widget class="QPushButton" name="Btn_CP_clear_recvBrowser">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>5</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>93</width>
+              <height>28</height>
+             </size>
+            </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>-1</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="statusTip">
              <string>清除接收区内容</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: white;
+              border-style: outset;
+              border-width: 2px;
+              border-radius: 3px;
+              border-color: #5A8EF4;
+              color:#5A8EF4;
+              font: bold 16px;
+             </string>
             </property>
             <property name="text">
              <string>清除</string>
@@ -928,18 +1129,37 @@ min-width: 10em;</string>
           <item>
            <widget class="QPushButton" name="Btn_CP_send">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>5</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>93</width>
+              <height>28</height>
+             </size>
+            </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>-1</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="statusTip">
              <string>发送AT指令</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: white;
+              border-style: outset;
+              border-width: 2px;
+              border-radius: 3px;
+              border-color: #5A8EF4;
+              color:#5A8EF4;
+              font: bold 16px;
+             </string>
             </property>
             <property name="text">
              <string>发送</string>
@@ -957,13 +1177,32 @@ min-width: 10em;</string>
               <verstretch>5</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>93</width>
+              <height>28</height>
+             </size>
+            </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>-1</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="statusTip">
              <string>清除发送区内容</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: white;
+              border-style: outset;
+              border-width: 2px;
+              border-radius: 3px;
+              border-color: #5A8EF4;
+              color:#5A8EF4;
+              font: bold 16px;
+             </string>
             </property>
             <property name="text">
              <string>清除</string>

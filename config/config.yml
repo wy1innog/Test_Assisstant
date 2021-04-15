@@ -9,10 +9,12 @@ config_WIFI:
   WIFI_SSID: jiaze2.4G
   WIFI_interval: '100'
 config_call:
+  call_ring: '10'
+  call_ringtimeout: '30'
   call_hold: '10'
   call_interval: '10'
   call_number: '18701997306'
-  call_timeout: '120'
+  call_timeout: '60'
 db_info:
   ap_table: ap_testcases
   charset: utf8
