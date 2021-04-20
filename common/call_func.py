@@ -11,8 +11,8 @@ class Call_func(object):
         self.log = Log(__name__).getlog()
 
     @classmethod
-    def testReady(cls):
-        call_config = Normal_func.getConfig()['config_call']
+    def testReady(cls, title):
+        call_config = Normal_func.getConfig()[title]
         Word.call_process.clear()
         return call_config
 
@@ -20,9 +20,10 @@ class Call_func(object):
         nf = Normal_func()
         nf.exec_cmd('ATD{};'.format(number))
         starttime = time.time()
-        self.log.debug("拨号开始时间: {}".format(starttime))
         time.sleep(3)
         return nf, starttime
+
+
 
     def cp_calling_to_answer(self) -> int:
         """
@@ -41,16 +42,16 @@ class Call_func(object):
 
         :return:
         """
-        call_config = Call_func.testReady()
-        timeout = int(call_config['call_timeout'])
-        hold_time = int(call_config['call_hold'])
+        call_config = Call_func.testReady("calling_to_answer")
+        timeout = int(call_config['timeout'])
+        hold_time = int(call_config['hold'])
 
-        nf, starttime = self.dial(call_config['call_number'])
+        nf, starttime = self.dial(call_config['number'])
 
         while time.time() - starttime < timeout:
             time.sleep(1)
             self.log.debug("process:{}".format(Word.call_process))
-            if Word.call_process != ["Error"] or Word.call_process == ['拨号', '通话结束']:
+            if Word.call_process and Word.call_process != ["Error"]:
 
                 if Word.call_process == ["拨号", "对端振铃", "通话结束"]:
                     # 对端拒接
@@ -90,17 +91,17 @@ class Call_func(object):
 
         :return:
         """
-        call_config = Call_func.testReady()
-        timeout = int(call_config['call_timeout'])
-        hold_time = int(call_config['call_hold'])
+        call_config = Call_func.testReady("caller_hangs_up")
+        timeout = int(call_config['timeout'])
+        hold_time = int(call_config['hold'])
 
-        nf, starttime = self.dial(call_config['call_number'])
+        nf, starttime = self.dial(call_config['number'])
 
         while time.time() - starttime < timeout:
             time.sleep(1)
             self.log.debug("process:{}".format(Word.call_process))
 
-            if Word.call_process != ["Error"]:
+            if Word.call_process and Word.call_process != ["Error"]:
 
                 if Word.call_process == ["拨号", "对端振铃", "通话结束"]:
                     # 对端拒接
@@ -116,9 +117,6 @@ class Call_func(object):
                             subprocess.call('adb shell input keyevent KEYCODE_ENDCALL')
                             time.sleep(3)
                             return 0
-
-                else:
-                    self.log.debug("pass process: {}".format(Word.call_process))
             else:
                 # 拨号失败
                 return 1
@@ -142,23 +140,23 @@ class Call_func(object):
         :return:
         """
 
-        call_config = Call_func.testReady()
-        timeout = int(call_config['call_timeout'])
-        ring_time = int(call_config['call_ring'])
+        call_config = Call_func.testReady("call_reject")
+        timeout = int(call_config['timeout'])
+        ring_time = int(call_config['ring_time'])
 
-        nf, starttime = self.dial(call_config['call_number'])
+        nf, starttime = self.dial(call_config['number'])
 
         while time.time() - starttime < timeout:
-            process = Word.call_process
-            self.log.debug("process:{}".format(process))
-            if process != ["Error"]:
+            time.sleep(1)
+            self.log.debug("process:{}".format(Word.call_process))
+            if Word.call_process and Word.call_process != ["Error"]:
 
-                if process == ["拨号", "对端振铃"]:
+                if Word.call_process == ["拨号", "对端振铃"]:
                     real_ringtime = time.time()
                     self.log.debug("开始振铃时间；{}".format(real_ringtime))
                     while True:
 
-                        if time.time() - real_ringtime < ring_time and process[-1] == "通话结束":
+                        if time.time() - real_ringtime < ring_time and Word.call_process[-1] == "通话结束":
                             # 对端振铃，振铃时长小于预设值
                             return 4
                         elif time.time() - real_ringtime >= ring_time:
@@ -166,12 +164,9 @@ class Call_func(object):
                             subprocess.call('adb shell input keyevent KEYCODE_ENDCALL')
                             time.sleep(3)
                             return 0
-                        elif process[-1] == "对端接听":
+                        elif Word.call_process[-1] == "对端接听":
                             # 对端接听
                             return 3
-                else:
-                    self.log.debug("pass process: {}".format(process))
-
             else:
                 # 拨号失败
                 return 1
@@ -194,36 +189,34 @@ class Call_func(object):
 ​	        拨号成功后对端响铃，响铃时长 < 响铃超时时间,通话结束 return 4
         :return:
         """
-        call_config = Call_func.testReady()
-        timeout = int(call_config['call_timeout'])
-        ring_timeout = int(call_config['call_ringtimeout'])
+        call_config = Call_func.testReady("call_no_answer")
+        timeout = int(call_config['timeout'])
+        ring_timeout = int(call_config['ring_time'])
 
-        nf, starttime = self.dial(call_config['call_number'])
+        nf, starttime = self.dial(call_config['number'])
 
         while time.time() - starttime < timeout:
-            process = Word.call_process
-            self.log.debug("process:{}".format(process))
-            if process != ["Error"]:
-                if process == ["拨号", "对端振铃", "对端接听"]:
+            time.sleep(1)
+            self.log.debug("process:{}".format(Word.call_process))
+            if Word.call_process and Word.call_process != ["Error"]:
+                if Word.call_process == ["拨号", "对端振铃", "对端接听"]:
                     # 对端接听
                     return 3
 
-                elif process == ["拨号", "对端振铃"]:
+                elif Word.call_process == ["拨号", "对端振铃"]:
                     real_ringtime = time.time()
                     self.log.debug("开始振铃时间；{}".format(real_ringtime))
                     while True:
 
-                        if time.time() - real_ringtime < ring_timeout and process[-1] == "通话结束":
+                        if time.time() - real_ringtime < ring_timeout and Word.call_process[-1] == "通话结束":
                             # 对端振铃，振铃时长小于预设值
                             return 4
                         elif time.time() - real_ringtime >= ring_timeout:
                             # pass
-                            if process == ["拨号", "对端振铃", "通话结束"]:
+                            if Word.call_process == ["拨号", "对端振铃", "通话结束"]:
                                 return 0
                             else:
                                 self.log.debug("主叫未接，已振铃{}".format(time.time() - real_ringtime))
-                else:
-                    self.log.debug("pass process: {}".format(process))
             else:
                 # 拨号失败
                 return 1

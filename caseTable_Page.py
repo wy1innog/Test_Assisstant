@@ -1,12 +1,12 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
-from PyQt5.QtWidgets import QMainWindow, QDialog, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QDialog, QPushButton, QTreeWidget
 
 import Word
 import common.pysql_connect as pysql
 from caseConfig_Page import CaseConfig_Page
 from common.log import Log
 from ensureCaseTable_Page import EnsureCaseTable_Page
-from ui.caseTableUI import Ui_Testcase_table
+from ui.caseTableUI_demo import Ui_Testcase_table
 
 
 class CaseTable_Page(QMainWindow, Ui_Testcase_table):
@@ -28,9 +28,7 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         self.Btn_save_case.clicked.connect(self.saveBeTestcase)
         self.ensureTable_window.Btn_ensure_ok.clicked.connect(self.close)
         # self.ensureTable_window.Btn_ensureTable_cancel.clicked.connect(self.clearList)
-        self.Btn_config_case.clicked.connect(self.show_caseConfig_window)
-
-
+        # self.Btn_config_case.clicked.connect(self.show_caseConfig_window)
 
     def show_caseConfig_window(self):
         self.caseConfig_window.show()
@@ -76,7 +74,6 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         QTreeWidgetItemIterator = self.get_QTreeItemIterator(self.TreeWidget_case)
 
         module = self.getModlue()
-        self.log.debug("module : %s" % module)
         while QTreeWidgetItemIterator.value():
             value = QTreeWidgetItemIterator.value()
 
@@ -98,7 +95,6 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
             self.showEmptyMessageBox()
             self.log.warning("No matching data")
 
-
     def get_QTreeItemIterator(self, TreeWidget):
         return QtWidgets.QTreeWidgetItemIterator(TreeWidget)
 
@@ -118,12 +114,9 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
 
         return module_list
 
-
-
     # 添加模块标题
     def add_top_item(self, title):
         item_0 = QtWidgets.QTreeWidgetItem(self.TreeWidget_case)
-
         item_0.setText(0, title)
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -132,7 +125,6 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         item_0.setCheckState(0, QtCore.Qt.Unchecked)
         item_0.setFlags(
             QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsDragEnabled | QtCore.Qt.ItemIsDropEnabled | QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsTristate)
-
         return item_0.text(0), item_0
 
     # 添加测试子项
@@ -143,11 +135,15 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         font = QtGui.QFont()
         font.setPointSize(9)
         item_1.setFont(0, font)
-        item_1.setText(0, title)
         item_1.setCheckState(0, QtCore.Qt.Unchecked)
         item_1.setFlags(
             QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsDragEnabled | QtCore.Qt.ItemIsDropEnabled | QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsTristate)
 
+        btn = QtWidgets.QPushButton()
+        btn.setText(title)
+        btn.setFixedSize(93, 28)
+        Word.tree_btn_Dict[title] = btn
+        self.TreeWidget_case.setItemWidget(item_1, 1, btn)
         title_name = item_1.text(0)
         assert title_name == title, "用例名字不匹配"
         assert QtCore.Qt.Unchecked == item_1.checkState(0)
@@ -160,9 +156,12 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         useTable = self.get_useTable()
         # pysql.exec_sql("select belong, count(*) as count from %s GROUP BY belong"% useTable)
         all_case = pysql.exec_sql("select title, belong from %s" % useTable)
-        # [{'title': '主叫主挂', 'belong': '通话测试'}, {'title': '主叫被挂', 'belong': '通话测试'}, {'title': '主叫拒接', 'belong': '通话测试'}, {'title': '主叫未接', 'belong': '通话测试'}]
+        # [{'title': '主叫主挂', 'belong': '通话测试'}, {'title': '主叫被挂', 'belong': '通话测试'}, {'title': '主叫拒接', 'belong':
+        # '通话测试'}, {'title': '主叫未接', 'belong': '通话测试'}]
 
         all_module = pysql.exec_sql("select DISTINCT belong from %s order by belong" % useTable)
+        cursor.close()
+        conn.close()
         if all_case is None:
             self.log.info("表中无内容!")
 
@@ -180,7 +179,16 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
 
                         case_module_obj = self.case_module_Qtree_dict[case_module[0]]
                         self.add_item(case['title'], case_module_obj)
-                    else:
-                        pass
-            cursor.close()
-            conn.close()
+            self.addCaseBtn()
+
+    def addCaseBtn(self):
+        for title in Word.tree_btn_Dict:
+            btn = Word.tree_btn_Dict[title]
+            if title == "主叫主挂":
+                btn.clicked.connect(CaseConfig_Page.caseConfig_calling_to_answer)
+            elif title == "主叫被挂":
+                btn.clicked.connect(CaseConfig_Page.caseConfig_caller_hangs_up)
+            elif title == "主叫拒接":
+                btn.clicked.connect(CaseConfig_Page.caseConfig_call_reject)
+            elif title == "主叫未接":
+                btn.clicked.connect(CaseConfig_Page.caseConfig_call_no_answer)

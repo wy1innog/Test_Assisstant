@@ -8,6 +8,7 @@ import threading
 import time
 from operator import methodcaller
 
+import psutil
 import serial
 import serial.tools.list_ports
 import yaml
@@ -41,8 +42,7 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         pysql.recover_checked_state()
         self.showAPTestStatus()
         self.showCPTestStatus()
-        # self.RECV_FLAG = True
-        # self.TEST_FLAG = False
+
         self.NETWORK_REGISTERED = False
 
     def initUI(self):
@@ -64,12 +64,12 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
 
         self.Btn_port_check.clicked.connect(self.port_check)
         self.Btn_port_open.clicked.connect(self.port_open)
-        self.Btn_port_open.clicked.connect(self.timerstart)
+        self.Btn_port_open.clicked.connect(self.timer_recv)
         self.Btn_port_close.clicked.connect(self.port_close)
 
         self.Btn_select_cp_case.clicked.connect(self.showCPCaseTable)
         self.Btn_CP_runTest.clicked.connect(self.run_cp_Thread)
-        # self.Btn_CP_runTest.clicked.connect(self.run_CP_selectedCase)
+        self.Btn_CP_runTest.clicked.connect(self.timer_showCPTestStatus)
         self.Btn_CP_stopTest.clicked.connect(self.stop_test_cp)
         self.Btn_CP_send.clicked.connect(self.data_send)
         self.Btn_CP_clear_recvBrowser.clicked.connect(self.cp_clear_recv)
@@ -223,42 +223,41 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
             self.ComboBox_port_select.setCurrentText("无串口")
 
     def run_cp_Thread(self):
-        Word.test_flag = False
         t = threading.Thread(target=self.run_CP_selectedCase)
         t.start()
+        # t.join()
+
 
     def run_CP_selectedCase(self):
         """
         CP 执行测试选项
         """
-
         test_call = Test_Call()
-        self.exec_cmd("AT+CREG?")
         Normal_func.clearTestStatus()
-        call_interval = int(Call_func.testReady()['call_interval'])
+        call_interval = int(Call_func.testReady("calling_to_answer")['interval'])
         test_times = self.Ledit_CP_test_times.text()
-        if Normal_func.number_check(test_times):
+
+        if Normal_func.number_check(test_times) and Word.be_testcase:
+            Word.test_flag = True
             test_times = int(test_times)
-            self.log.debug(Word.be_testcase)
             casetitle = Normal_func.getBeTestCaseTitle()
             Word.testcase_sum = len(casetitle) * test_times
             Word.waittest_testcase = len(casetitle) * test_times
 
-            for index in Word.cp_case_func_dict:
-                for case in casetitle:
-                    Word.testing_caseName = case
+            for case in casetitle:
+                Word.testing_caseName = case
+                for i in range(test_times):
+                    if Word.test_flag:
+                        self.cpTextPrint(">>> {} 开始测试".format(case))
+                        result = methodcaller(Normal_func.case_to_func(case))(test_call)
+                        self.cpTextPrint("{} 测试完成 测试结果: {}\n".format(case, result))
+                        Word.already_testcase += 1
+                        Word.waittest_testcase -= 1
+                        time.sleep(call_interval)
 
-                    if index == case:
-                        for i in range(test_times):
-                            self.cpTextPrint(">>> {} 开始测试".format(case))
-                            result = methodcaller(Word.cp_case_func_dict[index])(test_call)
-                            self.cpTextPrint("{} 测试完成 测试结果: {}".format(case, result))
-                            Word.already_testcase += 1
-                            Word.waittest_testcase -= 1
-                            time.sleep(call_interval)
-
-            self.cpTextPrint("===========测试完成==========")
-
+            self.cpTextPrint("============测试完成============\n")
+            self.Btn_CP_runTest.setText("开始测试")
+            Word.test_flag = False
         else:
             self.log.warning("测试次数输入格式错误")
             self.TextBrowser_CP_recv.append("测试次数输入格式错误")
@@ -268,12 +267,11 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         CP 停止测试项
         :return:
         """
-        if self.TEST_FLAG:
-            self.TEST_FLAG = False
+        if Word.test_flag:
+            Word.test_flag = False
+            Word.recv_flag = True
             self.TextBrowser_CP_recv.append("测试被强制停止！！！本次测试结束后终止测试")
             self.log.warning("force stop test !!!")
-        else:
-            pass
 
     def showAPTestStatus(self):
         currentDateTime = QDateTime.currentDateTime()
@@ -284,7 +282,7 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
               "<br><br>PASS: {}<br>FAILED: {}</font>". \
             format(Word.testing_caseName, Word.testcase_sum, Word.already_testcase, Word.waittest_testcase,
                    Word.pass_case, Word.fail_case)
-        self.textBrowser.setText(dateStr + msg)
+        self.textBrowser.setText(msg)
 
     def showCPTestStatus(self):
         currentDateTime = QDateTime.currentDateTime()
@@ -295,7 +293,7 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
               "<br><br>PASS: {}<br>FAILED: {}</font>". \
             format(Word.testing_caseName, Word.testcase_sum, Word.already_testcase, Word.waittest_testcase,
                    Word.pass_case, Word.fail_case)
-        self.textBrowser_2.setText(dateStr + msg)
+        self.textBrowser_2.setText(msg)
 
     def data_send(self):
         """
@@ -326,7 +324,7 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
                 # 检查是否有关键log
                 self.call_check(str(data))
                 # self.log.debug(data.decode('utf-8', 'ignore'))
-                if Word.test_flag:
+                if Word.recv_flag:
                     self.cpTextPrint(data.decode('utf-8', "ignore"))
                 self.recv_to_bottom()
 
@@ -341,15 +339,17 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         # 设置光标到text中
         self.TextBrowser_CP_recv.setTextCursor(textCursor)
 
-    def timerstart(self):
+    def timer_recv(self):
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.data_recv)
-        self.timer1 = QTimer(self)
-        self.timer1.timeout.connect(self.showCPTestStatus)
-        self.timer1.setInterval(1000)
-        # 每隔0.003s执行一次接收
         self.timer.start(3)
-        self.timer1.start()
+
+    def timer_showCPTestStatus(self):
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.showCPTestStatus)
+        self.timer.setInterval(1000)
+        # 每隔0.003s执行一次接收
+        self.timer.start()
 
     def call_check(self, line):
         """
@@ -449,7 +449,8 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         """
         清除CP发送框内容
         """
-        self.TextBrowser_CP_send.setText("")
+
+        self.TextEdit_CP_send.setText("")
 
     def cp_clear_recv(self):
         """

@@ -22,7 +22,6 @@ class Test_Call:
         self.log.info("主叫主挂测试++++")
         call_func = Call_func()
         resultcode = call_func.cp_calling_to_answer()
-        self.log.info("test process: %s" % resultcode)
 
         if resultcode == 1:
             self.log.info("主叫主挂fail——拨号失败")
@@ -51,7 +50,6 @@ class Test_Call:
         self.log.info("主叫被挂测试++++")
         call_func = Call_func()
         resultcode = call_func.cp_caller_hangs_up()
-        self.log.info("test process: %s" % resultcode)
 
         if resultcode == 1:
             self.log.info("主叫被挂fail——拨号失败")

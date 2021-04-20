@@ -1,7 +1,9 @@
 import re
 import subprocess
 import sys
+import time
 
+import psutil
 import serial
 import yaml
 
@@ -157,3 +159,26 @@ class Normal_func(Ui_MainWindow):
         else:
             return False
 
+    @classmethod
+    def case_to_func(cls, case):
+        cp_case_func_dict = {
+            '主叫主挂': 'test_calling_to_answer',
+            '主叫被挂': 'test_caller_hangs_up',
+            '主叫拒接': 'test_call_reject',
+            '主叫未接': 'test_call_no_answer',
+        }
+        return cp_case_func_dict.get(case)
+
+    @classmethod
+    def start(cls, pid):
+        p = psutil.Process(pid)
+        print("(start)pid: {}".format(pid))
+        print("(start)p: {}".format(p))
+        time.sleep(1)
+
+    @classmethod
+    def pause(cls, pid):
+        p = psutil.Process(pid)
+        print("(pause)pid: {}".format(pid))
+        print("(pause)p: {}".format(p))
+        time.sleep(10000)
