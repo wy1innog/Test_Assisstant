@@ -1,12 +1,13 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
-from PyQt5.QtWidgets import QMainWindow, QDialog, QPushButton, QTreeWidget
+from PyQt5.QtWidgets import QMainWindow
 
 import Word
 import common.pysql_connect as pysql
+from common.DialogUtil import showEmptyMessageBox
 from caseConfig_Page import CaseConfig_Page
-from common.log import Log
 from ensureCaseTable_Page import EnsureCaseTable_Page
-from ui.caseTableUI_demo import Ui_Testcase_table
+from cpSettings_page import CP_settings
+from ui.caseTableUI import Ui_Testcase_table
 
 
 class CaseTable_Page(QMainWindow, Ui_Testcase_table):
@@ -14,7 +15,7 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
     def __init__(self, Tab):
         super().__init__()
         self.setupUi(self)
-        self.log = Log(__name__).getlog()
+        self.log = Word.log[0]
         self.TAB = Tab
         self.case_Qtree_dict = {}
         self.case_module_Qtree_dict = {}
@@ -24,14 +25,14 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
 
         self.caseConfig_window = CaseConfig_Page()
         self.ensureTable_window = EnsureCaseTable_Page()
+        self.cpSettings = CP_settings()
         self.Btn_cancel_case.clicked.connect(self.close)
         self.Btn_save_case.clicked.connect(self.saveBeTestcase)
+        self.Btn_config_case.clicked.connect(self.show_cpSettings_window)
         self.ensureTable_window.Btn_ensure_ok.clicked.connect(self.close)
-        # self.ensureTable_window.Btn_ensureTable_cancel.clicked.connect(self.clearList)
-        # self.Btn_config_case.clicked.connect(self.show_caseConfig_window)
 
-    def show_caseConfig_window(self):
-        self.caseConfig_window.show()
+    def show_cpSettings_window(self):
+        self.cpSettings.show()
 
     def recover_check(self):
         """
@@ -41,29 +42,6 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         while item.value():
             item.value().setCheckState(0, QtCore.Qt.Unchecked)
             item.__iadd__(1)
-
-    def showEmptyMessageBox(self):
-        dialog = QDialog()
-        dialog.setObjectName("Emptycase_dialog")
-        dialog.setMinimumSize(311, 140)
-
-        btn = QPushButton("ok", dialog)
-        btn.setGeometry(QtCore.QRect(110, 100, 91, 40))
-        font1 = QtGui.QFont()
-        font1.setPointSize(10)
-        btn.setFont(font1)
-        btn.clicked.connect(dialog.close)
-
-        label_mes = QtWidgets.QLabel(dialog)
-        label_mes.setGeometry(QtCore.QRect(80, 40, 151, 41))
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setPointSize(12)
-        label_mes.setFont(font)
-        label_mes.setText("未选择测试用例！")
-
-        dialog.setWindowTitle("提示")
-        dialog.exec_()
 
     def saveBeTestcase(self):
         """
@@ -92,8 +70,8 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
             self.ensureTable_window.show()
 
         else:
-            self.showEmptyMessageBox()
-            self.log.warning("No matching data")
+            showEmptyMessageBox("未选择测试用例！")
+            Word.log.warning("No matching data")
 
     def get_QTreeItemIterator(self, TreeWidget):
         return QtWidgets.QTreeWidgetItemIterator(TreeWidget)

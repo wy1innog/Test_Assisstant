@@ -25,7 +25,7 @@ class Log(object):
         fh.setLevel(logging.DEBUG)
 
         ch = logging.StreamHandler()
-        ch.setLevel(logging.DEBUG)
+        ch.setLevel(logging.INFO)
 
         formatter = logging.Formatter(
         fmt="%(asctime)s %(filename)s->%(funcName)s [line:%(lineno)d] %(levelname)s %(message)s",

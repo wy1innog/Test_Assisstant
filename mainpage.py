@@ -8,7 +8,6 @@ import threading
 import time
 from operator import methodcaller
 
-import psutil
 import serial
 import serial.tools.list_ports
 import yaml
@@ -21,28 +20,31 @@ import common.pysql_connect as pysql
 from caseTable_Page import CaseTable_Page
 from common.call_func import Call_func
 from common.log import Log
-from common.normal_func import Normal_func
+from common.cp_normal_func import CpNormalFunc
+# from common.ap_normal_func import ApNormalFunc
 from cpSettings_page import CP_settings
 from testcase.test_cp_call import Test_Call
+
 
 parent_path = os.path.dirname(sys.path[0])
 if parent_path not in sys.path:
     sys.path.append(parent_path)
 
 
-class MainPage(QMainWindow, QComboBox, Normal_func):
+class MainPage(QMainWindow, QComboBox, CpNormalFunc):
 
     def __init__(self):
+        self.log = Log(__name__).getlog()
+        Word.log.append(self.log)
         super().__init__()
         self.setupUi(self)
         self.initUI()
-        self.log = Log(__name__).getlog()
         self.dev_check()
         self.port_check()
         pysql.recover_checked_state()
+        self.showCPtimer = QTimer()
         self.showAPTestStatus()
         self.showCPTestStatus()
-
         self.NETWORK_REGISTERED = False
 
     def initUI(self):
@@ -58,7 +60,7 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         self.Btn_dev_check.clicked.connect(self.dev_check)
         self.Btn_select_ap_case.clicked.connect(self.showAPCaseTable)
 
-        self.Btn_AP_runTest.clicked.connect(self.run_AP_selected_test)
+        # self.Btn_AP_runTest.clicked.connect(self.run_ap_Thread)
         self.Btn_AP_stopTest.clicked.connect(self.stop_test_ap)
         self.Btn_AP_clearBrowser.clicked.connect(self.ap_clear_recv)
 
@@ -91,9 +93,16 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
     def show_cpSettings(self):
         self.cp_settings.show()
 
-    def run_AP_selected_test(self):
-        # self.TEST_FLAG = True
-        if self.nf.getDev() != 0 and self.nf.getDev() != 2:
+    def run_ap_Thread(self):
+        if Word.test_flag:
+            self.log.debug("测试未结束，请勿再次点击")
+        else:
+            t = threading.Thread(target=self.run_AP_selectedCase)
+            t.start()
+            # t.join()
+
+    def run_AP_selectedCase(self):
+        if ApNormalFunc.getDev() not in (0, 2):
             # {多选框：[状态<1：勾选，0，未勾选>，对应方法]}
             test_item = {"CheckBox_SIM_test": [0, "test_SIM"],
                          "CheckBox_SDcard_test": [0, "test_SDcard"],
@@ -108,7 +117,7 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
                          "CheckBox_APKoper_test": [0, "test_APKoper"],
                          "CheckBox_APK_install_test": [0, "test_APK_install"]
                          }
-            times = self.LineEdit_AP_test_times.text()
+            times = self.Ledit_AP_test_times.text()
             func_list = []
             for item in test_item:
                 checkbox_obj = getattr(self, item)
@@ -136,19 +145,17 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         强制停止AP侧测试项
         :return: None
         """
-        if self.TEST_FLAG == True:
-            self.TEST_FLAG = False
-            self.TextBrowser_AP_recv.append("测试被强制停止！！！本次测试结束后终止测试")
+        if Word.test_flag:
+            Word.test_flag = False
+            Word.recv_flag = True
+            self.apTextPrint("<font color=\"#FF0000\">测试被强制停止！！！本次测试结束后终止测试</font>")
             self.log.warning("force stop test !!!")
-        else:
-            pass
 
     def dev_check(self):
         """
         AP 设备下拉框选项添加
         :return: None
         """
-        self.log.info("######>>> Check device")
         self.ComboBox_dev_select.clear()
         dev_list = []
         result = subprocess.getoutput("adb devices").strip().split("\n")
@@ -158,10 +165,12 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
             if "device" in dev:
                 dev_list.append(dev[:-7])
 
-        if len(dev_list) == 0:
-            self.ComboBox_dev_select.addItem(" 无设备")
         for dev in dev_list:
             self.ComboBox_dev_select.addItem(dev)
+        if len(dev_list) == 0:
+            self.ComboBox_dev_select.addItem(" 无设备")
+        else:
+            self.ComboBox_dev_select.setCurrentText(dev)
 
         self.log.debug("Device list:%s" % dev_list)
 
@@ -184,7 +193,7 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
                 os.makedirs(savelog_path)
             save_dir = os.path.join(savelog_path, '{0:%Y%m%d%H%M%S}'.format(datetime.datetime.now()))
 
-            status = subprocess_call("adb -s %s pull data/local/log %s" % (dev(), save_dir))
+            status = subprocess.call("adb -s %s pull data/local/log %s" % (dev(), save_dir))
 
             self.log.debug("Pull local log status:%s" % status)
 
@@ -210,7 +219,6 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         CP 检测连接PC的端口
         :return: None
         """
-        self.log.info("######>>> Check port")
         self.Com_Dict = {}
         port_list = list(serial.tools.list_ports.comports())
         self.ComboBox_port_select.clear()
@@ -221,46 +229,72 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         self.log.debug("Port list:%s\n" % self.Com_Dict)
         if len(self.Com_Dict) == 0:
             self.ComboBox_port_select.setCurrentText("无串口")
+        else:
+            self.ComboBox_port_select.setCurrentText(port[0])
 
     def run_cp_Thread(self):
-        t = threading.Thread(target=self.run_CP_selectedCase)
-        t.start()
-        # t.join()
-
+        if Word.test_flag:
+            self.log.debug("测试未结束，请勿再次点击")
+        else:
+            t = threading.Thread(target=self.run_CP_selectedCase)
+            t.start()
+            # t.join()
 
     def run_CP_selectedCase(self):
         """
         CP 执行测试选项
         """
         test_call = Test_Call()
-        Normal_func.clearTestStatus()
-        call_interval = int(Call_func.testReady("calling_to_answer")['interval'])
+        CpNormalFunc.clearTestStatus()
         test_times = self.Ledit_CP_test_times.text()
 
-        if Normal_func.number_check(test_times) and Word.be_testcase:
+        if CpNormalFunc.number_check(test_times) and Word.be_testcase:
             Word.test_flag = True
+
             test_times = int(test_times)
-            casetitle = Normal_func.getBeTestCaseTitle()
+            casetitle = CpNormalFunc.getBeTestCaseTitle()
             Word.testcase_sum = len(casetitle) * test_times
             Word.waittest_testcase = len(casetitle) * test_times
+            resultcode = Call_func.checkConfig(casetitle)
+            with open('config/config.yml', 'r', encoding='utf-8') as f:
+                content = yaml.load(f.read(), yaml.FullLoader)['CP_test']
+                Tracelog_status = content['Tracelog']
+                TTlog_status = content['TTlog']
+                FailAutoStop_status = content['FailAutoStop']
+                self.log.debug("FailAutoStop : {}".format(FailAutoStop_status))
 
-            for case in casetitle:
-                Word.testing_caseName = case
-                for i in range(test_times):
-                    if Word.test_flag:
-                        self.cpTextPrint(">>> {} 开始测试".format(case))
-                        result = methodcaller(Normal_func.case_to_func(case))(test_call)
-                        self.cpTextPrint("{} 测试完成 测试结果: {}\n".format(case, result))
-                        Word.already_testcase += 1
-                        Word.waittest_testcase -= 1
-                        time.sleep(call_interval)
+            test_times = self.Ledit_CP_test_times.text()
+            self.log.info("resultcode: {}".format(resultcode))
 
-            self.cpTextPrint("============测试完成============\n")
-            self.Btn_CP_runTest.setText("开始测试")
-            Word.test_flag = False
-        else:
-            self.log.warning("测试次数输入格式错误")
-            self.TextBrowser_CP_recv.append("测试次数输入格式错误")
+            if resultcode == 0 and test_times.isdigit():
+                for case in casetitle:
+                    Word.testing_caseName = case
+                    configName = CpNormalFunc.case_to_func(case)[5:]
+
+                    call_interval = int(Call_func.testReady(configName)['interval'])
+
+                    for i in range(int(test_times)):
+                        Word.recv_flag = False
+                        if Word.test_flag:
+                            self.cpTextPrint(">>> {} 开始测试".format(case))
+                            result = methodcaller(CpNormalFunc.case_to_func(case))(test_call)
+                            time.sleep(1)
+                            self.cpTextPrint("<<< {} 测试完成 测试结果: {}\n".format(case, result))
+                            Word.already_testcase += 1
+                            Word.waittest_testcase -= 1
+
+                            if FailAutoStop_status and Word.fail_case == 1:
+                                Word.test_flag = False
+                            else:
+                                if Word.waittest_testcase != 0:
+                                    time.sleep(call_interval)
+
+                self.cpTextPrint("============测试完成============\n")
+                self.Btn_CP_runTest.setText("开始测试")
+                Word.test_flag = False
+            else:
+                self.cpTextPrint("测试配置未填写完全，无法开始测试")
+                self.log.info("测试配置未填写完全，无法开始测试")
 
     def stop_test_cp(self):
         """
@@ -270,7 +304,7 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         if Word.test_flag:
             Word.test_flag = False
             Word.recv_flag = True
-            self.TextBrowser_CP_recv.append("测试被强制停止！！！本次测试结束后终止测试")
+            self.cpTextPrint("<font color=\"#FF0000\">测试被强制停止！！！本次测试结束后终止测试</font>")
             self.log.warning("force stop test !!!")
 
     def showAPTestStatus(self):
@@ -289,10 +323,14 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         currentDateStr = currentDateTime.toString("[yyyy.MM.dd hh:mm:ss ddd] ")
 
         dateStr = "<font size=\"2\" color=\"#FF0000\">" + currentDateStr + "</font>"
+        if Word.waittest_testcase == 0 or not Word.test_flag:
+            Word.testing_caseName = ""
+            self.showCPtimer.stop()
         msg = "<br><font size=\"4\">正在执行：{}</font><font size=\"3\"><br>共 {} 条用例<br>已测试 {} 条<br>未测试 {} 条" \
               "<br><br>PASS: {}<br>FAILED: {}</font>". \
             format(Word.testing_caseName, Word.testcase_sum, Word.already_testcase, Word.waittest_testcase,
                    Word.pass_case, Word.fail_case)
+
         self.textBrowser_2.setText(msg)
 
     def data_send(self):
@@ -301,8 +339,9 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         :return:
         """
         if Word.ser.is_open:
-            self.log.debug(Word.ser)
-            at_cmd = self.TextEdit_CP_send.toPlainText().strip()
+            Word.recv_flag = True
+            # at_cmd = self.TextEdit_CP_send.toPlainText().strip()
+            at_cmd = self.Ledit_CP_send.text().strip()
             # self.RECV_FLAG = True
             if at_cmd != "":
                 # 非空字符串
@@ -340,16 +379,14 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         self.TextBrowser_CP_recv.setTextCursor(textCursor)
 
     def timer_recv(self):
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.data_recv)
-        self.timer.start(3)
+        self.recv_timer = QTimer(self)
+        self.recv_timer.timeout.connect(self.data_recv)
+        self.recv_timer.start(3)
 
     def timer_showCPTestStatus(self):
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.showCPTestStatus)
-        self.timer.setInterval(1000)
-        # 每隔0.003s执行一次接收
-        self.timer.start()
+        self.showCPtimer.timeout.connect(self.showCPTestStatus)
+        self.showCPtimer.setInterval(1000)
+        self.showCPtimer.start()
 
     def call_check(self, line):
         """
@@ -358,99 +395,96 @@ class MainPage(QMainWindow, QComboBox, Normal_func):
         """
         with open('config/config.yml', 'r', encoding='utf-8') as f:
             content = yaml.load(f.read(), yaml.FullLoader)
-            number = content['config_call']['call_number']
+            # number = content['config_call']['call_number']
         network_registered = '+CREG: 0,1'
 
-        call = 'ATD{};'.format(number)
-        dial = '^DSCI: 1,0,2,0,0,"{}"'.format(number)
+        # call = 'ATD{};'.format(number)
+        dial = '^DSCI: 1,0,2,0,0'
 
-        ring = '^DSCI: 1,0,3,0,0,"{}"'.format(number)
+        ring = '^DSCI: 1,0,3,0,0'
 
-        hang_up = '^DSCI: 1,0,6,0,0,"{}"'.format(number)
+        hang_up = '^DSCI: 1,0,6,0,0'
 
-        # 表明主叫电话终止成功，原因正常呼叫清除
-        hang_up_active = '^DSCI: 1,0,6,0,0,"{}",129,,16,3'.format(number)
-        # 对端挂断
-        reject_hang_up = '^DSCI: 1,0,6,0,0,"{}",129,,16,6'.format(number)
-        reject_hang_up = '^DSCI: 1,0,6,0,0,"{}",129,,16,130'.format(number)
-        # NO CARRIER表明异常挂断,原因协议错误，未指定，ap侧显示呼出界面直接清除
-        dial_error = '^DSCI: 1,0,6,0,0,"{}",129,,111'.format(number)
-        # NO CARRIER表示电话状态为电话终止，未接通原因目的地障碍， APP侧语音提示所拨打电话已关机。
-        unreachable = '^DSCI: 1,0,6,0,0,"{}",129,,27'.format(number)
-        # NO CARRIER表示电话状态为电话终止，原因无效的数字格式，部分机器会提示所拨打号码为空号。
-        error_number = '^DSCI: 1,0,6,0,0,"{}",129,,28'.format(number)
-        # flight mode
-        flight_mode = '^DSCI: 1,0,6,0,0,"{}",129,,31'.format(number)
-        # BUSY表示电话状态为电话终止，未接通原因用户忙， APP侧语音提示所拨打电话正在通话中，请稍后再拨。
-        busy = '^DSCI: 1,0,6,0,0,"{}",129,,17'.format(number)
-        # NO CARRIER表示电话状态为电话终止，原因空号， APP侧语音提示所拨打是空号，请查证再拨
-        empty_number = '^DSCI: 1,0,6,0,0,"{}",129,,1,'.format(number)
-        answer = '^DSCI: 1,0,0,0,0,"{}"'.format(number)
+        # # 表明主叫电话终止成功，原因正常呼叫清除
+        # hang_up_active = '^DSCI: 1,0,6,0,0,129,,16,3'
+        # # 对端挂断
+        # reject_hang_up = '^DSCI: 1,0,6,0,0,129,,16,6'
+        # reject_hang_up = '^DSCI: 1,0,6,0,0,129,,16,130'
+        # # NO CARRIER表明异常挂断,原因协议错误，未指定，ap侧显示呼出界面直接清除
+        # dial_error = '^DSCI: 1,0,6,0,0,129,,111'
+        # # NO CARRIER表示电话状态为电话终止，未接通原因目的地障碍， APP侧语音提示所拨打电话已关机。
+        # unreachable = '^DSCI: 1,0,6,0,0,"{}",129,,27'.format(number)
+        # # NO CARRIER表示电话状态为电话终止，原因无效的数字格式，部分机器会提示所拨打号码为空号。
+        # error_number = '^DSCI: 1,0,6,0,0,"{}",129,,28'.format(number)
+        # # flight mode
+        # flight_mode = '^DSCI: 1,0,6,0,0,"{}",129,,31'.format(number)
+        # # BUSY表示电话状态为电话终止，未接通原因用户忙， APP侧语音提示所拨打电话正在通话中，请稍后再拨。
+        # busy = '^DSCI: 1,0,6,0,0,"{}",129,,17'.format(number)
+        # # NO CARRIER表示电话状态为电话终止，原因空号， APP侧语音提示所拨打是空号，请查证再拨
+        # empty_number = '^DSCI: 1,0,6,0,0,"{}",129,,1,'.format(number)
+        answer = '^DSCI: 1,0,0,0,0'
 
         if network_registered in line:
             self.NETWORK_REGISTERED = True
             self.log.info("NETWORK_REGISTERED  +CREG: 0,1")
 
         if dial in line:
-            self.TextBrowser_CP_recv.append("正在拨号>> %s" % number)
+            self.cpTextPrint("正在拨号")
             Word.call_process.append("拨号")
-            self.log.info("正在拨号>> %s" % number)
+            self.log.info("正在拨号")
         if ring in line:
-            self.TextBrowser_CP_recv.append("对端振铃")
+            self.cpTextPrint("对端振铃")
             Word.call_process.append("对端振铃")
             self.log.info("对端振铃")
         if answer in line:
-            self.TextBrowser_CP_recv.append("对端已接听")
+            self.cpTextPrint("对端已接听")
             Word.call_process.append("对端接听")
             self.log.info("对端已接听")
         if 'NO ANSWER' in line:
-            self.TextBrowser_CP_recv.append("对端无应答")
+            self.cpTextPrint("对端无应答")
             Word.call_process.append("对端无应答, 通话结束")
             self.log.info("对端无应答")
-
-        if hang_up_active in line:
-            self.TextBrowser_CP_recv.append("主动挂断，通话结束")
+        if hang_up in line:
+            self.cpTextPrint("通话结束")
             Word.call_process.append("通话结束")
-            self.log.info("主动挂断，通话结束\n")
-        elif busy in line:
-            self.TextBrowser_CP_recv.append("所拨打的号码正在通话中，通话结束")
-            Word.call_process.append("busy, 通话结束")
-            self.log.info("所拨打的号码正在通话中，通话结束\n")
-        elif flight_mode in line:
-            self.TextBrowser_CP_recv.append("所拨打的号码正在通话中，通话结束")
-            Word.call_process.append("busy, 通话结束")
-            self.log.info("所拨打的号码正在通话中，通话结束\n")
-        elif dial_error in line:
-            self.TextBrowser_CP_recv.append("异常挂断，通话结束")
-            Word.call_process.append("通话结束")
-            self.log.info("通话结束\n")
-        elif unreachable in line:
-            self.TextBrowser_CP_recv.append("所拨打的号码已关机，通话结束")
-            Word.call_process.append("通话结束")
-            self.log.info("通话结束\n")
-        elif error_number in line:
-            self.TextBrowser_CP_recv.append("无效的数字格式，通话结束")
-            Word.call_process.append("通话结束")
-            self.log.info("通话结束\n")
-        elif empty_number in line:
-            self.TextBrowser_CP_recv.append("所拨打的号码是空号，通话结束")
-            Word.call_process.append("通话结束")
-            self.log.info("通话结束\n")
-        elif hang_up in line:
-            self.TextBrowser_CP_recv.append("通话结束")
-            Word.call_process.append("通话结束")
-            self.log.info("通话结束\n")
-        elif call in line:
-            Word.call_process.append("拨号{}".format(call))
-        elif "ERROR" in line:
+            self.log.info("通话结束")
+        if "ERROR" in line:
             Word.call_process.append("Error")
+        # if hang_up_active in line:
+        #     self.TextBrowser_CP_recv.append("主动挂断，通话结束")
+        #     Word.call_process.append("通话结束")
+        #     self.log.info("主动挂断，通话结束\n")
+        # elif busy in line:
+        #     self.TextBrowser_CP_recv.append("所拨打的号码正在通话中，通话结束")
+        #     Word.call_process.append("busy, 通话结束")
+        #     self.log.info("所拨打的号码正在通话中，通话结束\n")
+        # elif flight_mode in line:
+        #     self.TextBrowser_CP_recv.append("所拨打的号码正在通话中，通话结束")
+        #     Word.call_process.append("busy, 通话结束")
+        #     self.log.info("所拨打的号码正在通话中，通话结束\n")
+        # elif dial_error in line:
+        #     self.TextBrowser_CP_recv.append("异常挂断，通话结束")
+        #     Word.call_process.append("通话结束")
+        #     self.log.info("通话结束\n")
+        # elif unreachable in line:
+        #     self.TextBrowser_CP_recv.append("所拨打的号码已关机，通话结束")
+        #     Word.call_process.append("通话结束")
+        #     self.log.info("通话结束\n")
+        # elif error_number in line:
+        #     self.TextBrowser_CP_recv.append("无效的数字格式，通话结束")
+        #     Word.call_process.append("通话结束")
+        #     self.log.info("通话结束\n")
+        # elif empty_number in line:
+        #     self.TextBrowser_CP_recv.append("所拨打的号码是空号，通话结束")
+        #     Word.call_process.append("通话结束")
+        #     self.log.info("通话结束\n")
 
     def cp_clear_send(self):
         """
         清除CP发送框内容
         """
 
-        self.TextEdit_CP_send.setText("")
+        self.Ledit_CP_send.setText("")
 
     def cp_clear_recv(self):
         """

@@ -1,40 +1,35 @@
 CP_test:
-  TT_path: D:/software/TT/bin/TT.exe
-  Trace_path: "D:/software/Trace\uFF08\u5DE5\u5177\uFF09/Trace/Trace.exe"
-  use_COM: COM8
+  FailAutoStop: false
+  TT_path: ''
+  TTlog: false
+  Trace_path: ''
+  Tracelog: false
 call_no_answer:
-  interval: '3'
-  number: '1'
-  ring_time: '2'
-  timeout: '4'
+  interval: '10'
+  number: '18701997306'
+  ring_time: '10'
+  timeout: '60'
 call_reject:
-  interval: '3'
-  number: '1'
-  ring_time: '2'
-  timeout: '4'
+  interval: '15'
+  number: '18701997306'
+  ring_time: '20'
+  timeout: '80'
+call_to_answer:
+  hold: '20'
+  interval: '15'
+  number: '10000'
+  timeout: '80'
 caller_hangs_up:
-  hold: '2'
-  interval: '3'
-  number: '1'
-  timeout: '4'
-calling_to_answer:
-  hold: '2'
-  interval: '3'
-  number: '1'
-  timeout: '4'
+  hold: '20'
+  interval: '15'
+  number: '18701997306'
+  timeout: '80'
 config_BT:
   BT_name: ihblu
 config_WIFI:
   WIFI_PWD: '12345678'
   WIFI_SSID: jiaze2.4G
   WIFI_interval: '100'
-config_call:
-  call_hold: '10'
-  call_interval: '5'
-  call_number: '18701997306'
-  call_ring: '10'
-  call_ringtimeout: '30'
-  call_timeout: '60'
 db_info:
   ap_table: ap_testcases
   charset: utf8

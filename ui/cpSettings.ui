@@ -13,67 +13,9 @@
   <property name="windowTitle">
    <string>CP设置</string>
   </property>
-  <widget class="QLabel" name="Label_calledNumber">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>40</y>
-     <width>99</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>被叫号码</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Label_callInterval">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>99</y>
-     <width>151</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>通话测试间隔(秒)</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="LineEdit_calledNumber">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>40</y>
-     <width>191</width>
-     <height>30</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="LineEdit_callInterval">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>99</y>
-     <width>191</width>
-     <height>30</height>
-    </rect>
-   </property>
-  </widget>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QPushButton" name="Btn_settings_save">
    <property name="geometry">
     <rect>
@@ -85,7 +27,8 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <family>等线</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="text">
@@ -103,7 +46,8 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <family>等线</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="text">
@@ -113,59 +57,20 @@
   <widget class="QLabel" name="Label_TT_switch">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>149</y>
+     <x>130</x>
+     <y>130</y>
      <width>91</width>
      <height>29</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
-     <pointsize>11</pointsize>
+     <family>等线</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="text">
     <string>TT log抓取</string>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="RadioBtn_TT_on">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>159</y>
-     <width>61</width>
-     <height>19</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>开启</string>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="RadioBtn_TT_off">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>159</y>
-     <width>61</width>
-     <height>19</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>关闭</string>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="Label_TT_path">
@@ -179,15 +84,15 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
-     <pointsize>11</pointsize>
+     <family>等线</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="text">
     <string>TT 路径</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="LineEdit_TT_path">
+  <widget class="QLineEdit" name="Ledit_TT_path">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -195,6 +100,12 @@
      <width>281</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>等线</family>
+     <pointsize>10</pointsize>
+    </font>
    </property>
   </widget>
   <widget class="QPushButton" name="Btn_TT_browse">
@@ -215,7 +126,7 @@
     <string>...</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="LineEdit_Trace_path">
+  <widget class="QLineEdit" name="Ledit_Trace_path">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -224,8 +135,14 @@
      <height>30</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>等线</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
   </widget>
-  <widget class="QPushButton" name="Btn_TT_browse_2">
+  <widget class="QPushButton" name="Btn_Trace_browse">
    <property name="geometry">
     <rect>
      <x>480</x>
@@ -254,7 +171,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>等线</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -273,7 +190,8 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <family>等线</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -298,67 +216,219 @@ rgb(85, 255, 127)</string>
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <family>等线</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
   </widget>
   <widget class="QLabel" name="Label_Trace_switch">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>200</y>
+     <x>110</x>
+     <y>180</y>
      <width>121</width>
      <height>29</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
-     <pointsize>11</pointsize>
+     <family>等线</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="text">
     <string>Trace log抓取</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="RadioBtn_Trace_off">
+  <widget class="QLabel" name="Label_FailAutoStop_switch">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>210</y>
-     <width>81</width>
-     <height>19</height>
+     <x>60</x>
+     <y>80</y>
+     <width>161</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <family>等线</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>关闭</string>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
+    <string>用例执行Fail自动停止</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="RadioBtn_Trace_on">
+  <widget class="QGroupBox" name="GroupBox_FailAutoStop">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>210</y>
-     <width>61</width>
-     <height>19</height>
+     <x>230</x>
+     <y>70</y>
+     <width>181</width>
+     <height>41</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">border: none</string>
    </property>
-   <property name="text">
-    <string>开启</string>
+   <property name="title">
+    <string/>
    </property>
+   <widget class="QRadioButton" name="RadioBtn_failAutoStop_on">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>61</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>等线</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>开启</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="RadioBtn_failAutoStop_off">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>61</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>等线</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>关闭</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="GroupBox_TTlog">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>120</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: none</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QRadioButton" name="RadioBtn_TT_off">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>61</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>等线</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>关闭</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="RadioBtn_TT_on">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>61</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>等线</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>开启</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="GroupBox_Tracelog">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>170</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: none</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QRadioButton" name="RadioBtn_Trace_on">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>61</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>等线</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>开启</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="RadioBtn_Trace_off">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>81</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>等线</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>关闭</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

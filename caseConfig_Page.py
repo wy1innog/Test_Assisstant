@@ -1,66 +1,51 @@
+import pickle
+
 import yaml
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QDialog, QPushButton
+from PyQt5.QtWidgets import QDialog, QPushButton
 
-import Word
-from ui.caseConfigUI import Ui_Case_config as cf
-
-from common.log import Log
-
-
-class CaseConfig_Page(QMainWindow, cf):
+class CaseConfig_Page:
     List_call_answer = []
     List_caller_hangs_up = []
     List_call_reject = []
     List_call_no_answer = []
 
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.log = Log(__name__).getlog()
 
-        self.init()
+    # def __init__(self):
+    #     super().__init__()
+    #     self.setupUi(self)
+    #     self.log = Log(__name__).getlog()
+    #
+    #     self.init()
 
-    def init(self):
-        self.__load_config()
-        self.Btn_config_ok.clicked.connect(self.write_config)
-        self.Btn_config_ok.clicked.connect(self.close)
-        self.Btn_config_cancel.clicked.connect(self.close)
+    # def init(self):
+        # self.__load_config()
+        # self.Btn_config_ok.clicked.connect(self.write_config)
+        # self.Btn_config_ok.clicked.connect(self.close)
+        # self.Btn_config_cancel.clicked.connect(self.close)
 
-    def __load_config(self):
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
-            content = yaml.load(f.read(), yaml.FullLoader)
 
-            self.Ledit_call_number.setText(content['config_call']['call_number'])
-            self.Ledit_call_interval.setText(content['config_call']['call_interval'])
-            self.Ledit_call_hold.setText(content['config_call']['call_hold'])
-            self.Ledit_WIFI_SSID.setText(content['config_WIFI']['WIFI_SSID'])
-            self.Ledit_WIFI_PWD.setText(content['config_WIFI']['WIFI_PWD'])
-            self.Ledit_WIFI_interval.setText(content['config_WIFI']['WIFI_interval'])
-            self.Ledit_BT_name.setText(content['config_BT']['BT_name'])
-
-    def write_config(self):
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
-            content = yaml.load(f.read(), yaml.FullLoader)
-            content['config_call']['call_number'] = self.Ledit_call_number.text()
-            content['config_call']['call_interval'] = self.Ledit_call_interval.text()
-            content['config_call']['call_hold'] = self.Ledit_call_hold.text()
-            content['config_WIFI']['WIFI_SSID'] = self.Ledit_WIFI_SSID.text()
-            content['config_WIFI']['WIFI_PWD'] = self.Ledit_WIFI_PWD.text()
-            content['config_WIFI']['WIFI_interval'] = self.Ledit_WIFI_interval.text()
-            content['config_BT']['BT_name'] = self.Ledit_BT_name.text()
-            # obj = self.__dict__
-            # for key, value in obj.items():
-            #     if isinstance(value, PyQt5.QtWidgets.QLineEdit) and value.textChanged:
-            #         print(key, value)
-
-        with open('config/config.yml', 'w', encoding='utf-8') as wf:
-            yaml.dump(content, wf, Dumper=yaml.SafeDumper)
-        self.log.info("数据写入完成")
+    # def write_config(self):
+    #     with open('config/config.yml', 'r', encoding='utf-8') as f:
+    #         content = yaml.load(f.read(), yaml.FullLoader)
+    #         content['config_call']['call_number'] = self.Ledit_call_number.text()
+    #         content['config_call']['call_interval'] = self.Ledit_call_interval.text()
+    #         content['config_call']['call_hold'] = self.Ledit_call_hold.text()
+    #         content['config_WIFI']['WIFI_SSID'] = self.Ledit_WIFI_SSID.text()
+    #         content['config_WIFI']['WIFI_PWD'] = self.Ledit_WIFI_PWD.text()
+    #         content['config_WIFI']['WIFI_interval'] = self.Ledit_WIFI_interval.text()
+    #         content['config_BT']['BT_name'] = self.Ledit_BT_name.text()
+    #         # obj = self.__dict__
+    #         # for key, value in obj.items():
+    #         #     if isinstance(value, PyQt5.QtWidgets.QLineEdit) and value.textChanged:
+    #         #         print(key, value)
+    #
+    #     with open('config/config.yml', 'w', encoding='utf-8') as wf:
+    #         yaml.dump(content, wf, Dumper=yaml.SafeDumper)
+    #     self.log.info("数据写入完成")
 
     @classmethod
     def getCaseConfigDialog(cls, title, item_list):
-
         dialog = QDialog()
         dialog.setMinimumSize(440, 330)
         font = QtGui.QFont()
@@ -72,7 +57,6 @@ class CaseConfig_Page(QMainWindow, cf):
         cls.btn.setGeometry(QtCore.QRect(260, 280, 110, 32))
 
         cls.btn.setFont(font)
-
 
         for i in range(len(item_list)):
             LabelName = "label" + str(i)
@@ -102,6 +86,7 @@ class CaseConfig_Page(QMainWindow, cf):
 
         cls.btn.clicked.connect(dialog.close)
 
+
         dialog.setWindowTitle(title)
         dialog.exec_()
 
@@ -129,13 +114,13 @@ class CaseConfig_Page(QMainWindow, cf):
     def saveConfig_calling_to_answer(cls):
         with open('config/config.yml', 'r', encoding='utf-8') as f:
             config = yaml.load(f.read(), yaml.FullLoader)
-            content = config['calling_to_answer']
+            content = config['call_to_answer']
             content['number'] = cls.List_call_answer[0].text()
             content['hold'] = cls.List_call_answer[1].text()
             content['interval'] = cls.List_call_answer[2].text()
             content['timeout'] = cls.List_call_answer[3].text()
-        with open('config/config.yml', 'w', encoding='utf-8') as wf:
-            yaml.dump(config, wf, Dumper=yaml.SafeDumper)
+            with open('config/config.yml', 'w', encoding='utf-8') as wf:
+                yaml.dump(config, wf, Dumper=yaml.SafeDumper)
 
     @classmethod
     def saveConfig_caller_hangs_up(cls):

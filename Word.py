@@ -2,7 +2,7 @@ import serial
 
 # 待测用例
 be_testcase = []
-
+log = []
 # tree下按钮对象存储
 tree_btn_Dict = {}
 

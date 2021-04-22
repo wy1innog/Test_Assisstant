@@ -140,8 +140,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../img/ue_select.png</normaloff>../img/ue_select.png
-            </iconset>
+             <normaloff>C:/Users/wangyanlin/.designer/img/ue_select.png</normaloff>C:/Users/wangyanlin/.designer/img/ue_select.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -260,13 +259,13 @@
             <rect>
              <x>20</x>
              <y>570</y>
-             <width>93</width>
+             <width>164</width>
              <height>35</height>
             </rect>
            </property>
            <property name="minimumSize">
             <size>
-             <width>93</width>
+             <width>164</width>
              <height>0</height>
             </size>
            </property>
@@ -298,8 +297,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../img/stop.png</normaloff>../img/stop.png
-            </iconset>
+             <normaloff>C:/Users/wangyanlin/.designer/img/stop.png</normaloff>C:/Users/wangyanlin/.designer/img/stop.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -367,6 +365,9 @@
              font: bold 18px;
             </string>
            </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhDigitsOnly</set>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -427,20 +428,22 @@
             </string>
            </property>
            <property name="readOnly">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="markdown">
-            <string/>
+            <string>             
+
+            
+
+</string>
            </property>
            <property name="html">
             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-             &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-             p, li { white-space: pre-wrap; }
-             &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400;
-             font-style:normal;&quot;&gt;
-             &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
-             margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-            </string>
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;             &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </widget>
@@ -767,8 +770,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../img/ue_check.png</normaloff>../img/ue_check.png
-            </iconset>
+             <normaloff>C:/Users/wangyanlin/.designer/img/ue_check.png</normaloff>C:/Users/wangyanlin/.designer/img/ue_check.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -857,8 +859,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../img/stop.png</normaloff>../img/stop.png
-            </iconset>
+             <normaloff>C:/Users/wangyanlin/.designer/img/stop.png</normaloff>C:/Users/wangyanlin/.designer/img/stop.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -905,6 +906,9 @@
              font: bold 18px;
             </string>
            </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhDigitsOnly</set>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -936,21 +940,21 @@
            <property name="lineWidth">
             <number>1</number>
            </property>
+           <property name="autoFormatting">
+            <set>QTextEdit::AutoNone</set>
+           </property>
            <property name="readOnly">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="markdown">
             <string/>
            </property>
            <property name="html">
             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-             &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-             p, li { white-space: pre-wrap; }
-             &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400;
-             font-style:normal;&quot;&gt;
-             &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
-             margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-            </string>
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="acceptRichText">
             <bool>true</bool>
@@ -1028,7 +1032,7 @@
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
-              <verstretch>2</verstretch>
+              <verstretch>1</verstretch>
              </sizepolicy>
             </property>
             <property name="font">
@@ -1041,12 +1045,18 @@
             </property>
             <layout class="QGridLayout" name="gridLayout">
              <item row="0" column="0">
-              <widget class="QTextEdit" name="TextBrowser_CP_send">
+              <widget class="QLineEdit" name="Ledit_CP_send">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>微软雅黑</family>
+                 <pointsize>10</pointsize>
+                </font>
                </property>
               </widget>
              </item>

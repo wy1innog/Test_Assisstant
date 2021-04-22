@@ -35,18 +35,23 @@ class Ui_Testcase_table(object):
         self.gridLayout.addWidget(self.Btn_config_case, 1, 0, 1, 1)
         self.TreeWidget_case = QtWidgets.QTreeWidget(self.centralwidget)
         self.TreeWidget_case.setObjectName("TreeWidget_case")
+        self.TreeWidget_case.setColumnCount(2)
+        self.TreeWidget_case.setColumnWidth(0, 300)
+        self.TreeWidget_case.setColumnWidth(1, 100)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setPointSize(14)
         font.setBold(True)
         font.setWeight(75)
         font.setStyleStrategy(QtGui.QFont.PreferDefault)
-        self.TreeWidget_case.headerItem().setFont(0, font)
-        self.TreeWidget_case.headerItem().setBackground(0, QtGui.QColor(255, 170, 127))
         brush = QtGui.QBrush(QtGui.QColor(85, 85, 255, 200))
         brush.setStyle(QtCore.Qt.SolidPattern)
+        self.TreeWidget_case.headerItem().setFont(0, font)
+        self.TreeWidget_case.headerItem().setFont(1, font)
+        self.TreeWidget_case.headerItem().setBackground(0, QtGui.QColor(255, 170, 127))
+        self.TreeWidget_case.headerItem().setBackground(1, QtGui.QColor(255, 170, 127))
         self.TreeWidget_case.headerItem().setForeground(0, brush)
-
+        self.TreeWidget_case.headerItem().setForeground(1, brush)
 
         self.gridLayout.addWidget(self.TreeWidget_case, 0, 0, 1, 4)
         self.Btn_save_case = QtWidgets.QPushButton(self.centralwidget)
@@ -67,8 +72,8 @@ class Ui_Testcase_table(object):
         _translate = QtCore.QCoreApplication.translate
         Testcase_table.setWindowTitle(_translate("Testcase_table", "用例表"))
 
-        self.TreeWidget_case.setProperty("setItemWidget", _translate("Testcase_table", "hello"))
         self.TreeWidget_case.headerItem().setText(0, _translate("Testcase_table", "用例标题"))
+        self.TreeWidget_case.headerItem().setText(1, _translate("Testcase_table", "配置"))
         __sortingEnabled = self.TreeWidget_case.isSortingEnabled()
         self.TreeWidget_case.setSortingEnabled(False)
 
