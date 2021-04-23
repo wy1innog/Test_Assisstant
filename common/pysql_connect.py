@@ -1,8 +1,11 @@
 import pymysql
 import yaml
+
+import Word
 from common.log import Log
 
-config_path = 'config/config.yml'
+# config_path = Word.config_path_exe
+config_path = Word.config_path
 log = Log(__name__).getlog()
 
 

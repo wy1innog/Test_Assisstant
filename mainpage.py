@@ -32,10 +32,12 @@ if parent_path not in sys.path:
 
 
 class MainPage(QMainWindow, QComboBox, CpNormalFunc):
+    config_path = Word.config_path
+
 
     def __init__(self):
-        self.log = Log(__name__).getlog()
-        Word.log.append(self.log)
+        log = Log(__name__).getlog()
+        Word.log.append(log)
         super().__init__()
         self.setupUi(self)
         self.initUI()
@@ -256,7 +258,7 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
             Word.testcase_sum = len(casetitle) * test_times
             Word.waittest_testcase = len(casetitle) * test_times
             resultcode = Call_func.checkConfig(casetitle)
-            with open('config/config.yml', 'r', encoding='utf-8') as f:
+            with open(self.config_path, 'r', encoding='utf-8') as f:
                 content = yaml.load(f.read(), yaml.FullLoader)['CP_test']
                 Tracelog_status = content['Tracelog']
                 TTlog_status = content['TTlog']
@@ -295,6 +297,7 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
             else:
                 self.cpTextPrint("测试配置未填写完全，无法开始测试")
                 self.log.info("测试配置未填写完全，无法开始测试")
+                Word.test_flag = False
 
     def stop_test_cp(self):
         """
@@ -393,7 +396,7 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
         通话测试关键词
         :param line: 接收的数据
         """
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
+        with open(self.config_path, 'r', encoding='utf-8') as f:
             content = yaml.load(f.read(), yaml.FullLoader)
             # number = content['config_call']['call_number']
         network_registered = '+CREG: 0,1'

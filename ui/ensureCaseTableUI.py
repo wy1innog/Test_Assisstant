@@ -20,7 +20,7 @@ class Ui_EnsureCase_table(object):
         EnsureCase_table.setFont(font)
         EnsureCase_table.setMouseTracking(False)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../img/icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         EnsureCase_table.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(EnsureCase_table)
         self.centralwidget.setObjectName("centralwidget")

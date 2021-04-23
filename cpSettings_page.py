@@ -12,6 +12,7 @@ from ui.cpSettings import Ui_Dialog
 class CP_settings(Ui_Dialog, QDialog):
     # 让多窗口之间传递信号，刷新主窗口信息
     my_Signal = QtCore.pyqtSignal(str)
+    config_path = Word.config_path
 
     def __init__(self):
         super(Ui_Dialog, self).__init__()
@@ -49,7 +50,7 @@ class CP_settings(Ui_Dialog, QDialog):
         return QMessageBox(QMessageBox.Warning, title, msg)
 
     def __write_config(self):
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
+        with open(self.config_path, 'r', encoding='utf-8') as f:
             content = yaml.load(f.read(), yaml.FullLoader)
             content['CP_test']['TT_path'] = self.Ledit_TT_path.text()
             content['CP_test']['Trace_path'] = self.Ledit_Trace_path.text()
@@ -65,7 +66,7 @@ class CP_settings(Ui_Dialog, QDialog):
                 content['CP_test']['FailAutoStop'] = True
             else:
                 content['CP_test']['FailAutoStop'] = False
-        with open('config/config.yml', 'w', encoding='utf-8') as wf:
+        with open(self.config_path, 'w', encoding='utf-8') as wf:
             yaml.dump(content, wf, Dumper=yaml.SafeDumper)
         self.log.debug("write CP config, TT path: %s\nTrace path: %s\nCOM: %s" %
                       (self.Ledit_TT_path.text(), self.Ledit_Trace_path.text(),

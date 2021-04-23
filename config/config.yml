@@ -5,25 +5,25 @@ CP_test:
   Trace_path: ''
   Tracelog: false
 call_no_answer:
-  interval: '10'
-  number: '18701997306'
-  ring_time: '10'
-  timeout: '60'
+  interval: ''
+  number: ''
+  ring_time: ''
+  timeout: ''
 call_reject:
-  interval: '15'
-  number: '18701997306'
-  ring_time: '20'
-  timeout: '80'
+  interval: ''
+  number: ''
+  ring_time: ''
+  timeout: ''
 call_to_answer:
-  hold: '20'
-  interval: '15'
-  number: '10000'
-  timeout: '80'
+  hold: ''
+  interval: ''
+  number: ''
+  timeout: ''
 caller_hangs_up:
-  hold: '20'
-  interval: '15'
-  number: '18701997306'
-  timeout: '80'
+  hold: ''
+  interval: ''
+  number: ''
+  timeout: ''
 config_BT:
   BT_name: ihblu
 config_WIFI:

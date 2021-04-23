@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow
 
 import Word
@@ -17,6 +18,8 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         self.setupUi(self)
         self.log = Word.log[0]
         self.TAB = Tab
+        icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
+        self.setWindowIcon(QIcon(icon))
         self.case_Qtree_dict = {}
         self.case_module_Qtree_dict = {}
         self.init()
@@ -71,7 +74,7 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
 
         else:
             showEmptyMessageBox("未选择测试用例！")
-            Word.log.warning("No matching data")
+            self.log.warning("No matching data")
 
     def get_QTreeItemIterator(self, TreeWidget):
         return QtWidgets.QTreeWidgetItemIterator(TreeWidget)

@@ -1,23 +1,21 @@
-import re
 import subprocess
 import sys
-import time
-
-import psutil
 import serial
 import yaml
 
 import Word
+from common.log import Log
 from ui.mainUI import Ui_MainWindow
 
 sys.path.append("..")
-from common.log import Log
 
 # WIN32 API
 IS_WIN32 = 'win32' in str(sys.platform).lower()
 
+
 class CpNormalFunc(Ui_MainWindow):
     log = Log(__name__).getlog()
+    config_path = Word.config_path
 
     def __init__(self):
         self.log = Word.log[0]
@@ -115,7 +113,7 @@ class CpNormalFunc(Ui_MainWindow):
         cls.exec_cmd(cls, "AT+CHUP")
 
     @classmethod
-    def network_check(self):
+    def network_check(cls):
         # todo:入网检测
         pass
 
@@ -141,16 +139,11 @@ class CpNormalFunc(Ui_MainWindow):
         retcode = subprocess.call(*args, **kwargs)
         return retcode
 
-    @classmethod
-    def getConfig(cls) -> dict:
-        # 获取配置
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
-            content = yaml.load(f.read(), yaml.FullLoader)
-            return content
+
 
     @classmethod
-    def number_check(self, words):
-        if words.isdigit() == True:
+    def number_check(cls, words):
+        if words.isdigit():
             tmp = int(words)
             if tmp > 0:
                 return True
@@ -158,17 +151,3 @@ class CpNormalFunc(Ui_MainWindow):
                 pass
         else:
             return False
-
-    @classmethod
-    def start(cls, pid):
-        p = psutil.Process(pid)
-        print("(start)pid: {}".format(pid))
-        print("(start)p: {}".format(p))
-        time.sleep(1)
-
-    @classmethod
-    def pause(cls, pid):
-        p = psutil.Process(pid)
-        print("(pause)pid: {}".format(pid))
-        print("(pause)p: {}".format(p))
-        time.sleep(10000)

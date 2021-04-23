@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow
 
 from ui.ensureCaseTableUI import Ui_EnsureCase_table
@@ -12,6 +13,8 @@ class EnsureCaseTable_Page(QMainWindow, Ui_EnsureCase_table):
         self.setupUi(self)
         self.init()
         self.testcase_ready_list = []
+        icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
+        self.setWindowIcon(QIcon(icon))
 
 
     def init(self):

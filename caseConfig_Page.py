@@ -2,9 +2,15 @@ import pickle
 
 import yaml
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QPushButton
 
+import Word
+
+
 class CaseConfig_Page:
+    # config_path = Word.config_path_exe
+    config_path = Word.config_path
     List_call_answer = []
     List_caller_hangs_up = []
     List_call_reject = []
@@ -48,6 +54,8 @@ class CaseConfig_Page:
     def getCaseConfigDialog(cls, title, item_list):
         dialog = QDialog()
         dialog.setMinimumSize(440, 330)
+        icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
+        dialog.setWindowIcon(QIcon(icon))
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setPointSize(10)
@@ -112,48 +120,48 @@ class CaseConfig_Page:
 
     @classmethod
     def saveConfig_calling_to_answer(cls):
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
+        with open(cls.config_path, 'r', encoding='utf-8') as f:
             config = yaml.load(f.read(), yaml.FullLoader)
             content = config['call_to_answer']
             content['number'] = cls.List_call_answer[0].text()
             content['hold'] = cls.List_call_answer[1].text()
             content['interval'] = cls.List_call_answer[2].text()
             content['timeout'] = cls.List_call_answer[3].text()
-            with open('config/config.yml', 'w', encoding='utf-8') as wf:
+            with open(cls.config_path, 'w', encoding='utf-8') as wf:
                 yaml.dump(config, wf, Dumper=yaml.SafeDumper)
 
     @classmethod
     def saveConfig_caller_hangs_up(cls):
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
+        with open(cls.config_path, 'r', encoding='utf-8') as f:
             config = yaml.load(f.read(), yaml.FullLoader)
             content = config['caller_hangs_up']
             content['number'] = cls.List_caller_hangs_up[0].text()
             content['hold'] = cls.List_caller_hangs_up[1].text()
             content['interval'] = cls.List_caller_hangs_up[2].text()
             content['timeout'] = cls.List_caller_hangs_up[3].text()
-        with open('config/config.yml', 'w', encoding='utf-8') as wf:
+        with open(cls.config_path, 'w', encoding='utf-8') as wf:
             yaml.dump(config, wf, Dumper=yaml.SafeDumper)
 
     @classmethod
     def saveConfig_call_reject(cls):
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
+        with open(cls.config_path, 'r', encoding='utf-8') as f:
             config = yaml.load(f.read(), yaml.FullLoader)
             content = config['call_reject']
             content['number'] = cls.List_call_reject[0].text()
             content['ring_time'] = cls.List_call_reject[1].text()
             content['interval'] = cls.List_call_reject[2].text()
             content['timeout'] = cls.List_call_reject[3].text()
-        with open('config/config.yml', 'w', encoding='utf-8') as wf:
+        with open(cls.config_path, 'w', encoding='utf-8') as wf:
             yaml.dump(config, wf, Dumper=yaml.SafeDumper)
 
     @classmethod
     def saveConfig_call_no_answer(cls):
-        with open('config/config.yml', 'r', encoding='utf-8') as f:
+        with open(cls.config_path, 'r', encoding='utf-8') as f:
             config = yaml.load(f.read(), yaml.FullLoader)
             content = config['call_no_answer']
             content['number'] = cls.List_call_no_answer[0].text()
             content['ring_time'] = cls.List_call_no_answer[1].text()
             content['interval'] = cls.List_call_no_answer[2].text()
             content['timeout'] = cls.List_call_no_answer[3].text()
-        with open('config/config.yml', 'w', encoding='utf-8') as wf:
+        with open(cls.config_path, 'w', encoding='utf-8') as wf:
             yaml.dump(config, wf, Dumper=yaml.SafeDumper)

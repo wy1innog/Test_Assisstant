@@ -81,7 +81,7 @@ class Ui_MainWindow(object):
                                          "             font: bold 18px;\n"
                                          "")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("C:/Users/wangyanlin/.designer/img/ue_select.png"), QtGui.QIcon.Normal,
+        icon.addPixmap(QtGui.QPixmap("ue_select.png"), QtGui.QIcon.Normal,
                        QtGui.QIcon.Off)
         self.Btn_dev_check.setIcon(icon)
         self.Btn_dev_check.setIconSize(QtCore.QSize(25, 25))
@@ -156,7 +156,7 @@ class Ui_MainWindow(object):
                                            "             min-width: 10em;\n"
                                            "            ")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("C:/Users/wangyanlin/.designer/img/stop.png"), QtGui.QIcon.Normal,
+        icon1.addPixmap(QtGui.QPixmap("stop.png"), QtGui.QIcon.Normal,
                         QtGui.QIcon.Off)
         self.Btn_AP_stopTest.setIcon(icon1)
         self.Btn_AP_stopTest.setIconSize(QtCore.QSize(25, 25))
@@ -390,7 +390,7 @@ class Ui_MainWindow(object):
                                           "             font: bold 18px;\n"
                                           "            ")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("C:/Users/wangyanlin/.designer/img/ue_check.png"), QtGui.QIcon.Normal,
+        icon2.addPixmap(QtGui.QPixmap("ue_check.png"), QtGui.QIcon.Normal,
                         QtGui.QIcon.Off)
         self.Btn_port_check.setIcon(icon2)
         self.Btn_port_check.setIconSize(QtCore.QSize(25, 25))

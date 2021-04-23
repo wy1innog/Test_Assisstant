@@ -1,17 +1,23 @@
 import subprocess
 import time
 
+import yaml
+
 import Word
 from common.cp_normal_func import CpNormalFunc
 
 
 class Call_func(object):
+    config_path = Word.config_path
+
     def __init__(self):
         self.log = Word.log[0]
 
     @classmethod
     def testReady(cls, title):
-        call_config = CpNormalFunc.getConfig()[title]
+        with open(cls.config_path, 'r', encoding='utf-8') as f:
+            content = yaml.load(f.read(), yaml.FullLoader)
+        call_config = content[title]
         for item in call_config:
             if call_config[item] == "":
                 return 1
@@ -21,15 +27,19 @@ class Call_func(object):
 
     @classmethod
     def checkConfig(cls, casetitle):
+        havaValue = 0
         for case in casetitle:
             configName = CpNormalFunc.case_to_func(case)[5:]
 
             title_config = Call_func.testReady(configName)
             if title_config != 1:
-                return 0
+                havaValue += 1
             else:
-                return 1
-
+                pass
+        if havaValue == len(casetitle):
+            return 0
+        else:
+            return 1
 
     def dial(self, number):
         nf = CpNormalFunc()
@@ -131,7 +141,9 @@ class Call_func(object):
                             CpNormalFunc.chup_up()
                             return 5
                         else:
-                            subprocess.call("adb shell input keyevent KEYCODE_ENDCALL")
+                            subprocess.run("adb shell input keyevent KEYCODE_ENDCALL", shell=True,
+                                           stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
                             time.sleep(3)
                             if Word.call_process[-1] == "通话结束":
                                 return 0
@@ -191,7 +203,8 @@ class Call_func(object):
                         CpNormalFunc.chup_up()
                         return 5
                     else:
-                        subprocess.call("adb shell input keyevent KEYCODE_ENDCALL")
+                        subprocess.run("adb shell input keyevent KEYCODE_ENDCALL", shell=True,
+                                       stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                         self.log.debug("对端挂断")
                         # 手机挂断后，对端语音提示10s，关掉提示
                         time.sleep(10)
@@ -265,4 +278,3 @@ class Call_func(object):
             # 超时
             CpNormalFunc.chup_up()
             return 2
-

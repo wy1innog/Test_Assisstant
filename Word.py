@@ -6,6 +6,8 @@ log = []
 # tree下按钮对象存储
 tree_btn_Dict = {}
 
+config_path = 'config/config.yml'
+
 # 串口
 ser = serial.Serial(baudrate=115200)
 
