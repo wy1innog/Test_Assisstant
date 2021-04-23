@@ -1,5 +1,3 @@
-import pickle
-
 import yaml
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon
@@ -52,6 +50,10 @@ class CaseConfig_Page:
 
     @classmethod
     def getCaseConfigDialog(cls, title, item_list):
+        cls.List_call_answer.clear()
+        cls.List_caller_hangs_up.clear()
+        cls.List_call_reject.clear()
+        cls.List_call_no_answer.clear()
         dialog = QDialog()
         dialog.setMinimumSize(440, 330)
         icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'

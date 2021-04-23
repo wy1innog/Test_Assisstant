@@ -1,11 +1,13 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QPushButton
 
 
 def showEmptyMessageBox(msg):
     dialog = QDialog()
     dialog.setMinimumSize(311, 140)
-
+    icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
+    dialog.setWindowIcon(QIcon(icon))
     font1 = QtGui.QFont()
     font1.setPointSize(10)
     btn = QPushButton("ok", dialog)
