@@ -1,7 +1,9 @@
+import os
 import subprocess
 import sys
 import serial
-import yaml
+# from pywinauto import application
+# from pywinauto.keyboard import send_keys
 
 import Word
 from common.log import Log
@@ -18,8 +20,8 @@ class CpNormalFunc(Ui_MainWindow):
     config_path = Word.config_path
 
     def __init__(self):
-        self.log = Word.log[0]
-        # self.RECV_FLAG = True
+        # self.log = Word.log[0]
+        pass
 
     def getSer(self):
         self.ser = serial.Serial()
@@ -151,3 +153,23 @@ class CpNormalFunc(Ui_MainWindow):
                 pass
         else:
             return False
+
+    # def connectTT(self):
+    #     TTpath = 'D:/software/TT/bin/TT.exe'
+    #     os.environ.update({"__COMPAT_LAYER": "RUnAsInvoker"})
+    #     app = application.Application(backend='uia').start(TTpath)
+    #     wind_1 = app['Leadcore TT']
+    #     # wind_1.print_control_identifiers()
+    #     wind_1.wait("active", timeout=5)
+    #     send_keys('^n')
+    #     send_keys('{ENTER}')
+    #     # wind_1.print_control_identifiers()
+    #     wind_2 = wind_1['连接配置']
+    #     # wind_2.print_control_identifiers()
+    #     serialComboBox = wind_1['串口:Edit']
+    #     print(serialComboBox.WrapperObjec)
+
+
+
+
+

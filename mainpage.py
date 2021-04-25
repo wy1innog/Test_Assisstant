@@ -25,7 +25,6 @@ from common.cp_normal_func import CpNormalFunc
 from cpSettings_page import CP_settings
 from testcase.test_cp_call import Test_Call
 
-
 parent_path = os.path.dirname(sys.path[0])
 if parent_path not in sys.path:
     sys.path.append(parent_path)
@@ -33,7 +32,6 @@ if parent_path not in sys.path:
 
 class MainPage(QMainWindow, QComboBox, CpNormalFunc):
     config_path = Word.config_path
-
 
     def __init__(self):
         log = Log(__name__).getlog()
@@ -225,8 +223,10 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
         port_list = list(serial.tools.list_ports.comports())
         self.ComboBox_port_select.clear()
         for port in port_list:
-            self.Com_Dict["%s" % port[0]] = "%s" % port[1]
-            self.ComboBox_port_select.addItem(port[0])
+            if port.description.endswith(')'):
+                self.Com_Dict["%s" % port[0]] = "%s" % port[1]
+                self.ComboBox_port_select.addItem(port[0])
+
 
         self.log.debug("Port list:%s\n" % self.Com_Dict)
         if len(self.Com_Dict) == 0:

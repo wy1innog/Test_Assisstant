@@ -89,3 +89,4 @@ class CP_settings(Ui_Dialog, QDialog):
         self.log.debug("Port list:%s" % self.Com_Dict)
         if len(self.Com_Dict) == 0:
             self.ComboBox_serial_port.setCurrentText("无串口")
+
