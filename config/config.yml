@@ -2,23 +2,25 @@ CP_test:
   FailAutoStop: false
   TT_path: ''
   TTlog: false
-  Trace_path: ''
-  Tracelog: false
+  Trace_path: "E:/software/trace\u5DE5\u5177\u53CA\u65B9\u6CD5/trace\u5DE5\u5177\u53CA\
+    \u65B9\u6CD5/Trace/Trace.exe"
+  Tracelog: true
+  useCOM: COM3
 call_no_answer:
-  interval: ''
-  number: ''
-  ring_time: ''
-  timeout: ''
+  interval: '20'
+  number: '10086'
+  ring_time: '10'
+  timeout: '80'
 call_reject:
   interval: ''
   number: ''
   ring_time: ''
   timeout: ''
 call_to_answer:
-  hold: ''
-  interval: ''
-  number: ''
-  timeout: ''
+  hold: '10'
+  interval: '20'
+  number: '10086'
+  timeout: '0'
 caller_hangs_up:
   hold: ''
   interval: ''

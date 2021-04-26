@@ -65,7 +65,6 @@ class Ui_Case_config(object):
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        # self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
 
         QtWidgets.QApplication.setStyle(ProxyStyle())
 

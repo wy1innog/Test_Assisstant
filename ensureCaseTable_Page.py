@@ -15,7 +15,8 @@ class EnsureCaseTable_Page(QMainWindow, Ui_EnsureCase_table):
         self.testcase_ready_list = []
         icon = 'D:\\ihblu\\wyrepo\\Test_Assistant\\img\\icon.ico'
         self.setWindowIcon(QIcon(icon))
-
+        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.setWindowModality(QtCore.Qt.ApplicationModal)
 
     def init(self):
         self.Btn_ensureTable_cancel.clicked.connect(self.close)

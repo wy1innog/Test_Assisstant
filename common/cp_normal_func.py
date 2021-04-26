@@ -143,33 +143,5 @@ class CpNormalFunc(Ui_MainWindow):
 
 
 
-    @classmethod
-    def number_check(cls, words):
-        if words.isdigit():
-            tmp = int(words)
-            if tmp > 0:
-                return True
-            else:
-                pass
-        else:
-            return False
-
-    # def connectTT(self):
-    #     TTpath = 'D:/software/TT/bin/TT.exe'
-    #     os.environ.update({"__COMPAT_LAYER": "RUnAsInvoker"})
-    #     app = application.Application(backend='uia').start(TTpath)
-    #     wind_1 = app['Leadcore TT']
-    #     # wind_1.print_control_identifiers()
-    #     wind_1.wait("active", timeout=5)
-    #     send_keys('^n')
-    #     send_keys('{ENTER}')
-    #     # wind_1.print_control_identifiers()
-    #     wind_2 = wind_1['连接配置']
-    #     # wind_2.print_control_identifiers()
-    #     serialComboBox = wind_1['串口:Edit']
-    #     print(serialComboBox.WrapperObjec)
-
-
-
 
 

@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import QMainWindow
 
 import Word
 import common.pysql_connect as pysql
-from common.DialogUtil import showEmptyMessageBox
 from caseConfig_Page import CaseConfig_Page
+from common.DialogUtil import showEmptyMessageBox
 from ensureCaseTable_Page import EnsureCaseTable_Page
 from cpSettings_page import CP_settings
 from ui.caseTableUI import Ui_Testcase_table
@@ -22,6 +22,7 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         self.setWindowIcon(QIcon(icon))
         self.case_Qtree_dict = {}
         self.case_module_Qtree_dict = {}
+        # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.init()
 
     def init(self):
@@ -53,16 +54,14 @@ class CaseTable_Page(QMainWindow, Ui_Testcase_table):
         :return:
         """
         QTreeWidgetItemIterator = self.get_QTreeItemIterator(self.TreeWidget_case)
-
+        Word.be_testcase.clear()
         module = self.getModlue()
         while QTreeWidgetItemIterator.value():
             value = QTreeWidgetItemIterator.value()
-
             if value.checkState(0) == QtCore.Qt.Checked and value.text(0) not in module:
                 Word.be_testcase.append({'title': value.text(0), 'execStatus': 0, 'passCount': 0, 'failCount': 0})
 
             QTreeWidgetItemIterator.__iadd__(1)
-
         self.ensureTable_window.ListWidget_ensureTable.clear()
 
         # 用例名称添加到待测表

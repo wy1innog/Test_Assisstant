@@ -2,7 +2,8 @@ import sys
 
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication
-
+import warnings
+warnings.filterwarnings("ignore")
 from mainpage import MainPage
 
 if __name__ == '__main__':

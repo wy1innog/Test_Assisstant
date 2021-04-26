@@ -70,7 +70,7 @@ class Call_func(object):
         pre_hold_time = int(call_config['hold']) - 2
 
         start_time = self.dial(call_config['number'])
-        self.log.debug("wait pre hold time: {}".format(pre_hold_time))
+        self.log.debug("wait pre hold time: {}".format(pre_hold_time+2))
 
         while time.time() - start_time < timeout:
             self.log.debug("call time: {}".format(time.time() - start_time))

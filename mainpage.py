@@ -21,7 +21,7 @@ from caseTable_Page import CaseTable_Page
 from common.call_func import Call_func
 from common.log import Log
 from common.cp_normal_func import CpNormalFunc
-# from common.ap_normal_func import ApNormalFunc
+from common.ap_normal_func import ApNormalFunc
 from cpSettings_page import CP_settings
 from testcase.test_cp_call import Test_Call
 
@@ -184,7 +184,9 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
         :return: None
         """
         self.log.info("######>>> get local log")
-        if getDev() != 0:
+        devName = ApNormalFunc.getDev()
+        if devName not in (0,2):
+
             self.TextBrowser_AP_recv.append("log抓取中……")
             # savelog_path = os.path.dirname(__file__) + '\logs'
             savelog_path = '\logs'
@@ -193,7 +195,7 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
                 os.makedirs(savelog_path)
             save_dir = os.path.join(savelog_path, '{0:%Y%m%d%H%M%S}'.format(datetime.datetime.now()))
 
-            status = subprocess.call("adb -s %s pull data/local/log %s" % (dev(), save_dir))
+            status = subprocess.call("adb -s %s pull data/local/log %s" % (devName, save_dir))
 
             self.log.debug("Pull local log status:%s" % status)
 
@@ -214,6 +216,41 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
 
     # CP ================================================================================================
 
+    def openTT(self):
+        t1 = threading.Thread(target=self.run)
+        t1.start()
+        t1.setDaemon(True)
+
+    def run(self):
+        with open(self.config_path, 'r', encoding='utf-8') as file:
+            content = yaml.load(file.read(), yaml.FullLoader)
+
+        ser = serial.Serial(content['CP_test']['useCOM'], 115200)
+        ser.write('AT^TTLOG=1\r\n'.encode('utf-8'))
+        if ser.is_open:
+            print("send {} AT^TTLOG=1".format(ser.name))
+
+            f = open('ttlog.log', 'w', encoding='utf-8')
+            getBytes = b''
+            while True:
+                try:
+                    count = ser.inWaiting()
+                    # if count > 0:
+                    data = ser.read(count)
+                    print(data)
+                    # if data != getBytes:
+                    f.write(data.decode('utf-8'))
+                    f.write('\n')
+                    # getBytes = data
+
+                except KeyboardInterrupt:
+                    if serial != None:
+                        f.close()
+                        self.log.debug("写入完毕")
+        else:
+            print("ser is close")
+
+
     def port_check(self):
         """
         CP 检测连接PC的端口
@@ -227,7 +264,6 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
                 self.Com_Dict["%s" % port[0]] = "%s" % port[1]
                 self.ComboBox_port_select.addItem(port[0])
 
-
         self.log.debug("Port list:%s\n" % self.Com_Dict)
         if len(self.Com_Dict) == 0:
             self.ComboBox_port_select.setCurrentText("无串口")
@@ -235,12 +271,14 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
             self.ComboBox_port_select.setCurrentText(port[0])
 
     def run_cp_Thread(self):
-        if Word.test_flag:
-            self.log.debug("测试未结束，请勿再次点击")
+        if Word.ser.is_open:
+            if Word.test_flag:
+                self.log.debug("测试未结束，请勿再次点击")
+            else:
+                t = threading.Thread(target=self.run_CP_selectedCase)
+                t.start()
         else:
-            t = threading.Thread(target=self.run_CP_selectedCase)
-            t.start()
-            # t.join()
+            self.cpTextPrint("串口未打开")
 
     def run_CP_selectedCase(self):
         """
@@ -250,7 +288,7 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
         CpNormalFunc.clearTestStatus()
         test_times = self.Ledit_CP_test_times.text()
 
-        if CpNormalFunc.number_check(test_times) and Word.be_testcase:
+        if test_times.isdigit() and Word.be_testcase:
             Word.test_flag = True
 
             test_times = int(test_times)
@@ -278,10 +316,12 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
                     for i in range(int(test_times)):
                         Word.recv_flag = False
                         if Word.test_flag:
-                            self.cpTextPrint(">>> {} 开始测试".format(case))
+                            self.cpTextPrint("{} >>> {} 开始测试".format(time.strftime(
+                                "%Y-%m-%d %H:%M:%S", time.gmtime()), case))
                             result = methodcaller(CpNormalFunc.case_to_func(case))(test_call)
                             time.sleep(1)
-                            self.cpTextPrint("<<< {} 测试完成 测试结果: {}\n".format(case, result))
+                            self.cpTextPrint("{} <<< {} 测试完成 测试结果: {}\n".format(time.strftime(
+                                "%Y-%m-%d %H:%M:%S", time.gmtime()), case, result))
                             Word.already_testcase += 1
                             Word.waittest_testcase -= 1
 
@@ -298,6 +338,8 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
                 self.cpTextPrint("测试配置未填写完全，无法开始测试")
                 self.log.info("测试配置未填写完全，无法开始测试")
                 Word.test_flag = False
+        else:
+            self.cpTextPrint("测试次数格式输入有误")
 
     def stop_test_cp(self):
         """
@@ -343,9 +385,7 @@ class MainPage(QMainWindow, QComboBox, CpNormalFunc):
         """
         if Word.ser.is_open:
             Word.recv_flag = True
-            # at_cmd = self.TextEdit_CP_send.toPlainText().strip()
             at_cmd = self.Ledit_CP_send.text().strip()
-            # self.RECV_FLAG = True
             if at_cmd != "":
                 # 非空字符串
                 self.exec_cmd(at_cmd)
