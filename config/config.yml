@@ -30,7 +30,7 @@ config_BT:
   BT_name: ihblu
 config_WIFI:
   WIFI_PWD: '12345678'
-  WIFI_SSID: jiaze2.4G
+  WIFI_SSID: wifiDemoxxx
   WIFI_interval: '100'
 db_info:
   ap_table: ap_testcases
